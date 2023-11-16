@@ -29,7 +29,7 @@ public class Screen {
        drawMap1Screen(g,boxSize*3/2,boxSize*2,boxSize*4,boxSize*3,16);
        g.setColor(Color.cyan);
        drawMap2Screen(g,boxSize*13/2,boxSize*2,boxSize*4,boxSize*3,16);
-       g.setColor(Color.blue);
+       g.setColor(Color.pink);
        drawMap3Screen(g,boxSize*23/2,boxSize*2,boxSize*4,boxSize*3,16);
        g.setColor(Color.WHITE);
        g.drawString("Choose Your Map:",width/2-70,50);
@@ -61,7 +61,7 @@ public class Screen {
 
    //This method draws the screen for the third map.
    public void drawMap3Screen(Graphics g,int x, int y,int width, int height,int boxSize){
-       g.setColor(Color.blue);
+       g.setColor(Color.pink);
        g.fillRect(x,y,width-boxSize*4,height);
    }
 

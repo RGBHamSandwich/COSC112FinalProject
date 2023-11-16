@@ -17,12 +17,12 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
    boolean titleScreen;
     static Button Start = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
     boolean chooseMapScreen;
-   boolean mapOneScreen;
-   Button mapOneScreenButton = new Button(Screen.boxSize*3/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
-   boolean mapTwoScreen;
-   Button mapTwoScreenButton = new Button(Screen.boxSize*13/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
-   boolean mapThreeScreen;
-   Button mapThreeScreenButton = new Button(0, 0, 0, 0);
+   boolean map1Screen;
+   Button map1ScreenButton = new Button(Screen.boxSize*3/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
+   boolean map2Screen;
+   Button map2ScreenButton = new Button(Screen.boxSize*13/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
+   boolean map3Screen;
+   Button map3ScreenButton = new Button(Screen.boxSize*23/2,Screen.boxSize*2,Screen.boxSize*4, Screen.boxSize*3);
 
 
    public TowerDefense(){
@@ -31,9 +31,9 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
        titleScreen = true;
        chooseMapScreen = false;
-       mapOneScreen = false;
-       mapTwoScreen = false;
-       mapThreeScreen = false;
+       map1Screen = false;
+       map2Screen = false;
+       map3Screen = false;
        screen = new Screen();
        this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
        Thread mainThread = new Thread(new Runner());
@@ -59,16 +59,16 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
        else if(chooseMapScreen){
            screen.drawChooseMapScreen(g,getWidth(),getHeight());
        }
-       else if(mapOneScreen){
+       else if(map1Screen){
            screen.drawMap1Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
            screen.drawShopScreen(g,getWidth(),getHeight());
        }
-       else if(mapTwoScreen){
+       else if(map2Screen){
            screen.drawMap2Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
            screen.drawShopScreen(g,getWidth(),getHeight());
        }
-       else if(mapThreeScreen){
-           screen.drawMap2Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
+       else if(map3Screen){
+           screen.drawMap3Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
            screen.drawShopScreen(g,getWidth(),getHeight());
        }
    }
@@ -104,18 +104,18 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
        }
 
        if (chooseMapScreen) {
-           if ((y > mapOneScreenButton.top) && (y < mapOneScreenButton.bottom) && (x > mapOneScreenButton.left) && (x < mapOneScreenButton.right)) {
+           if ((y > map1ScreenButton.top) && (y < map1ScreenButton.bottom) && (x > map1ScreenButton.left) && (x < map1ScreenButton.right)) {
                chooseMapScreen = false;
-               mapOneScreen = true;
-       }
-           if ((y > mapTwoScreenButton.top) && (y < mapTwoScreenButton.bottom) && (x > mapTwoScreenButton.left) && (x < mapTwoScreenButton.right)) {
-           chooseMapScreen = false;
-           mapTwoScreen = true;
-       }
-
-//          chooseMapScreen = false;
-//          mapThreeScreen = true;
-
+               map1Screen = true;
+           }
+           if ((y > map2ScreenButton.top) && (y < map2ScreenButton.bottom) && (x > map2ScreenButton.left) && (x < map2ScreenButton.right)) {
+               chooseMapScreen = false;
+               map2Screen = true;
+           }
+           if ((y > map3ScreenButton.top) && (y < map3ScreenButton.bottom) && (x > map3ScreenButton.left) && (x < map3ScreenButton.right)) {
+               chooseMapScreen = false;
+               map3Screen = true;
+           }
        }
 
    }
