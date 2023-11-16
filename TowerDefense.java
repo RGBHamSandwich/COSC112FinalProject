@@ -10,20 +10,19 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
    public static final int HEIGHT = 768;
    public static final int FPS = 60;
    public static int popped = 0;
-   public static int moolah = 0;
+   public static int tokens = 0;
 
-   Screen screen;
-
-   boolean titleScreen;
+    //these booleans and buttons create a relationship between buttons and screen to determine which screens are displaying
+    Screen screen;
+    boolean titleScreen;
     static Button Start = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
     boolean chooseMapScreen;
-   boolean map1Screen;
-   Button map1ScreenButton = new Button(Screen.boxSize*3/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
-   boolean map2Screen;
-   Button map2ScreenButton = new Button(Screen.boxSize*13/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
-   boolean map3Screen;
-   Button map3ScreenButton = new Button(Screen.boxSize*23/2,Screen.boxSize*2,Screen.boxSize*4, Screen.boxSize*3);
-
+    boolean map1Screen;
+    Button map1ScreenButton = new Button(Screen.boxSize*3/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
+    boolean map2Screen;
+    Button map2ScreenButton = new Button(Screen.boxSize*13/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
+    boolean map3Screen;
+    Button map3ScreenButton = new Button(Screen.boxSize*23/2,Screen.boxSize*2,Screen.boxSize*4, Screen.boxSize*3);
 
    public TowerDefense(){
        addKeyListener(this);
@@ -97,7 +96,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
        System.out.println("The mouse has been clicked at " + x + ", " + y + ".");
 
        if (titleScreen) {
-           if (y > Start.top && y < Start.bottom && x > Start.left && x < Start.right) {
+           if (y > Start.top && y < Start.bottom && x > Start.left && x < Start.right) {        //let's move this to a button.check and ButtonHolder thing
                titleScreen = false;
                chooseMapScreen = true;
            }
@@ -268,13 +267,13 @@ class Button {
     double y;
     double width;
     double height;
-    //The coordinate for the upper side corner of the button
+    //The (y) coordinate for the upper side corner of the button
     double top;
-    //The coordinate for the lower side of the button
+    //The (y) coordinate for the lower side of the button
     double bottom;
-    //The coordinate for the left side corner of the button
+    //The (x) coordinate for the left side corner of the button
     double left;
-    //The coordinate for the right side of the button
+    //The (x) coordinate for the right side of the button
     double right;
 
     public Button(double x, double y, double width, double height) {
@@ -291,6 +290,11 @@ class Button {
     public void ifClicked() {
         //a button could do something interesting!
     }
+
+}
+
+class ButtonHolder {
+
 
 }
 
