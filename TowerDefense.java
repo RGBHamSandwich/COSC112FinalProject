@@ -20,7 +20,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
    boolean mapOneScreen;
    Button mapOneScreenButton = new Button(Screen.boxSize*3/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
    boolean mapTwoScreen;
-   Button mapTwoScreenButton = new Button(0, 0, 0, 0);
+   Button mapTwoScreenButton = new Button(Screen.boxSize*13/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
    boolean mapThreeScreen;
    Button mapThreeScreenButton = new Button(0, 0, 0, 0);
 
@@ -104,13 +104,14 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
        }
 
        if (chooseMapScreen) {
-           if (y > mapOneScreenButton.top && y < mapOneScreenButton.bottom && x > mapOneScreenButton.left && x < mapOneScreenButton.right) {
+           if ((y > mapOneScreenButton.top) && (y < mapOneScreenButton.bottom) && (x > mapOneScreenButton.left) && (x < mapOneScreenButton.right)) {
                chooseMapScreen = false;
                mapOneScreen = true;
        }
-//           chooseMapScreen = false;
-//           mapTwoScreen = true;
-//       }
+           if ((y > mapTwoScreenButton.top) && (y < mapTwoScreenButton.bottom) && (x > mapTwoScreenButton.left) && (x < mapTwoScreenButton.right)) {
+           chooseMapScreen = false;
+           mapTwoScreen = true;
+       }
 
 //          chooseMapScreen = false;
 //          mapThreeScreen = true;
@@ -119,8 +120,6 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
    }
 
-
-   //I'm not using the rest of the mouseEvents as of the week of 11/15; that's for later in the project.
    @Override
    public void mousePressed(MouseEvent e) {
        double x = e.getX();
