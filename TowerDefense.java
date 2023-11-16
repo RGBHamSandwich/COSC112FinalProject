@@ -13,12 +13,12 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
    public static int moolah = 0;
 
    Screen screen;
-   int boxSize = 16;        //this is brought from the Screen
+
    boolean titleScreen;
     static Button Start = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
     boolean chooseMapScreen;
    boolean mapOneScreen;
-   Button mapOneScreenButton = new Button(boxSize*3/2,boxSize*2,boxSize*4,boxSize*3);
+   Button mapOneScreenButton = new Button(Screen.boxSize*3/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
    boolean mapTwoScreen;
    Button mapTwoScreenButton = new Button(0, 0, 0, 0);
    boolean mapThreeScreen;
@@ -104,17 +104,16 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
        }
 
        if (chooseMapScreen) {
-//            if (map1ButtonThings) {
-           chooseMapScreen = false;
-           mapOneScreen = true;
-//            }
-
-           chooseMapScreen = false;
-           mapTwoScreen = true;
+           if (y > mapOneScreenButton.top && y < mapOneScreenButton.bottom && x > mapOneScreenButton.left && x < mapOneScreenButton.right) {
+               chooseMapScreen = false;
+               mapOneScreen = true;
+       }
+//           chooseMapScreen = false;
+//           mapTwoScreen = true;
 //       }
 
-          chooseMapScreen = false;
-          mapThreeScreen = true;
+//          chooseMapScreen = false;
+//          mapThreeScreen = true;
 
        }
 
