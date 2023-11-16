@@ -11,18 +11,27 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
    public static final int FPS = 60;
    public static int popped = 0;
    public static int moolah = 0;
+
    Screen screen;
+   int boxSize = 16;        //this is brought from the Screen
    boolean titleScreen;
-   boolean chooseMapScreen;
+    static Button Start = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
+    boolean chooseMapScreen;
    boolean mapOneScreen;
+   Button mapOneScreenButton = new Button(boxSize*3/2,boxSize*2,boxSize*4,boxSize*3);
    boolean mapTwoScreen;
+   Button mapTwoScreenButton = new Button(0, 0, 0, 0);
    boolean mapThreeScreen;
+   Button mapThreeScreenButton = new Button(0, 0, 0, 0);
 
 
    public TowerDefense(){
-       titleScreen = false;
+       addKeyListener(this);
+       addMouseListener(this);
+
+       titleScreen = true;
        chooseMapScreen = false;
-       mapOneScreen = true;
+       mapOneScreen = false;
        mapTwoScreen = false;
        mapThreeScreen = false;
        screen = new Screen();
@@ -63,6 +72,8 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
            screen.drawShopScreen(g,getWidth(),getHeight());
        }
    }
+
+
    class Runner implements Runnable{
        public void run() {
            while(true){
@@ -83,26 +94,46 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
    public void mouseClicked(MouseEvent e) {
        double x = e.getX();
        double y = e.getY();
+       System.out.println("The mouse has been clicked at " + x + ", " + y + ".");
 
+       if (titleScreen) {
+           if (y > Start.top && y < Start.bottom && x > Start.left && x < Start.right) {
+               titleScreen = false;
+               chooseMapScreen = true;
+           }
+       }
+
+       if (chooseMapScreen) {
+//            if (map1ButtonThings) {
+           chooseMapScreen = false;
+           mapOneScreen = true;
+//            }
+
+           chooseMapScreen = false;
+           mapTwoScreen = true;
+//       }
+
+          chooseMapScreen = false;
+          mapThreeScreen = true;
+
+       }
 
    }
 
 
+   //I'm not using the rest of the mouseEvents as of the week of 11/15; that's for later in the project.
    @Override
    public void mousePressed(MouseEvent e) {
        double x = e.getX();
        double y = e.getY();
 
-
    }
-
 
    @Override
    public void mouseReleased(MouseEvent e) {
        double x = e.getX();
        double y = e.getY();
    }
-
 
    @Override
    public void mouseEntered(MouseEvent e) {
@@ -112,7 +143,6 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
    }
 
-
    @Override
    public void mouseExited(MouseEvent e) {
        double x = e.getX();
@@ -121,19 +151,16 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
    }
 
-
    @Override
    public void keyTyped(KeyEvent e) {
        char k = e.getKeyChar();
-
+        System.out.println("The key " + k + " has been pressed.");
 
    }
-
 
    @Override
    public void keyPressed(KeyEvent e) {
        char k = e.getKeyChar();
-
 
    }
 
@@ -142,14 +169,13 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
    public void keyReleased(KeyEvent e) {
        char k = e.getKeyChar();
 
-
    }
 
 
 }
 
-
-//////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//This is the end of the TowerDefense Class
 
 
 abstract class Tower{
@@ -240,29 +266,33 @@ class Pair{
 
 
 class Button {
-   double width;
-   double height;
-   //The coordinate for the upper side corner of the button
-   double top;
-   //The coordinate for the lower side of the button
-   double bottom;
-   //The coordinate for the left side corner of the button
-   double left;
-   //The coordinate for the right side of the button
-   double right;
+    double x;
+    double y;
+    double width;
+    double height;
+    //The coordinate for the upper side corner of the button
+    double top;
+    //The coordinate for the lower side of the button
+    double bottom;
+    //The coordinate for the left side corner of the button
+    double left;
+    //The coordinate for the right side of the button
+    double right;
 
+    public Button(double x, double y, double width, double height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        right = x + width;
+        left = x;
+        bottom = y + height;
+        top = y;
+    }
 
-   public Button(double x, double y, double width, double height) {
-       this.width = width;
-       this.height = height;
-       right = x + width;
-       left = x;
-       bottom = y + height;
-       top = y;
-   }
-
-
-
+    public void ifClicked() {
+        //a button could do something interesting!
+    }
 
 }
 

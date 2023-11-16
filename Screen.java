@@ -14,8 +14,11 @@ public class Screen {
        g.fillRect(0,0,width,height);
        g.setColor(Color.white);
        g.drawString("Amherst Tower Defense",width/2-70, height/2);
-       g.drawRect(width/2-20,height*5/8-20,50,30);
+       g.drawRect((int)TowerDefense.Start.x,(int)TowerDefense.Start.y,(int)TowerDefense.Start.width,(int)TowerDefense.Start.height);
        g.drawString("Start",width/2-10,height*5/8);
+
+       g.setColor(Color.pink);
+
    }
 
 
