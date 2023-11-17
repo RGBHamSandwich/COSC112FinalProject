@@ -13,7 +13,6 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
    public static int tokens = 0;
 
     //these booleans and buttons create a relationship between buttons and screen to determine which screens are displaying
-    Screen screen;
     boolean titleScreen;
     static Button Start = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
     boolean chooseMapScreen;
@@ -23,16 +22,24 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     Button map2ScreenButton = new Button(Screen.boxSize*13/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
     boolean map3Screen;
     Button map3ScreenButton = new Button(Screen.boxSize*23/2,Screen.boxSize*2,Screen.boxSize*4, Screen.boxSize*3);
+    Screen screen;
+    static boolean titleScreen;
+    static boolean chooseMapScreen;
+    static boolean map1Screen;
+    static boolean map2Screen;
+    static boolean map3Screen;
 
    public TowerDefense(){
        addKeyListener(this);
        addMouseListener(this);
+
 
        titleScreen = true;
        chooseMapScreen = false;
        map1Screen = false;
        map2Screen = false;
        map3Screen = false;
+       arrayOfButtons = new ButtonHolder();
        screen = new Screen();
        this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
        Thread mainThread = new Thread(new Runner());
@@ -95,27 +102,13 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
        double y = e.getY();
        System.out.println("The mouse has been clicked at " + x + ", " + y + ".");
 
-       if (titleScreen) {
-           if (y > Start.top && y < Start.bottom && x > Start.left && x < Start.right) {        //let's move this to a button.check and ButtonHolder thing
-               titleScreen = false;
-               chooseMapScreen = true;
-           }
+       if (titleScreen) ButtonHolder.checkIfClicked('t', x, y);
+       if (chooseMapScreen) {
+           if (map1Screen) ButtonHolder.checkIfClicked('1', x, y);
+           if (map2Screen) ButtonHolder.checkIfClicked('2', x, y);
+           if (map3Screen) ButtonHolder.checkIfClicked('3', x, y);
        }
 
-       if (chooseMapScreen) {
-           if ((y > map1ScreenButton.top) && (y < map1ScreenButton.bottom) && (x > map1ScreenButton.left) && (x < map1ScreenButton.right)) {
-               chooseMapScreen = false;
-               map1Screen = true;
-           }
-           if ((y > map2ScreenButton.top) && (y < map2ScreenButton.bottom) && (x > map2ScreenButton.left) && (x < map2ScreenButton.right)) {
-               chooseMapScreen = false;
-               map2Screen = true;
-           }
-           if ((y > map3ScreenButton.top) && (y < map3ScreenButton.bottom) && (x > map3ScreenButton.left) && (x < map3ScreenButton.right)) {
-               chooseMapScreen = false;
-               map3Screen = true;
-           }
-       }
 
    }
 
@@ -184,9 +177,7 @@ abstract class Tower{
    double fireY;
    int type;
 
-
    //implement a purchase/upgrade button for each tower?
-
 
    public void fireBullet(double fireX, double fireY, int damage) {
        //add to an arrayList of bullets?
@@ -203,8 +194,6 @@ abstract class Tower{
 
 
 class BasicTower extends Tower {
-
-
 
 
    public BasicTower(double x, double y) {
@@ -294,7 +283,58 @@ class Button {
 }
 
 class ButtonHolder {
+    double width;
+    double height;
+    public static Button Start;
 
 
-}
+    public ButtonHolder() {
+        width = TowerDefense.WIDTH;
+        height = TowerDefense.HEIGHT;
+        Start = new Button(width/2-20,height*5/8-20,50,30);         //this is the title screen "Start" button
+        Button[] arrayOfButtons = new Button[5];
+        arrayOfButtons[0] = Start;
+        arrayOfButtons[1] = new Button(Screen.boxSize*3/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);      //this is the map1ScreenButton;
+        arrayOfButtons[2] = new Button(Screen.boxSize*13/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);     //this is the map2ScreenButton;
+        arrayOfButtons[3] = new Button(Screen.boxSize*23/2,Screen.boxSize*2,Screen.boxSize*4, Screen.boxSize*3);    //this is the map3ScreenButton;
 
+
+    }
+
+    public static boolean clickRange(Button button) {
+        double y = button.y;
+        double x = button.x;
+        if (y > button.top && y < button.bottom && x > button.left && x < button.right) {
+            return true;
+        }
+        else return false;
+    }
+
+    public static void checkIfClicked(char i, double x, double y) {
+        Button CB = TowerDefense.arrayOfButtons[i];      //CB = current button
+        if (i == 't') {
+                if (clickRange(CB)) {
+                    TowerDefense.titleScreen = false;
+                    TowerDefense.chooseMapScreen = true;
+                }
+        }
+//        if (i == '1') {
+//            if ((y > CB.top) && (y < CB.bottom) && (x > CB.left) && (x < CB.right)) {
+//                chooseMapScreen = false;
+//                map1Screen = true;
+//            }
+//        }
+//        if (i == '2') {
+//            if ((y > map2ScreenButton.top) && (y < map2ScreenButton.bottom) && (x > map2ScreenButton.left) && (x < map2ScreenButton.right)) {
+//                chooseMapScreen = false;
+//                map2Screen = true;
+//            }
+//        }
+//        if (i == '3') {
+//            if ((y > map3ScreenButton.top) && (y < map3ScreenButton.bottom) && (x > map3ScreenButton.left) && (x < map3ScreenButton.right)) {
+//                chooseMapScreen = false;
+//                map3Screen = true;
+//            }
+        }
+
+    }
