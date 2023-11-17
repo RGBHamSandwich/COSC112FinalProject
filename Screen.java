@@ -6,15 +6,20 @@ import java.awt.event.*;
 public class Screen {
    static int boxSize = 64;
    Balloons balloon;
-
+    static boolean titleScreen = true;
+    static boolean chooseMapScreen = false;
+    static boolean map1Screen = false;
+    static boolean map2Screen = false;
+    static boolean map3Screen = false;
 
    //This method draws the Title Screen.
    public void drawTitleScreen(Graphics g, int width, int height){
+       Button DrawStart = TowerDefense.arrayOfButtons.Start;
        g.setColor(Color.BLACK);
        g.fillRect(0,0,width,height);
        g.setColor(Color.white);
        g.drawString("Amherst Tower Defense",width/2-70, height/2);
-       g.drawRect((int)TowerDefense.Start.x,(int)TowerDefense.Start.y,(int)TowerDefense.Start.width,(int)TowerDefense.Start.height);
+       g.drawRect((int) DrawStart.x,(int)DrawStart.y,(int)DrawStart.width,(int)DrawStart.height);
        g.drawString("Start",width/2-10,height*5/8);
        g.setColor(Color.pink);
 
