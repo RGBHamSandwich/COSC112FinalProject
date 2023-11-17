@@ -10,8 +10,9 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
    public static final int HEIGHT = 768;
    public static final int FPS = 60;
    public static int popped = 0;
-   public static int tokens = 0;
+   public static int moolah = 0;
 
+<<<<<<< HEAD
     //these booleans and buttons create a relationship between buttons and screen to determine which screens are displaying
     boolean titleScreen;
     static Button Start = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
@@ -28,6 +29,20 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     static boolean map1Screen;
     static boolean map2Screen;
     static boolean map3Screen;
+=======
+   Screen screen;
+
+   boolean titleScreen;
+    static Button Start = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
+    boolean chooseMapScreen;
+   boolean map1Screen;
+   Button map1ScreenButton = new Button(Screen.boxSize*3/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
+   boolean map2Screen;
+   Button map2ScreenButton = new Button(Screen.boxSize*13/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
+   boolean map3Screen;
+   Button map3ScreenButton = new Button(Screen.boxSize*23/2,Screen.boxSize*2,Screen.boxSize*4, Screen.boxSize*3);
+
+>>>>>>> parent of e45ffb4 (Contemplating a ButtonHolder class)
 
    public TowerDefense(){
        addKeyListener(this);
@@ -102,11 +117,19 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
        double y = e.getY();
        System.out.println("The mouse has been clicked at " + x + ", " + y + ".");
 
+<<<<<<< HEAD
        if (titleScreen) ButtonHolder.checkIfClicked('t', x, y);
        if (chooseMapScreen) {
            if (map1Screen) ButtonHolder.checkIfClicked('1', x, y);
            if (map2Screen) ButtonHolder.checkIfClicked('2', x, y);
            if (map3Screen) ButtonHolder.checkIfClicked('3', x, y);
+=======
+       if (titleScreen) {
+           if (y > Start.top && y < Start.bottom && x > Start.left && x < Start.right) {
+               titleScreen = false;
+               chooseMapScreen = true;
+           }
+>>>>>>> parent of e45ffb4 (Contemplating a ButtonHolder class)
        }
 
 
@@ -256,13 +279,13 @@ class Button {
     double y;
     double width;
     double height;
-    //The (y) coordinate for the upper side corner of the button
+    //The coordinate for the upper side corner of the button
     double top;
-    //The (y) coordinate for the lower side of the button
+    //The coordinate for the lower side of the button
     double bottom;
-    //The (x) coordinate for the left side corner of the button
+    //The coordinate for the left side corner of the button
     double left;
-    //The (x) coordinate for the right side of the button
+    //The coordinate for the right side of the button
     double right;
 
     public Button(double x, double y, double width, double height) {
@@ -282,6 +305,7 @@ class Button {
 
 }
 
+<<<<<<< HEAD
 class ButtonHolder {
     double width;
     double height;
@@ -338,3 +362,5 @@ class ButtonHolder {
         }
 
     }
+=======
+>>>>>>> parent of e45ffb4 (Contemplating a ButtonHolder class)

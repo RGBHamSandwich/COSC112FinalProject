@@ -42,15 +42,20 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/TowerDefense.java</url>
+<<<<<<< HEAD
           <line>59</line>
+=======
+          <line>53</line>
+>>>>>>> parent of e45ffb4 (Contemplating a ButtonHolder class)
           <properties class="TowerDefense" method="paintComponent">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/TowerDefense.java</url>
+<<<<<<< HEAD
           <line>85</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
@@ -78,6 +83,39 @@
           <url>file://$PROJECT_DIR$/TowerDefense.java</url>
           <line>104</line>
           <option name="timeStamp" value="48" />
+=======
+          <line>279</line>
+          <properties class="Button" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TowerDefense.java</url>
+          <line>287</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TowerDefense.java</url>
+          <line>286</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TowerDefense.java</url>
+          <line>288</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TowerDefense.java</url>
+          <line>284</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TowerDefense.java</url>
+          <line>285</line>
+          <option name="timeStamp" value="16" />
+>>>>>>> parent of e45ffb4 (Contemplating a ButtonHolder class)
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
