@@ -65,30 +65,44 @@ public class Screen {
        g.fillRect(x,y,width-boxSize*4,height);
    }
 
-
+   //This method draws the panel where towers can be bought and the start level button area
    public void drawShopScreen(Graphics g,int width, int height){
-       width = width-256;
-       g.setColor(Color.lightGray);
-       g.fillRect(width,0,boxSize*4,height);
-       g.setColor(Color.WHITE);
-       g.fillRect(width,0,boxSize*4,boxSize);
-       g.setColor(Color.black);
-       g.drawRect(width,0,boxSize*4,boxSize);
-       g.drawString("Shop",width + boxSize*2 -15,boxSize/2);
-       g.setColor(Color.green);
-       g.fillRect(width,height-boxSize,boxSize*4,boxSize);
-       g.setColor(Color.black);
-       g.drawRect(width,height-boxSize,boxSize*4,boxSize);
-       g.drawString("Start Level",width + boxSize*2 -30,height-boxSize/2);
-       //draws 9 circles in a grid. The number of rows is the upper bound of i, and there are three per row.
-       //the number of rows can be any int between 2 and 9 for circles to appear in the proper area.
-       int spacing = 15;
-       for(int i = 1; i < 3; i++) {
-           for(int j = 0; j < 3;j++) {
-               g.drawOval(width + (j)*boxSize + (j+1)*spacing, i * (boxSize + spacing), boxSize, boxSize);
-           }
-       }
+        width = width-256;
+        g.setColor(Color.lightGray);
+        g.fillRect(width,0,boxSize*4,height);
+        g.setColor(Color.WHITE);
+        g.fillRect(width,0,boxSize*4,boxSize);
+        g.setColor(Color.black);
+        g.drawRect(width,0,boxSize*4,boxSize);
+        g.drawRect(width+boxSize*2,0,boxSize*2,boxSize);
+        g.drawString("Shop",width + boxSize -15,boxSize/2);
+        drawCoin(g,width+boxSize*17/8,boxSize/3);
+        g.drawString(Integer.toString(TowerDefense.tokens),width+boxSize*21/8,boxSize/2 +10);
+        g.setColor(Color.green);
+        g.fillRect(width,height-boxSize,boxSize*4,boxSize);
+        g.setColor(Color.black);
+        g.drawRect(width,height-boxSize,boxSize*4,boxSize);
+        g.drawString("Start Level",width + boxSize*2 -30,height-boxSize/2);
+        //draws 9 circles in a grid. The number of rows is the upper bound of i, and there are three per row.
+        //the number of rows can be any int between 2 and 9 for circles to appear in the proper area.
+        int spacing = 15;
+        for(int i = 1; i < 3; i++) {
+            for(int j = 0; j < 3;j++) {
+                g.drawOval(width + (j)*boxSize + (j+1)*spacing, i * (boxSize + spacing) + (i-1)*boxSize, boxSize,
+                        boxSize);
+                g.drawRect(width +(j)*boxSize + (j+1)*spacing,(i+1) * (boxSize + spacing) + (i-1)*boxSize,boxSize,
+                        boxSize/2);
+                drawCoin(g,width +(j)*boxSize + (j+1)*spacing + 1,(i+1) * (boxSize + spacing) + (i-1)*boxSize + 1);
+            }
+        }
    }
-
-
+   
+   static void drawCoin(Graphics g,int x,int y){
+        g.setColor(Color.orange);
+        g.fillOval(x, y, boxSize/2 - 3,boxSize/2 - 3);
+        g.setColor(Color.yellow);
+        g.fillOval(x+2, y+2, boxSize/2 - 7,boxSize/2 - 7);
+        g.setColor(Color.black);
+    }
+   
 }
