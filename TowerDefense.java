@@ -10,30 +10,43 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     public static final int HEIGHT = 768;
     public static final int FPS = 60;
     public static int popped = 0;
-    public static int tokens = 0;
+    public static int lives = 100;
+    public static int coins = 300;
 
     //these booleans and buttons create a relationship between buttons and screen to determine which screens are displaying
     Screen screen;
+    Level level;
     boolean titleScreen;
     static Button Start = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
     boolean chooseMapScreen;
     boolean map1Screen;
-    Button map1ScreenButton = new Button(Screen.boxSize*3/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
+    Button map1ScreenButton = new Button(Screen.boxSize*3/2,Screen.boxSize*2,
+            Screen.boxSize*4,Screen.boxSize*3);
     boolean map2Screen;
-    Button map2ScreenButton = new Button(Screen.boxSize*13/2,Screen.boxSize*2,Screen.boxSize*4,Screen.boxSize*3);
+    Button map2ScreenButton = new Button(Screen.boxSize*13/2,Screen.boxSize*2,
+            Screen.boxSize*4,Screen.boxSize*3);
     boolean map3Screen;
-    Button map3ScreenButton = new Button(Screen.boxSize*23/2,Screen.boxSize*2,Screen.boxSize*4, Screen.boxSize*3);
+    Button map3ScreenButton = new Button(Screen.boxSize*23/2,Screen.boxSize*2,
+            Screen.boxSize*4, Screen.boxSize*3);
+
+    Button startLevelButton = new Button(WIDTH - 256,HEIGHT - Screen.boxSize,
+            Screen.boxSize*4,Screen.boxSize);
+
+    boolean gameOverScreen;
+    static boolean playAgain = false;
+    Button playAgainButton = new Button(WIDTH/2-30,HEIGHT*5/8 - 20,85,30);
 
     public TowerDefense(){
         addKeyListener(this);
         addMouseListener(this);
-
         titleScreen = true;
         chooseMapScreen = false;
         map1Screen = false;
         map2Screen = false;
         map3Screen = false;
+        gameOverScreen = false;
         screen = new Screen();
+        level = new Level(0,this);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         Thread mainThread = new Thread(new Runner());
         mainThread.start();
@@ -58,17 +71,32 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
         else if(chooseMapScreen){
             screen.drawChooseMapScreen(g,getWidth(),getHeight());
         }
-        else if(map1Screen){
-            screen.drawMap1Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
+        else if(gameOverScreen){
+            screen.drawGameOverScreen(g,getWidth(),getHeight());
+        }
+        else{
+            if(map1Screen){
+                screen.drawMap1Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
+            }
+            else if(map2Screen){
+                screen.drawMap2Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
+            }
+            else if(map3Screen){
+                screen.drawMap3Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
+            }
+            level.draw(g);
             screen.drawShopScreen(g,getWidth(),getHeight());
         }
-        else if(map2Screen){
-            screen.drawMap2Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
-            screen.drawShopScreen(g,getWidth(),getHeight());
-        }
-        else if(map3Screen){
-            screen.drawMap3Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
-            screen.drawShopScreen(g,getWidth(),getHeight());
+    }
+
+    public void update(){
+        level.update(1.0 / (double) FPS,this);
+        if(lives == 0){
+            level.balloon = null;
+            gameOverScreen = true;
+            map1Screen = false;
+            map2Screen = false;
+            map3Screen = false;
         }
     }
 
@@ -76,7 +104,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     class Runner implements Runnable{
         public void run() {
             while(true){
-                //sc
+                update();
                 repaint();
                 try{
                     Thread.sleep(1000/FPS);
@@ -101,7 +129,6 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
                 chooseMapScreen = true;
             }
         }
-
         if (chooseMapScreen) {
             if ((y > map1ScreenButton.top) && (y < map1ScreenButton.bottom) && (x > map1ScreenButton.left) && (x < map1ScreenButton.right)) {
                 chooseMapScreen = false;
@@ -116,7 +143,29 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
                 map3Screen = true;
             }
         }
-
+        if(map1Screen||map2Screen||map3Screen){
+            if ((y > startLevelButton.top) && (y < startLevelButton.bottom) && (x > startLevelButton.left) && (x < startLevelButton.right)) {
+                if(level.balloon == null) {
+                    System.out.println(level.levelNum);
+                    level.levelNum++;
+                    level = new Level(level.levelNum,this);
+                    System.out.println(level.levelNum);
+                }
+            }
+        }
+        if(gameOverScreen){
+            if(!playAgain) {
+                playAgain = true;
+            }
+            else if ((y > playAgainButton.top) && (y < playAgainButton.bottom) && (x > playAgainButton.left) && (x < playAgainButton.right)) {
+                gameOverScreen = false;
+                chooseMapScreen = true;
+                playAgain = false;
+                level.levelNum = 0;
+                lives = 100;
+                coins = 300;
+            }
+        }
     }
 
     @Override
@@ -179,7 +228,7 @@ abstract class Tower{
     double x;
     double y;
     double damage;
-    //determine perspective, and use these if the base of the tower is different than where the bullets will be coming from.
+    //determine perspective, and use these if the base of the tower is different from where the bullets will be coming from.
     double fireX;
     double fireY;
     int type;
@@ -231,11 +280,6 @@ class BasicTower extends Tower {
         //here we can add the "basic" graphics to the tower
     }
 }
-
-
-class Balloons{
-}
-
 
 class Pair{
     public double x;
@@ -297,4 +341,3 @@ class ButtonHolder {
 
 
 }
-
