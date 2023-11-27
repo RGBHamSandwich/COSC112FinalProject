@@ -13,6 +13,8 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     public static int lives = 100;
     public static int coins = 300;
 
+    static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
+
     //these booleans and buttons create a relationship between buttons and screen to determine which screens are displaying
     Screen screen;
     Level level;
@@ -47,6 +49,8 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
         gameOverScreen = false;
         screen = new Screen();
         level = new Level(0,this);
+
+
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         Thread mainThread = new Thread(new Runner());
         mainThread.start();
@@ -65,8 +69,11 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+
+
         if (titleScreen){
             screen.drawTitleScreen(g,getWidth(),getHeight());
+            g.drawImage(TowerDefense.image, 10, 10, this);
         }
         else if(chooseMapScreen){
             screen.drawChooseMapScreen(g,getWidth(),getHeight());
