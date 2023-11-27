@@ -1,4 +1,3 @@
-//penis
 import java.awt.*;
 
 public class Screen {
