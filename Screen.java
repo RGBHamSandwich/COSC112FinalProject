@@ -1,12 +1,8 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-
 
 public class Screen {
     static int boxSize = 64;
-    Balloons balloon;
-
+    Balloon balloon;
 
     //This method draws the Title Screen.
     public void drawTitleScreen(Graphics g, int width, int height){
@@ -14,12 +10,9 @@ public class Screen {
         g.fillRect(0,0,width,height);
         g.setColor(Color.white);
         g.drawString("Amherst Tower Defense",width/2-70, height/2);
-        g.drawRect((int)TowerDefense.Start.x,(int)TowerDefense.Start.y,(int)TowerDefense.Start.width,(int)TowerDefense.Start.height);
+        g.drawRect(width/2-20,height*5/8-20,50,30);
         g.drawString("Start",width/2-10,height*5/8);
-        g.setColor(Color.pink);
-
     }
-
 
     //This method draws the screen where the user can choose their map.
     public void drawChooseMapScreen(Graphics g,int width, int height){
@@ -29,7 +22,7 @@ public class Screen {
         drawMap1Screen(g,boxSize*3/2,boxSize*2,boxSize*4,boxSize*3,16);
         g.setColor(Color.cyan);
         drawMap2Screen(g,boxSize*13/2,boxSize*2,boxSize*4,boxSize*3,16);
-        g.setColor(Color.pink);
+        g.setColor(Color.blue);
         drawMap3Screen(g,boxSize*23/2,boxSize*2,boxSize*4,boxSize*3,16);
         g.setColor(Color.WHITE);
         g.drawString("Choose Your Map:",width/2-70,50);
@@ -37,7 +30,6 @@ public class Screen {
         g.drawRect(boxSize*6,boxSize*2,boxSize*4,boxSize*3);
         g.drawRect(boxSize*11,boxSize*2,boxSize*4,boxSize*3);
     }
-
 
     //This method draws the screen for the first map.
     public void drawMap1Screen(Graphics g,int x, int y,int width, int height,int boxSize){
@@ -51,20 +43,66 @@ public class Screen {
         g.fillRect(x+boxSize*9,y+boxSize,boxSize,height-boxSize);
     }
 
-
     //This method draws the screen for the second map.
     public void drawMap2Screen(Graphics g,int x, int y,int width, int height,int boxSize){
         g.setColor(Color.cyan);
         g.fillRect(x,y,width-boxSize*4,height);
-    }
+        g.setColor(Color.lightGray);
+        g.fillRect(x+boxSize,y,boxSize,boxSize*7/2);
+        g.fillOval(x+boxSize,y+boxSize*2,boxSize*3,boxSize*3);
 
+        g.fillRect(x+boxSize,y+boxSize*17/2,boxSize,boxSize*7/2);
+        g.fillOval(x+boxSize,y+boxSize*7,boxSize*3,boxSize*3);
+
+        g.fillOval(x+boxSize*3,y+boxSize/2,boxSize*3,boxSize*3);
+        g.fillOval(x+boxSize*3,y+boxSize*17/2,boxSize*3,boxSize*3);
+
+        g.fillOval(x+boxSize*5,y+boxSize*2,boxSize*3,boxSize*3);
+        g.fillOval(x+boxSize*5,y+boxSize*7,boxSize*3,boxSize*3);
+
+        g.fillOval(x+boxSize*7,y+boxSize/2,boxSize*3,boxSize*3);
+        g.fillOval(x+boxSize*7,y+boxSize*17/2,boxSize*3,boxSize*3);
+
+        g.fillRect(x+boxSize*9,y+boxSize*2,boxSize,boxSize*8);
+
+        g.setColor(Color.cyan);
+
+        g.fillOval(x + boxSize*2,y + boxSize*3,boxSize,boxSize);
+        g.fillRect(x + boxSize*2,y,boxSize,boxSize*7/2);
+        g.fillOval(x + boxSize*2,y + boxSize*8,boxSize,boxSize);
+        g.fillRect(x + boxSize*2,y + boxSize*17/2,boxSize,boxSize*7/2);
+
+        g.fillOval(x + boxSize*4,y + boxSize*3/2,boxSize,boxSize);
+        g.fillRect(x + boxSize*4,y + boxSize*2,boxSize,boxSize*7/2);
+        g.fillOval(x + boxSize*4,y + boxSize*19/2,boxSize,boxSize);
+        g.fillRect(x + boxSize*4,y + boxSize*8,boxSize,boxSize*2);
+
+        g.fillOval(x + boxSize*6,y + boxSize*3,boxSize,boxSize);
+        g.fillRect(x + boxSize*6,y,boxSize,boxSize*7/2);
+        g.fillOval(x + boxSize*6,y + boxSize*8,boxSize,boxSize);
+        g.fillRect(x + boxSize*6,y + boxSize*17/2,boxSize,boxSize*7/2);
+
+        g.fillOval(x + boxSize*8,y + boxSize*3/2,boxSize,boxSize);
+        g.fillRect(x + boxSize*8,y + boxSize*2,boxSize,boxSize*7/2);
+        g.fillOval(x + boxSize*8,y + boxSize*19/2,boxSize,boxSize);
+        g.fillRect(x + boxSize*8,y + boxSize*8,boxSize,boxSize*2);
+    }
 
     //This method draws the screen for the third map.
     public void drawMap3Screen(Graphics g,int x, int y,int width, int height,int boxSize){
-        g.setColor(Color.pink);
+        g.setColor(Color.blue);
         g.fillRect(x,y,width-boxSize*4,height);
+        g.setColor(Color.lightGray);
+        g.fillRect(x,y+boxSize*6,boxSize*9,boxSize);
+        g.fillRect(x+boxSize,y+boxSize*3,boxSize*8,boxSize);
+        g.fillRect(x+boxSize,y+boxSize,boxSize*10,boxSize);
+        g.drawRect(x+boxSize,y+boxSize,boxSize,boxSize*3);
+        g.drawRect(x+boxSize*8,y+boxSize*3,boxSize,boxSize*3);
+        g.drawRect(x+boxSize*10,y+boxSize,boxSize,boxSize*8);
+        g.fillRect(x+boxSize,y+boxSize*8,boxSize*10,boxSize);
+        g.drawRect(x+boxSize,y+boxSize*8,boxSize,boxSize*3);
+        g.fillRect(x+boxSize,y+boxSize*10,boxSize*11,boxSize);
     }
-
 
     public void drawShopScreen(Graphics g,int width, int height){
         width = width-256;
@@ -74,7 +112,15 @@ public class Screen {
         g.fillRect(width,0,boxSize*4,boxSize);
         g.setColor(Color.black);
         g.drawRect(width,0,boxSize*4,boxSize);
-        g.drawString("Shop",width + boxSize*2 -15,boxSize/2);
+        g.drawRect(width+boxSize*2,0,boxSize*2,boxSize);
+        g.drawString("Shop",width + boxSize -15,boxSize/2);
+        //These two lines draw the life counter next to the shop label
+        drawLifeToken(g,width+boxSize*17/8,1);
+        g.drawString(Integer.toString(TowerDefense.lives),width+boxSize*21/8,20);
+        //These two lines draw the coin counter under the life counter
+        drawCoin(g,width+boxSize*17/8,boxSize/2);
+        g.drawString(Integer.toString(TowerDefense.coins),width+boxSize*21/8,boxSize/2 + 20);
+        //These next lines draw the start level button
         g.setColor(Color.green);
         g.fillRect(width,height-boxSize,boxSize*4,boxSize);
         g.setColor(Color.black);
@@ -85,10 +131,45 @@ public class Screen {
         int spacing = 15;
         for(int i = 1; i < 3; i++) {
             for(int j = 0; j < 3;j++) {
-                g.drawOval(width + (j)*boxSize + (j+1)*spacing, i * (boxSize + spacing), boxSize, boxSize);
+                g.drawOval(width + (j)*boxSize + (j+1)*spacing, i * (boxSize + spacing) + (i-1)*boxSize, boxSize,
+                        boxSize);
+                g.drawRect(width +(j)*boxSize + (j+1)*spacing,(i+1) * (boxSize + spacing) + (i-1)*boxSize,boxSize,
+                        boxSize/2);
+                drawCoin(g,width +(j)*boxSize + (j+1)*spacing + 1,(i+1) * (boxSize + spacing) + (i-1)*boxSize + 1);
             }
         }
     }
 
+    static void drawCoin(Graphics g,int x,int y){
+        g.setColor(Color.orange);
+        g.fillOval(x, y, boxSize/2 - 3,boxSize/2 - 3);
+        g.setColor(Color.yellow);
+        g.fillOval(x+2, y+2, boxSize/2 - 7,boxSize/2 - 7);
+        g.setColor(Color.black);
+    }
+
+    static void drawLifeToken(Graphics g,int x,int y){
+        g.setColor(Color.red);
+        g.fillOval(x, y, boxSize/2 - 3,boxSize/2 - 3);
+        g.setColor(Color.pink);
+        g.fillOval(x+2, y+2, boxSize/2 - 7,boxSize/2 - 7);
+        g.setColor(Color.black);
+    }
+
+    public void drawGameOverScreen(Graphics g,int width,int height){
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0,width,height);
+        g.setColor(Color.red);
+        g.drawString("Game Over",width/2-20, height/2);
+        if(TowerDefense.playAgain) {
+            drawPlayAgainButton(g, width, height);
+        }
+    }
+
+    static void drawPlayAgainButton(Graphics g,int width, int height){
+        g.setColor(Color.white);
+        g.drawRect(width/2-30,height*5/8 - 20,85,30);
+        g.drawString("Play again?",width/2-20,height*5/8);
+    }
 
 }
