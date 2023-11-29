@@ -13,7 +13,9 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     public static int lives = 100;
     public static int coins = 300;
 
-    static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
+//    static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
+    private ButtonHolder buttonHolder;
+
 
     //these booleans and buttons create a relationship between buttons and screen to determine which screens are displaying
     Screen screen;
@@ -73,7 +75,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
         if (titleScreen){
             screen.drawTitleScreen(g,getWidth(),getHeight());
-            g.drawImage(TowerDefense.image, 10, 10, this);
+//            g.drawImage(TowerDefense.image, 10, 10, this);
         }
         else if(chooseMapScreen){
             screen.drawChooseMapScreen(g,getWidth(),getHeight());
@@ -344,7 +346,22 @@ class Button {
 
 }
 
-class ButtonHolder {
+ class ButtonHolder {
+    Button[] buttons;
 
+    public ButtonHolder() {
+        buttons = new Button[3]; // here we can edit the number of buttons
+        buttons[0] = new Button(TowerDefense.WIDTH / 2 - 20, TowerDefense.HEIGHT * 5 / 8 - 20, 50, 30); // Initialize the buttons accordingly
+        // here I'll initialize other buttons...
+    }
 
+    public void handleButtonClick(double x, double y) {
+        //this will help us figure out if clicks are on the button
+        for (Button button : buttons) {
+            if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
+                button.ifClicked(); // Perform button-specific actions
+                break; // Assuming only one button can be clicked at a time
+            }
+        }
+    }
 }
