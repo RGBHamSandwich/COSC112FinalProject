@@ -19,39 +19,26 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
     //these booleans and buttons create a relationship between buttons and screen to determine which screens are displaying
     Screen screen;
-    Level level;
-    boolean titleScreen;
-    static Button Start = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
-    boolean chooseMapScreen;
-    boolean map1Screen;
-    Button map1ScreenButton = new Button(Screen.boxSize*3/2,Screen.boxSize*2,
-            Screen.boxSize*4,Screen.boxSize*3);
-    boolean map2Screen;
-    Button map2ScreenButton = new Button(Screen.boxSize*13/2,Screen.boxSize*2,
-            Screen.boxSize*4,Screen.boxSize*3);
-    boolean map3Screen;
-    Button map3ScreenButton = new Button(Screen.boxSize*23/2,Screen.boxSize*2,
-            Screen.boxSize*4, Screen.boxSize*3);
-
-    Button startLevelButton = new Button(WIDTH - 256,HEIGHT - Screen.boxSize,
-            Screen.boxSize*4,Screen.boxSize);
-
-    boolean gameOverScreen;
+    int boxSize = Screen.boxSize;
+    static Level level;
+    static boolean titleScreen = true;
+    static boolean chooseMapScreen = false;
+    static boolean map1Screen = false;
+    static boolean map2Screen = false;
+    static boolean map3Screen = false;
+    boolean gameOverScreen = false;
     static boolean playAgain = false;
     Button playAgainButton = new Button(WIDTH/2-30,HEIGHT*5/8 - 20,85,30);
+
+
 
     public TowerDefense(){
         addKeyListener(this);
         addMouseListener(this);
-        titleScreen = true;
-        chooseMapScreen = false;
-        map1Screen = false;
-        map2Screen = false;
-        map3Screen = false;
-        gameOverScreen = false;
         screen = new Screen();
         level = new Level(0,this);
 
+        buttonHolder = new ButtonHolder();
 
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         Thread mainThread = new Thread(new Runner());
@@ -132,36 +119,9 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
         double y = e.getY();
         System.out.println("The mouse has been clicked at " + x + ", " + y + ".");
 
-        if (titleScreen) {
-            if (y > Start.top && y < Start.bottom && x > Start.left && x < Start.right) {        //let's move this to a button.check and ButtonHolder thing
-                titleScreen = false;
-                chooseMapScreen = true;
-            }
-        }
-        if (chooseMapScreen) {
-            if ((y > map1ScreenButton.top) && (y < map1ScreenButton.bottom) && (x > map1ScreenButton.left) && (x < map1ScreenButton.right)) {
-                chooseMapScreen = false;
-                map1Screen = true;
-            }
-            if ((y > map2ScreenButton.top) && (y < map2ScreenButton.bottom) && (x > map2ScreenButton.left) && (x < map2ScreenButton.right)) {
-                chooseMapScreen = false;
-                map2Screen = true;
-            }
-            if ((y > map3ScreenButton.top) && (y < map3ScreenButton.bottom) && (x > map3ScreenButton.left) && (x < map3ScreenButton.right)) {
-                chooseMapScreen = false;
-                map3Screen = true;
-            }
-        }
-        if(map1Screen||map2Screen||map3Screen){
-            if ((y > startLevelButton.top) && (y < startLevelButton.bottom) && (x > startLevelButton.left) && (x < startLevelButton.right)) {
-                if(level.balloon == null) {
-                    System.out.println(level.levelNum);
-                    level.levelNum++;
-                    level = new Level(level.levelNum,this);
-                    System.out.println(level.levelNum);
-                }
-            }
-        }
+        buttonHolder.handleButtonClick(x, y);
+
+
         if(gameOverScreen){
             if(!playAgain) {
                 playAgain = true;
@@ -338,28 +298,69 @@ class Button {
         left = x;
         bottom = y + height;
         top = y;
+
     }
 
-    public void ifClicked() {
-        //a button could do something interesting!
+    public void ifClicked(int num) {
+        Level level = TowerDefense.level;
+
+//        if a button is clicked, these are the functions
+        if (num == 0) {
+            TowerDefense.titleScreen = false;
+            TowerDefense.chooseMapScreen = true;
+        }
+        if (num == 1) {
+            TowerDefense.chooseMapScreen = false;
+            TowerDefense.map1Screen = true;
+        }
+        if (num == 2) {
+            TowerDefense.chooseMapScreen = false;
+            TowerDefense.map2Screen = true;
+        }
+        if (num == 3) {
+            TowerDefense.chooseMapScreen = false;
+            TowerDefense.map3Screen = true;
+        }
+
+        if (num == 4) {
+            if (level.balloon == null) {
+                System.out.println(level.levelNum);
+                level.levelNum++;
+//                level = new Level(level.levelNum, mainInstance);
+                System.out.println(level.levelNum);
+            }
+        }
     }
 
 }
 
  class ButtonHolder {
-    Button[] buttons;
+    Button[] buttonArray;
+    int WIDTH = TowerDefense.WIDTH;
+    int HEIGHT = TowerDefense.HEIGHT;
+    int boxSize = Screen.boxSize;
 
     public ButtonHolder() {
-        buttons = new Button[3]; // here we can edit the number of buttons
-        buttons[0] = new Button(TowerDefense.WIDTH / 2 - 20, TowerDefense.HEIGHT * 5 / 8 - 20, 50, 30); // Initialize the buttons accordingly
-        // here I'll initialize other buttons...
+        buttonArray = new Button[10]; // here we can edit the number of buttons
+
+        //this is the Start button
+        buttonArray[0] = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
+        //these are the buttons to choose between map 1, 2, and 3
+        buttonArray[1] = new Button(boxSize*3/2,boxSize*2, boxSize*4,boxSize*3);
+        buttonArray[2] = new Button(boxSize*13/2,boxSize*2, boxSize*4,boxSize*3);
+        buttonArray[3] = new Button(boxSize*23/2,boxSize*2, boxSize*4, boxSize*3);
+        //this is the button to start the level
+        buttonArray[4] = new Button(WIDTH - 256,HEIGHT - boxSize, boxSize*4, boxSize);
+
+
     }
 
     public void handleButtonClick(double x, double y) {
         //this will help us figure out if clicks are on the button
-        for (Button button : buttons) {
+        for (int i = 0; i < buttonArray.length; i++) {
+            Button button = buttonArray[i];
             if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
-                button.ifClicked(); // Perform button-specific actions
+                button.ifClicked(i); // Perform button-specific actions
                 break; // Assuming only one button can be clicked at a time
             }
         }
