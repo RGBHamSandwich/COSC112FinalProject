@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class Balloon {
-    static int radius = 15;
+    int radius = 15;
     Pair position;
     Pair velocity;
     Color color;
@@ -89,7 +89,7 @@ public class Balloon {
             velocity.y = velocity.x;
             velocity.x = 0;
         }
-        if(position.y > TowerDefense.HEIGHT + Balloon.radius){
+        if(position.y > TowerDefense.HEIGHT + 15){
             pathCleared = true;
         }
     }
@@ -179,7 +179,8 @@ public class Balloon {
             velocity.y = determineVelocity(this.color);
         }
         //End Condition
-        if(position.y > TowerDefense.HEIGHT + Balloon.radius){
+        //15 was the static value for radius... og code said "Balloon.radius"
+        if(position.y > TowerDefense.HEIGHT + 15){
             pathCleared = true;
         }
     }
@@ -240,7 +241,8 @@ public class Balloon {
             velocity.x = velocity.y;
             velocity.y = 0;
         }
-        if(position.x > Screen.boxSize*12 + Balloon.radius){
+        //"og code had "Balloon.radius" instead of 15
+        if(position.x > Screen.boxSize*12 + 15){
             pathCleared = true;
         }
     }

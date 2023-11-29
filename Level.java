@@ -12,11 +12,11 @@ public class Level {
         }
         else{
             if(towerDefense.map1Screen||towerDefense.map2Screen) {
-                startPosition = new Pair(96,-Balloon.radius);
+                startPosition = new Pair(96,-20);
                 balloon = new Balloon(startPosition.x,startPosition.y, Color.red, 1,true);
             }
             else if(towerDefense.map3Screen){
-                startPosition = new Pair(-Balloon.radius,416);
+                startPosition = new Pair(-20,416);
                 balloon = new Balloon(startPosition.x,startPosition.y, Color.red, 1,false);
             }
         }
