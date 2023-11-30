@@ -333,16 +333,34 @@ public class Balloon {
                     radius * 2, radius * 2,null);
         }
         else if(color == Color.yellow){
-            g.drawImage(ImageHolder.yellowBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
-                    radius * 2, radius * 2,null);
+            if(TowerDefense.map2Screen){
+                g.drawImage(ImageHolder.pastelYellowBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+            else {
+                g.drawImage(ImageHolder.yellowBalloon, (int) (position.x - radius + xMargin), (int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2, null);
+            }
         }
         else if(color == Color.blue){
-            g.drawImage(ImageHolder.blueBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
-                    radius * 2, radius * 2,null);
+            if(TowerDefense.map2Screen){
+                g.drawImage(ImageHolder.pastelBlueBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+            else {
+                g.drawImage(ImageHolder.blueBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
         }
         else if(color == Color.green){
-            g.drawImage(ImageHolder.greenBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
-                    radius * 2, radius * 2,null);
+            if(TowerDefense.map2Screen){
+                g.drawImage(ImageHolder.pastelGreenBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+            else {
+                g.drawImage(ImageHolder.greenBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
         }
         if (nextBalloon != null) {
             nextBalloon.draw(g);
