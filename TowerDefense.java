@@ -78,7 +78,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
                 screen.drawMap3Screen(g,0,0,768,768);
             }
             level.draw(g);
-            screen.drawShopScreen(g,getWidth(),getHeight());
+            screen.drawShopScreen(g);
         }
     }
 
