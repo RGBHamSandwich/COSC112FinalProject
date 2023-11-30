@@ -10,10 +10,10 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     public static final int HEIGHT = 768;
     public static final int FPS = 60;
     public static int popped = 0;
-    public static int lives = 100;
+    public static int lives = 1;
     public static int coins = 300;
 
-//    static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
+    static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
     private ButtonHolder buttonHolder;
 
 
@@ -26,10 +26,8 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     static boolean map1Screen = false;
     static boolean map2Screen = false;
     static boolean map3Screen = false;
-    boolean gameOverScreen = false;
+    static boolean gameOverScreen = false;
     static boolean playAgain = false;
-    Button playAgainButton = new Button(WIDTH/2-30,HEIGHT*5/8 - 20,85,30);
-
 
 
     public TowerDefense(){
@@ -60,6 +58,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
         if (titleScreen){
             screen.drawTitleScreen(g,getWidth(),getHeight());
+            //this is the OG bugtesting goat; leave him be. <3
 //            g.drawImage(TowerDefense.image, 10, 10, this);
         }
         else if(chooseMapScreen){
@@ -119,19 +118,18 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
         buttonHolder.handleButtonClick(x, y);
 
-
-        if(gameOverScreen){
+        if(gameOverScreen){             //Beck, make sure to come back to this to figure out what's happening ~ Beck
             if(!playAgain) {
                 playAgain = true;
             }
-            else if ((y > playAgainButton.top) && (y < playAgainButton.bottom) && (x > playAgainButton.left) && (x < playAgainButton.right)) {
-                gameOverScreen = false;
-                chooseMapScreen = true;
-                playAgain = false;
-                level.levelNum = 0;
-                lives = 100;
-                coins = 300;
-            }
+//            else if ((y > playAgainButton.top) && (y < playAgainButton.bottom) && (x > playAgainButton.left) && (x < playAgainButton.right)) {
+//                gameOverScreen = false;
+//                chooseMapScreen = true;
+//                playAgain = false;
+//                level.levelNum = 0;
+//                lives = 100;
+//                coins = 300;
+//            }
         }
     }
 
@@ -158,6 +156,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+        //make sure to think about this method in case someone can't figure out drag/drop
         double x = e.getX();
         double y = e.getY();
 
@@ -327,6 +326,16 @@ class Button {
                 }
             }
         }
+        if (num == 5) {
+            TowerDefense.gameOverScreen = false;
+            TowerDefense.chooseMapScreen = true;
+            TowerDefense.playAgain = false;
+            TowerDefense.level.levelNum = 0;
+            TowerDefense.lives = 100;
+            TowerDefense.coins = 300;
+        }
+
+
     }
 
 }
@@ -348,6 +357,8 @@ class Button {
         buttonArray[3] = new Button(boxSize*23/2,boxSize*2, boxSize*4, boxSize*3);
         //this is the button to start the level
         buttonArray[4] = new Button(WIDTH - 256,HEIGHT - boxSize, boxSize*4, boxSize);
+        //this is the "play again" button
+        buttonArray[5] = new Button(WIDTH/2-30,HEIGHT*5/8 - 20,85,30);
 
 
     }
