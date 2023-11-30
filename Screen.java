@@ -86,12 +86,6 @@ public class Screen {
 
     static void drawLifeToken(Graphics g,int x,int y){
         g.drawImage(ImageHolder.heart,x,y,boxSize/2,boxSize/2,null);
-        /*g.setColor(Color.red);
-        g.fillOval(x, y, boxSize/2 - 3,boxSize/2 - 3);
-        g.setColor(Color.pink);
-        g.fillOval(x+2, y+2, boxSize/2 - 7,boxSize/2 - 7);
-        g.setColor(Color.black);
-         */
     }
 
     public void drawGameOverScreen(Graphics g,int width,int height){
