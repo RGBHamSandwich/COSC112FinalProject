@@ -5,32 +5,32 @@ public class Level {
     int levelNum;
     static Pair startPosition;
 
-    public Level(int levelNum, TowerDefense towerDefense){
+    public Level(int levelNum){
         this.levelNum = levelNum;
         if(levelNum == 0){
             balloon = null;
         }
         else{
-            if(towerDefense.map1Screen||towerDefense.map2Screen) {
+            if(TowerDefense.map1Screen||TowerDefense.map2Screen) {
                 startPosition = new Pair(96,-Balloon.radius);
                 balloon = new Balloon(startPosition.x,startPosition.y, Color.red, 1,true);
             }
-            else if(towerDefense.map3Screen){
+            else if(TowerDefense.map3Screen){
                 startPosition = new Pair(-Balloon.radius,416);
                 balloon = new Balloon(startPosition.x,startPosition.y, Color.red, 1,false);
             }
         }
     }
 
-    public void update(double time, TowerDefense towerDefense){
+    public void update(double time){
         if(balloon != null) {
-            if(towerDefense.map1Screen) {
+            if(TowerDefense.map1Screen) {
                 balloon.updateMap1(time,levelNum);
             }
-            if(towerDefense.map2Screen){
+            if(TowerDefense.map2Screen){
                 balloon.updateMap2(time,levelNum);
             }
-            if(towerDefense.map3Screen){
+            if(TowerDefense.map3Screen){
                 balloon.updateMap3(time,levelNum);
             }
             if (balloon.pathCleared) {

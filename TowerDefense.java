@@ -36,10 +36,8 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
         addKeyListener(this);
         addMouseListener(this);
         screen = new Screen();
-        level = new Level(0,this);
-
+        level = new Level(0);
         buttonHolder = new ButtonHolder();
-
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         Thread mainThread = new Thread(new Runner());
         mainThread.start();
@@ -86,7 +84,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     }
 
     public void update(){
-        level.update(1.0 / (double) FPS,this);
+        level.update(1.0 / (double) FPS);
         if(lives == 0){
             level.balloon = null;
             gameOverScreen = true;
@@ -302,9 +300,7 @@ class Button {
     }
 
     public void ifClicked(int num) {
-        Level level = TowerDefense.level;
-
-//        if a button is clicked, these are the functions
+//      if a button is clicked, these are the functions
         if (num == 0) {
             TowerDefense.titleScreen = false;
             TowerDefense.chooseMapScreen = true;
@@ -321,13 +317,14 @@ class Button {
             TowerDefense.chooseMapScreen = false;
             TowerDefense.map3Screen = true;
         }
-
         if (num == 4) {
-            if (level.balloon == null) {
-                System.out.println(level.levelNum);
-                level.levelNum++;
-//                level = new Level(level.levelNum, mainInstance);
-                System.out.println(level.levelNum);
+            if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen){
+                if (TowerDefense.level.balloon == null) {
+                    System.out.println(TowerDefense.level.levelNum);
+                    TowerDefense.level.levelNum++;
+                    TowerDefense.level = new Level(TowerDefense.level.levelNum);
+                    System.out.println(TowerDefense.level.levelNum);
+                }
             }
         }
     }
