@@ -10,6 +10,6 @@ public class ImageHolder {
     static Image pastelYellowBalloon = Toolkit.getDefaultToolkit().getImage("Pastel Yellow Balloon.png");
     static Image pastelGreenBalloon = Toolkit.getDefaultToolkit().getImage("Pastel Green Balloon.png");
     static Image pastelBlueBalloon = Toolkit.getDefaultToolkit().getImage("Pastel Blue Balloon.png");
-
     static Image coin = Toolkit.getDefaultToolkit().getImage("Coin.png");
+    static Image heart = Toolkit.getDefaultToolkit().getImage("Heart.png");
 }

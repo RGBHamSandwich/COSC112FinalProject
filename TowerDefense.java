@@ -334,8 +334,11 @@ class Button {
             TowerDefense.lives = 100;
             TowerDefense.coins = 300;
         }
-
-
+        else if(num == 6){
+            if(TowerDefense.gameOverScreen && !TowerDefense.playAgain){
+                TowerDefense.playAgain = true;
+            }
+        }
     }
 
 }
@@ -359,8 +362,7 @@ class Button {
         buttonArray[4] = new Button(WIDTH - 256,HEIGHT - boxSize, boxSize*4, boxSize);
         //this is the "play again" button
         buttonArray[5] = new Button(WIDTH/2-30,HEIGHT*5/8 - 20,85,30);
-
-
+        buttonArray[6] = new Button(0,0,WIDTH,HEIGHT);
     }
 
     public void handleButtonClick(double x, double y) {
