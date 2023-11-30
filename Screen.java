@@ -2,7 +2,6 @@ import java.awt.*;
 
 public class Screen {
     static int boxSize = 64;
-    Balloon balloon;
 
     //This method draws the Title Screen.
     public void drawTitleScreen(Graphics g, int width, int height){
@@ -19,9 +18,9 @@ public class Screen {
         g.setColor(Color.BLACK);
         g.fillRect(0,0,width,height);
         g.setColor(Color.green);
-        drawMap1Screen(g,boxSize*3/2,boxSize*2,boxSize*4,boxSize*3,16);
+        drawMap1Screen(g,boxSize*3/2,boxSize*2,boxSize*3,boxSize*3);
         g.setColor(Color.cyan);
-        drawMap2Screen(g,boxSize*13/2,boxSize*2,boxSize*4,boxSize*3,16);
+        drawMap2Screen(g,boxSize*13/2,boxSize*2,boxSize*3,boxSize*3);
         g.setColor(Color.blue);
         drawMap3Screen(g,boxSize*23/2,boxSize*2,boxSize*4,boxSize*3,16);
         g.setColor(Color.WHITE);
@@ -32,62 +31,14 @@ public class Screen {
     }
 
     //This method draws the screen for the first map.
-    public void drawMap1Screen(Graphics g,int x, int y,int width, int height,int boxSize){
-        g.setColor(Color.green);
-        g.fillRect(x,y,width-boxSize*4,height);
-        g.setColor(Color.lightGray);
-        g.fillRect(x+boxSize,y,boxSize,height-boxSize);
-        g.fillRect(x+boxSize,y+height-(boxSize*2),boxSize*5,boxSize);
-        g.fillRect(x+boxSize*5,y+boxSize,boxSize,height-boxSize*2);
-        g.fillRect(x+boxSize*5,y+boxSize,boxSize*5,boxSize);
-        g.fillRect(x+boxSize*9,y+boxSize,boxSize,height-boxSize);
+    public void drawMap1Screen(Graphics g,int x, int y,int width, int height){
+        g.drawImage(ImageHolder.map1,x,y,width,height,null);
     }
 
     //This method draws the screen for the second map.
-    public void drawMap2Screen(Graphics g,int x, int y,int width, int height,int boxSize){
-        g.setColor(Color.cyan);
-        g.fillRect(x,y,width-boxSize*4,height);
-        g.setColor(Color.lightGray);
-        g.fillRect(x+boxSize,y,boxSize,boxSize*7/2);
-        g.fillOval(x+boxSize,y+boxSize*2,boxSize*3,boxSize*3);
-
-        g.fillRect(x+boxSize,y+boxSize*17/2,boxSize,boxSize*7/2);
-        g.fillOval(x+boxSize,y+boxSize*7,boxSize*3,boxSize*3);
-
-        g.fillOval(x+boxSize*3,y+boxSize/2,boxSize*3,boxSize*3);
-        g.fillOval(x+boxSize*3,y+boxSize*17/2,boxSize*3,boxSize*3);
-
-        g.fillOval(x+boxSize*5,y+boxSize*2,boxSize*3,boxSize*3);
-        g.fillOval(x+boxSize*5,y+boxSize*7,boxSize*3,boxSize*3);
-
-        g.fillOval(x+boxSize*7,y+boxSize/2,boxSize*3,boxSize*3);
-        g.fillOval(x+boxSize*7,y+boxSize*17/2,boxSize*3,boxSize*3);
-
-        g.fillRect(x+boxSize*9,y+boxSize*2,boxSize,boxSize*8);
-
-        g.setColor(Color.cyan);
-
-        g.fillOval(x + boxSize*2,y + boxSize*3,boxSize,boxSize);
-        g.fillRect(x + boxSize*2,y,boxSize,boxSize*7/2);
-        g.fillOval(x + boxSize*2,y + boxSize*8,boxSize,boxSize);
-        g.fillRect(x + boxSize*2,y + boxSize*17/2,boxSize,boxSize*7/2);
-
-        g.fillOval(x + boxSize*4,y + boxSize*3/2,boxSize,boxSize);
-        g.fillRect(x + boxSize*4,y + boxSize*2,boxSize,boxSize*7/2);
-        g.fillOval(x + boxSize*4,y + boxSize*19/2,boxSize,boxSize);
-        g.fillRect(x + boxSize*4,y + boxSize*8,boxSize,boxSize*2);
-
-        g.fillOval(x + boxSize*6,y + boxSize*3,boxSize,boxSize);
-        g.fillRect(x + boxSize*6,y,boxSize,boxSize*7/2);
-        g.fillOval(x + boxSize*6,y + boxSize*8,boxSize,boxSize);
-        g.fillRect(x + boxSize*6,y + boxSize*17/2,boxSize,boxSize*7/2);
-
-        g.fillOval(x + boxSize*8,y + boxSize*3/2,boxSize,boxSize);
-        g.fillRect(x + boxSize*8,y + boxSize*2,boxSize,boxSize*7/2);
-        g.fillOval(x + boxSize*8,y + boxSize*19/2,boxSize,boxSize);
-        g.fillRect(x + boxSize*8,y + boxSize*8,boxSize,boxSize*2);
+    public void drawMap2Screen(Graphics g,int x, int y,int width, int height){
+        g.drawImage(ImageHolder.map2,x,y,width,height,null);
     }
-
     //This method draws the screen for the third map.
     public void drawMap3Screen(Graphics g,int x, int y,int width, int height,int boxSize){
         g.setColor(Color.blue);
