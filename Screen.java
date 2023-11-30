@@ -81,11 +81,7 @@ public class Screen {
     }
 
     static void drawCoin(Graphics g,int x,int y){
-        g.setColor(Color.orange);
-        g.fillOval(x, y, boxSize/2 - 3,boxSize/2 - 3);
-        g.setColor(Color.yellow);
-        g.fillOval(x+2, y+2, boxSize/2 - 7,boxSize/2 - 7);
-        g.setColor(Color.black);
+        g.drawImage(ImageHolder.coin,x,y,boxSize/2,boxSize/2,null);
     }
 
     static void drawLifeToken(Graphics g,int x,int y){
