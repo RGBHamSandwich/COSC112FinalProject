@@ -22,7 +22,7 @@ public class Screen {
         g.setColor(Color.cyan);
         drawMap2Screen(g,boxSize*13/2,boxSize*2,boxSize*3,boxSize*3);
         g.setColor(Color.blue);
-        drawMap3Screen(g,boxSize*23/2,boxSize*2,boxSize*4,boxSize*3,16);
+        drawMap3Screen(g,boxSize*23/2,boxSize*2,boxSize*3,boxSize*3);
         g.setColor(Color.WHITE);
         g.drawString("Choose Your Map:",width/2-70,50);
         g.drawRect(boxSize,boxSize*2,boxSize*4,boxSize*3);
@@ -40,19 +40,8 @@ public class Screen {
         g.drawImage(ImageHolder.map2,x,y,width,height,null);
     }
     //This method draws the screen for the third map.
-    public void drawMap3Screen(Graphics g,int x, int y,int width, int height,int boxSize){
-        g.setColor(Color.blue);
-        g.fillRect(x,y,width-boxSize*4,height);
-        g.setColor(Color.lightGray);
-        g.fillRect(x,y+boxSize*6,boxSize*9,boxSize);
-        g.fillRect(x+boxSize,y+boxSize*3,boxSize*8,boxSize);
-        g.fillRect(x+boxSize,y+boxSize,boxSize*10,boxSize);
-        g.drawRect(x+boxSize,y+boxSize,boxSize,boxSize*3);
-        g.drawRect(x+boxSize*8,y+boxSize*3,boxSize,boxSize*3);
-        g.drawRect(x+boxSize*10,y+boxSize,boxSize,boxSize*8);
-        g.fillRect(x+boxSize,y+boxSize*8,boxSize*10,boxSize);
-        g.drawRect(x+boxSize,y+boxSize*8,boxSize,boxSize*3);
-        g.fillRect(x+boxSize,y+boxSize*10,boxSize*11,boxSize);
+    public void drawMap3Screen(Graphics g,int x, int y,int width, int height){
+        g.drawImage(ImageHolder.map3,x,y,width,height,null);
     }
 
     public void drawShopScreen(Graphics g,int width, int height){
