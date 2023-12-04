@@ -3,6 +3,7 @@ import java.util.Random;
 
 public class Balloon {
     int radius = 15;
+    static int radius = 25;
     Pair position;
     Pair velocity;
     Color color;
@@ -330,15 +331,41 @@ public class Balloon {
     }
 
     public void draw(Graphics g){
-        //System.out.println("Drawing the Balloon");
-        g.setColor(color);
-        g.fillOval((int) (position.x-radius + xMargin), (int) (position.y-radius + yMargin),
-                radius*2,radius*2);
-        int[] xValues = {(int)position.x+ xMargin,(int)position.x + radius/2 + xMargin,(int) position.x - radius/2 + xMargin};
-        int[] yValues = {(int)position.y+ yMargin, (int)position.y + radius+ yMargin + 5,(int) position.y + radius+ yMargin + 5};
-        Polygon triangle = new Polygon(xValues,yValues,3);
-        g.fillPolygon(triangle);
-        if(nextBalloon != null){
+        if(color == Color.red){
+            g.drawImage(ImageHolder.redBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                    radius * 2, radius * 2,null);
+        }
+        else if(color == Color.yellow){
+            if(TowerDefense.map2Screen){
+                g.drawImage(ImageHolder.pastelYellowBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+            else {
+                g.drawImage(ImageHolder.yellowBalloon, (int) (position.x - radius + xMargin), (int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2, null);
+            }
+        }
+        else if(color == Color.blue){
+            if(TowerDefense.map2Screen){
+                g.drawImage(ImageHolder.pastelBlueBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+            else {
+                g.drawImage(ImageHolder.blueBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+        }
+        else if(color == Color.green){
+            if(TowerDefense.map2Screen){
+                g.drawImage(ImageHolder.pastelGreenBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+            else {
+                g.drawImage(ImageHolder.greenBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+        }
+        if (nextBalloon != null) {
             nextBalloon.draw(g);
         }
     }

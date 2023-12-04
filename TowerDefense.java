@@ -10,10 +10,10 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     public static final int HEIGHT = 768;
     public static final int FPS = 60;
     public static int popped = 0;
-    public static int lives = 100;
+    public static int lives = 1;
     public static int coins = 300;
 
-//    static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
+    static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
     private ButtonHolder buttonHolder;
 
 
@@ -26,20 +26,16 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     static boolean map1Screen = false;
     static boolean map2Screen = false;
     static boolean map3Screen = false;
-    boolean gameOverScreen = false;
+    static boolean gameOverScreen = false;
     static boolean playAgain = false;
-    Button playAgainButton = new Button(WIDTH/2-30,HEIGHT*5/8 - 20,85,30);
-
 
 
     public TowerDefense(){
         addKeyListener(this);
         addMouseListener(this);
         screen = new Screen();
-        level = new Level(0,this);
-
+        level = new Level(0);
         buttonHolder = new ButtonHolder();
-
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         Thread mainThread = new Thread(new Runner());
         mainThread.start();
@@ -62,6 +58,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
         if (titleScreen){
             screen.drawTitleScreen(g,getWidth(),getHeight());
+            //this is the OG bugtesting goat; leave him be. <3
 //            g.drawImage(TowerDefense.image, 10, 10, this);
         }
         else if(chooseMapScreen){
@@ -72,21 +69,21 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
         }
         else{
             if(map1Screen){
-                screen.drawMap1Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
+                screen.drawMap1Screen(g,0,0,768,768);
             }
             else if(map2Screen){
-                screen.drawMap2Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
+                screen.drawMap2Screen(g,0,0,768,768);
             }
             else if(map3Screen){
-                screen.drawMap3Screen(g,0,0,getWidth(),getHeight(),Screen.boxSize);
+                screen.drawMap3Screen(g,0,0,768,768);
             }
             level.draw(g);
-            screen.drawShopScreen(g,getWidth(),getHeight());
+            screen.drawShopScreen(g);
         }
     }
 
     public void update(){
-        level.update(1.0 / (double) FPS,this);
+        level.update(1.0 / (double) FPS);
         if(lives == 0){
             level.balloon = null;
             gameOverScreen = true;
@@ -121,19 +118,18 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
         buttonHolder.handleButtonClick(x, y);
 
-
-        if(gameOverScreen){
+        if(gameOverScreen){             //Beck, make sure to come back to this to figure out what's happening ~ Beck
             if(!playAgain) {
                 playAgain = true;
             }
-            else if ((y > playAgainButton.top) && (y < playAgainButton.bottom) && (x > playAgainButton.left) && (x < playAgainButton.right)) {
-                gameOverScreen = false;
-                chooseMapScreen = true;
-                playAgain = false;
-                level.levelNum = 0;
-                lives = 100;
-                coins = 300;
-            }
+//            else if ((y > playAgainButton.top) && (y < playAgainButton.bottom) && (x > playAgainButton.left) && (x < playAgainButton.right)) {
+//                gameOverScreen = false;
+//                chooseMapScreen = true;
+//                playAgain = false;
+//                level.levelNum = 0;
+//                lives = 100;
+//                coins = 300;
+//            }
         }
     }
 
@@ -160,6 +156,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+        //make sure to think about this method in case someone can't figure out drag/drop
         double x = e.getX();
         double y = e.getY();
 
@@ -302,9 +299,7 @@ class Button {
     }
 
     public void ifClicked(int num) {
-        Level level = TowerDefense.level;
-
-//        if a button is clicked, these are the functions
+//      if a button is clicked, these are the functions
         if (num == 0) {
             TowerDefense.titleScreen = false;
             TowerDefense.chooseMapScreen = true;
@@ -321,13 +316,27 @@ class Button {
             TowerDefense.chooseMapScreen = false;
             TowerDefense.map3Screen = true;
         }
-
         if (num == 4) {
-            if (level.balloon == null) {
-                System.out.println(level.levelNum);
-                level.levelNum++;
-//                level = new Level(level.levelNum, mainInstance);
-                System.out.println(level.levelNum);
+            if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen){
+                if (TowerDefense.level.balloon == null) {
+                    System.out.println(TowerDefense.level.levelNum);
+                    TowerDefense.level.levelNum++;
+                    TowerDefense.level = new Level(TowerDefense.level.levelNum);
+                    System.out.println(TowerDefense.level.levelNum);
+                }
+            }
+        }
+        if (num == 5) {
+            TowerDefense.gameOverScreen = false;
+            TowerDefense.chooseMapScreen = true;
+            TowerDefense.playAgain = false;
+            TowerDefense.level.levelNum = 0;
+            TowerDefense.lives = 100;
+            TowerDefense.coins = 300;
+        }
+        else if(num == 6){
+            if(TowerDefense.gameOverScreen && !TowerDefense.playAgain){
+                TowerDefense.playAgain = true;
             }
         }
     }
@@ -351,8 +360,9 @@ class Button {
         buttonArray[3] = new Button(boxSize*23/2,boxSize*2, boxSize*4, boxSize*3);
         //this is the button to start the level
         buttonArray[4] = new Button(WIDTH - 256,HEIGHT - boxSize, boxSize*4, boxSize);
-
-
+        //this is the "play again" button
+        buttonArray[5] = new Button(WIDTH/2-30,HEIGHT*5/8 - 20,85,30);
+        buttonArray[6] = new Button(0,0,WIDTH,HEIGHT);
     }
 
     public void handleButtonClick(double x, double y) {
