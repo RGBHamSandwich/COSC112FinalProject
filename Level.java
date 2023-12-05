@@ -5,25 +5,17 @@ public class Level {
     int levelNum;
     static Pair startPosition;
 
-    public Level(int levelNum){
+    public Level(int levelNum) {
         this.levelNum = levelNum;
-        if(levelNum == 0){
+        if (levelNum == 0) {
             balloon = null;
-        }
-        else{
-            if(towerDefense.map1Screen||towerDefense.map2Screen) {
-                startPosition = new Pair(96,-20);
-                balloon = new Balloon(startPosition.x,startPosition.y, Color.red, 1,true);
-            }
-            else if(towerDefense.map3Screen){
-                startPosition = new Pair(-20,416);
-            if(TowerDefense.map1Screen||TowerDefense.map2Screen) {
-                startPosition = new Pair(96,-Balloon.radius);
-                balloon = new Balloon(startPosition.x,startPosition.y, Color.red, 1,true);
-            }
-            else if(TowerDefense.map3Screen){
-                startPosition = new Pair(-Balloon.radius,416);
-                balloon = new Balloon(startPosition.x,startPosition.y, Color.red, 1,false);
+        } else {
+            if (TowerDefense.map1Screen || TowerDefense.map2Screen) {
+                startPosition = new Pair(96, -20);
+                balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, true);
+            } else if (TowerDefense.map3Screen) {
+                startPosition = new Pair(-20, 416);
+                balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, false);
             }
         }
     }

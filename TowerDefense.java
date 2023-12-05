@@ -93,6 +93,20 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
         }
     }
 
+    static void resetGame(){
+        titleScreen = false;
+        chooseMapScreen = true;
+        map1Screen = false;
+        map2Screen = false;
+        map3Screen = false;
+        gameOverScreen = false;
+        playAgain = false;
+        TowerDefense.level.levelNum = 0;
+        TowerDefense.level = new Level(TowerDefense.level.levelNum);
+        TowerDefense.lives = 1;
+        TowerDefense.coins = 300;
+    }
+
 
     class Runner implements Runnable{
         public void run() {
@@ -117,7 +131,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
         System.out.println("The mouse has been clicked at " + x + ", " + y + ".");
 
         buttonHolder.handleButtonClick(x, y);
-
+        /*
         if(gameOverScreen){             //Beck, make sure to come back to this to figure out what's happening ~ Beck
             if(!playAgain) {
                 playAgain = true;
@@ -130,7 +144,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 //                lives = 100;
 //                coins = 300;
 //            }
-        }
+        }*/
     }
 
     @Override
@@ -301,20 +315,27 @@ class Button {
     public void ifClicked(int num) {
 //      if a button is clicked, these are the functions
         if (num == 0) {
-            TowerDefense.titleScreen = false;
-            TowerDefense.chooseMapScreen = true;
+            if(TowerDefense.titleScreen||(TowerDefense.gameOverScreen && TowerDefense.playAgain)) {
+                TowerDefense.resetGame();
+            }
         }
         if (num == 1) {
             TowerDefense.chooseMapScreen = false;
             TowerDefense.map1Screen = true;
+            System.out.println("Moving to map 1");
+            System.out.println(TowerDefense.lives);
         }
         if (num == 2) {
             TowerDefense.chooseMapScreen = false;
             TowerDefense.map2Screen = true;
+            System.out.println("Moving to map 2");
+            System.out.println(TowerDefense.lives);
         }
         if (num == 3) {
             TowerDefense.chooseMapScreen = false;
             TowerDefense.map3Screen = true;
+            System.out.println("Moving to map 3");
+            System.out.println(TowerDefense.lives);
         }
         if (num == 4) {
             if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen){
@@ -327,12 +348,7 @@ class Button {
             }
         }
         if (num == 5) {
-            TowerDefense.gameOverScreen = false;
-            TowerDefense.chooseMapScreen = true;
-            TowerDefense.playAgain = false;
-            TowerDefense.level.levelNum = 0;
-            TowerDefense.lives = 100;
-            TowerDefense.coins = 300;
+            TowerDefense.resetGame();
         }
         else if(num == 6){
             if(TowerDefense.gameOverScreen && !TowerDefense.playAgain){
@@ -371,6 +387,7 @@ class Button {
             Button button = buttonArray[i];
             if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
                 button.ifClicked(i); // Perform button-specific actions
+                System.out.println("Button Clicked: "+i);
                 break; // Assuming only one button can be clicked at a time
             }
         }

@@ -2,8 +2,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class Balloon {
-    int radius = 15;
-    static int radius = 25;
+    int radius;
     Pair position;
     Pair velocity;
     Color color;
@@ -18,6 +17,7 @@ public class Balloon {
         this.color = color;
         this.rank = rank;
         this.verticalStart = verticalStart;
+        this.radius = determineSize(this.color);
         determineVelocity();
         determineMargins();
     }
@@ -37,6 +37,14 @@ public class Balloon {
         else if(color == Color.green) return 300;
         else if(color == Color.blue) return 250;
         else if(color == Color.yellow) return 350;
+        else return 0;
+    }
+
+    static int determineSize(Color color){
+        if(color == Color.red) return 20;
+        else if(color == Color.green) return 27;
+        else if(color == Color.blue) return 23;
+        else if(color == Color.yellow) return 30;
         else return 0;
     }
 
