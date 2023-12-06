@@ -46,11 +46,13 @@ public class Level {
                             } else {
                                 //this line isnt doing much rn.. its more so for if we decide to mess around w
                                 //indexes later on
-                                prev.nextBalloon = temp.nextBalloon;
+//                                prev.nextBalloon = temp.nextBalloon;
+                                temp = temp.nextBalloon;
                             }
-                        } else {
-                            prev = temp;
                         }
+//                        else {
+//                            prev = temp;
+//                        }
                         temp = temp.nextBalloon;
                     }
 
@@ -84,6 +86,7 @@ public class Level {
             balloon.draw(g);
         }
         if (tower != null) {
+            tower.drawComponent(g);
             for (Bullet b : tower.bullets) {
                 b.drawComponent(g);
             }

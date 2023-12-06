@@ -59,6 +59,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
     }
 
 
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
@@ -235,7 +236,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
 //This is the end of the TowerDefense Class
 
 
-abstract class Tower{
+abstract class Tower implements Drawable{
     double x;
     double y;
     double damage;
@@ -252,10 +253,11 @@ abstract class Tower{
     }
 
 
-    public void drawTower(int type, Graphics g) {
-//        g.setColor(Color.blue);
-//        g.fillRect((int)x, (int)y, 50, 50);
-//        if (type == 1) BasicTower.drawBasicTower();
+    @Override
+    public void drawComponent(Graphics g) {
+        g.setColor(Color.blue);
+        g.fillRect((int)x, (int)y, 50, 50);
+        if (type == 1) BasicTower.drawBasicTower();
         //I'm not sure if x, y will work how I'm thinking they'll work ngl
     }
 
@@ -280,8 +282,8 @@ class BasicTower extends Tower {
 
 
     @Override
-    public void drawTower(int type, Graphics g) {
-        super.drawTower(this.type, g);
+    public void drawComponent(Graphics g) {
+        super.drawComponent(g);
     }
 
 
