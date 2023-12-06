@@ -83,7 +83,7 @@ public class Level {
 
     public void draw(Graphics g) {
         if (balloon != null) {
-            balloon.draw(g);
+            balloon.drawComponent(g);
         }
         if (tower != null) {
             tower.drawComponent(g);
