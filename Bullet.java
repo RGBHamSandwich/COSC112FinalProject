@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Bullet {
+public class Bullet implements Drawable {
     //I'm thinking we might also need a boolean for "has target" or a boolean for ballons called "is targetted"
     //prolly determined by position of tower
     private Pair position;
@@ -27,8 +27,9 @@ public class Bullet {
         position = position.add(velocity.times(time));
     }
 
-        public void drawComponent(Graphics g) {
-        g.setColor(Color.yellow);
+    @Override
+    public void drawComponent(Graphics g) {
+        g.setColor(Color.black);
         g.fillOval((int)(position.x - radius), (int)(position.y - radius), (int)(2*radius), (int)(2*radius));
     }
 }

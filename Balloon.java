@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.Random;
 
-public class Balloon {
+public class Balloon implements Drawable {
     int radius;
     Pair position;
     Pair velocity;
@@ -339,7 +339,8 @@ public class Balloon {
         }
     }
 
-    public void draw(Graphics g){
+    @Override
+    public void drawComponent(Graphics g){
         if(color == Color.red){
             g.drawImage(ImageHolder.redBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
                     radius * 2, radius * 2,null);
@@ -375,7 +376,7 @@ public class Balloon {
             }
         }
         if (nextBalloon != null) {
-            nextBalloon.draw(g);
+            nextBalloon.drawComponent(g);
         }
     }
     public boolean isShot(Bullet bullet){
