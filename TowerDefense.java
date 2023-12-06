@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TowerDefense extends JPanel implements MouseListener, KeyListener {
+public class TowerDefense extends JPanel implements MouseListener, KeyListener, MouseMotionListener {
     //change panel width and height so that we can have a shop panel and game panel
     //which are independent of the final width and height.
     public static final int WIDTH = 1024;
@@ -17,6 +17,10 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
 
     static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
     private ButtonHolder buttonHolder;
+    static boolean basicTowerPresent;
+
+    static double mouseX = 0;
+    static double mouseY = 0;
 
 
     //these booleans and buttons create a relationship between buttons and screen to determine which screens are displaying
@@ -35,6 +39,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     public TowerDefense(){
         addKeyListener(this);
         addMouseListener(this);
+        addMouseMotionListener(this);
         screen = new Screen();
         level = new Level(0);
         buttonHolder = new ButtonHolder();
@@ -82,6 +87,11 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
             level.draw(g);
             screen.drawShopScreen(g);
         }
+
+        if(basicTowerPresent) {
+            g.drawRect((int) mouseX, (int)mouseY, 50, 50);
+        }
+
     }
 
     public void update(){
@@ -124,7 +134,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     }
 
 
-
+// I (Beck) think that a mouse-related class would be good to hold all of these things ...
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -138,14 +148,14 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
             if(!playAgain) {
                 playAgain = true;
             }
-//            else if ((y > playAgainButton.top) && (y < playAgainButton.bottom) && (x > playAgainButton.left) && (x < playAgainButton.right)) {
-//                gameOverScreen = false;
-//                chooseMapScreen = true;
-//                playAgain = false;
-//                level.levelNum = 0;
-//                lives = 100;
-//                coins = 300;
-//            }
+            else if ((y > playAgainButton.top) && (y < playAgainButton.bottom) && (x > playAgainButton.left) && (x < playAgainButton.right)) {
+                gameOverScreen = false;
+                chooseMapScreen = true;
+                playAgain = false;
+                level.levelNum = 0;
+                lives = 100;
+                coins = 300;
+            }
         }*/
     }
 
@@ -163,20 +173,39 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener {
     }
 
     @Override
+    public void mouseExited(MouseEvent e) {
+        //this is important so the program doesn't crash when the mouse exits the screen
+        double x = WIDTH/2;
+        double y = HEIGHT/2;
+
+
+
+    }
+
+    @Override
     public void mouseEntered(MouseEvent e) {
+        //we need to use this in tandem with mouseExited to get the drag and drop working again
+        //on the other hand, we could just cancel the drag and drop when the mouse exits the screen
         double x = e.getX();
         double y = e.getY();
 
 
     }
 
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
     @Override
-    public void mouseExited(MouseEvent e) {
-        //make sure to think about this method in case someone can't figure out drag/drop
+    public void mouseMoved(MouseEvent e) {
+
+    }
+
+    public void MouseMoved(MouseEvent e) {
         double x = e.getX();
         double y = e.getY();
-
-
+        mouseX = x;
+        mouseY = y;
     }
 
     @Override
@@ -224,11 +253,12 @@ abstract class Tower{
 
 
     public void drawTower(int type, Graphics g) {
-        g.setColor(Color.blue);
-        g.fillRect((int)x, (int)y, 50, 50);
+//        g.setColor(Color.blue);
+//        g.fillRect((int)x, (int)y, 50, 50);
 //        if (type == 1) BasicTower.drawBasicTower();
         //I'm not sure if x, y will work how I'm thinking they'll work ngl
     }
+
 }
 
 
@@ -318,25 +348,25 @@ class Button {
                 TowerDefense.resetGame();
             }
         }
-        if (num == 1) {
+        else if (num == 1) {
             TowerDefense.chooseMapScreen = false;
             TowerDefense.map1Screen = true;
             System.out.println("Moving to map 1");
             System.out.println(TowerDefense.lives);
         }
-        if (num == 2) {
+        else if (num == 2) {
             TowerDefense.chooseMapScreen = false;
             TowerDefense.map2Screen = true;
             System.out.println("Moving to map 2");
             System.out.println(TowerDefense.lives);
         }
-        if (num == 3) {
+        else if (num == 3) {
             TowerDefense.chooseMapScreen = false;
             TowerDefense.map3Screen = true;
             System.out.println("Moving to map 3");
             System.out.println(TowerDefense.lives);
         }
-        if (num == 4) {
+        else if (num == 4) {
             if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen){
                 if (TowerDefense.level.balloon == null) {
                     System.out.println(TowerDefense.level.levelNum);
@@ -346,13 +376,18 @@ class Button {
                 }
             }
         }
-        if (num == 5) {
+        else if (num == 5) {
             TowerDefense.resetGame();
         }
-        else if(num == 6){
+        else if(num == 6) {
             if(TowerDefense.gameOverScreen && !TowerDefense.playAgain){
                 TowerDefense.playAgain = true;
             }
+        }
+        else if (num == 7) {
+            TowerDefense.basicTowerPresent = true;
+//            TowerDefense.drawTower(1);
+            // I don't know how to pass g into this :(
         }
     }
 
@@ -367,27 +402,30 @@ class Button {
     public ButtonHolder() {
         buttonArray = new Button[10]; // here we can edit the number of buttons
 
-        //this is the Start button
+        //0 is the Start button
         buttonArray[0] = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
-        //these are the buttons to choose between map 1, 2, and 3
+        //1, 2, 3 are the buttons to choose between map 1, 2, and 3
         buttonArray[1] = new Button(boxSize*3/2,boxSize*2, boxSize*4,boxSize*3);
         buttonArray[2] = new Button(boxSize*13/2,boxSize*2, boxSize*4,boxSize*3);
         buttonArray[3] = new Button(boxSize*23/2,boxSize*2, boxSize*4, boxSize*3);
-        //this is the button to start the level
+        //4 is the button to start the level
         buttonArray[4] = new Button(WIDTH - 256,HEIGHT - boxSize, boxSize*4, boxSize);
-        //this is the "play again" button
+        //5, 6 implement a "play again" function
         buttonArray[5] = new Button(WIDTH/2-30,HEIGHT*5/8 - 20,85,30);
         buttonArray[6] = new Button(0,0,WIDTH,HEIGHT);
+        //7 is the top-left shop button
+        buttonArray[7] = new Button(784, 87, 63, 63);
     }
 
     public void handleButtonClick(double x, double y) {
-        //this will help us figure out if clicks are on the button
+        //this will help us figure out if clicks are on the button or somewhere else
         for (int i = 0; i < buttonArray.length; i++) {
             Button button = buttonArray[i];
             if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
-                button.ifClicked(i); // Perform button-specific actions
+                button.ifClicked(i);
                 System.out.println("Button Clicked: "+i);
-                break; // Assuming only one button can be clicked at a time
+                // Only one button can be clicked at a time, so this keeps us from thumbing through every button for every click
+                break;
             }
         }
     }

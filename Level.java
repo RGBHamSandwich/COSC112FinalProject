@@ -5,7 +5,8 @@ public class Level {
     Balloon balloon;
     int levelNum;
     static Pair startPosition;
-// start position can also be used to determine the direction of the bullts firing - hena
+
+    // start position can also be used to determine the direction of the bullts firing - hena
     public Level(int levelNum) {
         this.levelNum = levelNum;
         if (levelNum == 0) {
@@ -23,23 +24,23 @@ public class Level {
         }
     }
 
-    public void update(double time){
-        if(balloon != null) {
-            if(TowerDefense.map1Screen) {
-                balloon.updateMap1(time,levelNum);
+    public void update(double time) {
+        if (balloon != null) {
+            if (TowerDefense.map1Screen) {
+                balloon.updateMap1(time, levelNum);
 
                 //this is the code that "should" work in popping the balloons... but rn I can't draw anything - Hena
-                for (int i = 0; i < tower.bullets.size(); i++){
+                for (int i = 0; i < tower.bullets.size(); i++) {
                     Balloon temp = balloon;
                     double velocity = Math.sqrt(Math.pow(balloon.velocity.x, 2) + Math.pow(balloon.velocity.y, 2));
                     Balloon prev = null;
                     //the location of the while-loop makes it so that I'm checking for collision between any bullet
                     //and any balloon... basically a double for-loop checking every row and col in a double array
-                    while (temp != null){
-                        if(temp.isShot(tower.bullets.get(i))){
+                    while (temp != null) {
+                        if (temp.isShot(tower.bullets.get(i))) {
                             //we stop drawing it
                             temp.radius = 0;
-                            if (temp.nextBalloon == null){
+                            if (temp.nextBalloon == null) {
                                 //this part I need Kiara to look at cuz rn im just creating rank 1 balloons - Hena
                                 temp = new Balloon(startPosition.x, startPosition.y, Color.red, 1, true);
                             } else {
@@ -53,18 +54,18 @@ public class Level {
                         temp = temp.nextBalloon;
                     }
 
-                    if (tower.bullets.get(i).getPosition().x < 10){
+                    if (tower.bullets.get(i).getPosition().x < 10) {
                         tower.bullets.remove(i);
                         tower.bullets.add(new Bullet(new Pair(300, 80), 5, new Pair(-350, 0)));
                     }
                     tower.bullets.get(i).update(time);
                 }
             }
-            if(TowerDefense.map2Screen){
-                balloon.updateMap2(time,levelNum);
+            if (TowerDefense.map2Screen) {
+                balloon.updateMap2(time, levelNum);
             }
-            if(TowerDefense.map3Screen){
-                balloon.updateMap3(time,levelNum);
+            if (TowerDefense.map3Screen) {
+                balloon.updateMap3(time, levelNum);
             }
             if (balloon.pathCleared) {
                 if (balloon.nextBalloon != null) {
@@ -78,12 +79,14 @@ public class Level {
         }
     }
 
-    public void draw(Graphics g){
-        if(balloon != null){
+    public void draw(Graphics g) {
+        if (balloon != null) {
             balloon.draw(g);
         }
-        for (Bullet b : tower.bullets){
-            b.drawComponent(g);
+        if (tower != null) {
+            for (Bullet b : tower.bullets) {
+                b.drawComponent(g);
+            }
         }
     }
 }

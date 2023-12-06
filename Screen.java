@@ -60,6 +60,9 @@ public class Screen {
                 drawCoin(g,width +(j)*boxSize + (j+1)*spacing - 5,(i+1) * (boxSize + spacing) + (i-1)*boxSize - 5);
             }
         }
+        //this oval outlines the top left shop bubble
+        g.setColor(Color.blue);
+        g.drawOval(784, 87, 63, 63);
     }
 
     static void drawCoin(Graphics g,int x,int y){
