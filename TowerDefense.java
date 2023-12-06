@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class TowerDefense extends JPanel implements MouseListener, KeyListener {
@@ -209,9 +211,8 @@ abstract class Tower{
     double y;
     double damage;
     //determine perspective, and use these if the base of the tower is different from where the bullets will be coming from.
-    double fireX;
-    double fireY;
     int type;
+    List<Bullet> bullets;
 
 
     //implement a purchase/upgrade button for each tower?
@@ -225,22 +226,20 @@ abstract class Tower{
     public void drawTower(int type, Graphics g) {
         g.setColor(Color.blue);
         g.fillRect((int)x, (int)y, 50, 50);
-        if (type == 1) BasicTower.drawBasicTower();
+//        if (type == 1) BasicTower.drawBasicTower();
         //I'm not sure if x, y will work how I'm thinking they'll work ngl
     }
 }
 
 
 class BasicTower extends Tower {
-
-
-
-
     public BasicTower(double x, double y) {
         this. x = x;
         this.y = y;
         damage = 1;
         type = 1;
+        bullets = new ArrayList<>();
+        bullets.add(new Bullet(new Pair(300, 80), 5, new Pair(-350, 0)));
     }
 
 

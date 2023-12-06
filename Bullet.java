@@ -23,7 +23,11 @@ public class Bullet {
         this.velocity.x = (target.x-position.x)/0.3;
         this.velocity.y = (target.y-position.y)/0.3;
     }
-    public void drawComponent(Graphics g) {
+    public void update(double time) {
+        position = position.add(velocity.times(time));
+    }
+
+        public void drawComponent(Graphics g) {
         g.setColor(Color.yellow);
         g.fillOval((int)(position.x - radius), (int)(position.y - radius), (int)(2*radius), (int)(2*radius));
     }

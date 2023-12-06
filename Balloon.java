@@ -257,6 +257,7 @@ public class Balloon {
     }
 
     public void determineLevel(int levelNum){
+        //Would it be cleaner if we put switch cases here? - Hena
         Pair startPosition = Level.startPosition;
         //Level 1
         if(levelNum == 1) {
@@ -376,5 +377,16 @@ public class Balloon {
         if (nextBalloon != null) {
             nextBalloon.draw(g);
         }
+    }
+    public boolean isShot(Bullet bullet){
+        if ((bullet.getPosition().x > this.position.x-radius-2) && (bullet.getPosition().x < position.x+radius-2)){
+            if ((bullet.getPosition().y > this.position.y-radius-2) && (bullet.getPosition().y < position.y+radius-2)){
+                return true;
+            }
+        }
+        if (nextBalloon != null){
+            nextBalloon.isShot(bullet);
+        }
+        return false;
     }
 }
