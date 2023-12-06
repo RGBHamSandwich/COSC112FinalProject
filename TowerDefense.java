@@ -343,52 +343,64 @@ class Button {
 
     public void ifClicked(int num) {
 //      if a button is clicked, these are the functions
-        if (num == 0) {
-            if(TowerDefense.titleScreen||(TowerDefense.gameOverScreen && TowerDefense.playAgain)) {
-                TowerDefense.resetGame();
-            }
-        }
-        else if (num == 1) {
-            TowerDefense.chooseMapScreen = false;
-            TowerDefense.map1Screen = true;
-            System.out.println("Moving to map 1");
-            System.out.println(TowerDefense.lives);
-        }
-        else if (num == 2) {
-            TowerDefense.chooseMapScreen = false;
-            TowerDefense.map2Screen = true;
-            System.out.println("Moving to map 2");
-            System.out.println(TowerDefense.lives);
-        }
-        else if (num == 3) {
-            TowerDefense.chooseMapScreen = false;
-            TowerDefense.map3Screen = true;
-            System.out.println("Moving to map 3");
-            System.out.println(TowerDefense.lives);
-        }
-        else if (num == 4) {
-            if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen){
-                if (TowerDefense.level.balloon == null) {
-                    System.out.println(TowerDefense.level.levelNum);
-                    TowerDefense.level.levelNum++;
-                    TowerDefense.level = new Level(TowerDefense.level.levelNum);
-                    System.out.println(TowerDefense.level.levelNum);
+
+        switch(num) {
+            case 0:
+                if(TowerDefense.titleScreen||(TowerDefense.gameOverScreen && TowerDefense.playAgain)) {
+                    TowerDefense.resetGame();
                 }
-            }
+                break;
+
+            case 1:
+                TowerDefense.chooseMapScreen = false;
+                TowerDefense.map1Screen = true;
+                System.out.println("Moving to map 1");
+                System.out.println(TowerDefense.lives);
+                break;
+
+            case 2:
+                TowerDefense.chooseMapScreen = false;
+                TowerDefense.map2Screen = true;
+                System.out.println("Moving to map 2");
+                System.out.println(TowerDefense.lives);
+                break;
+
+            case 3:
+                TowerDefense.chooseMapScreen = false;
+                TowerDefense.map3Screen = true;
+                System.out.println("Moving to map 3");
+                System.out.println(TowerDefense.lives);
+                break;
+
+            case 4:
+                if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen){
+                    if (TowerDefense.level.balloon == null) {
+                        System.out.println(TowerDefense.level.levelNum);
+                        TowerDefense.level.levelNum++;
+                        TowerDefense.level = new Level(TowerDefense.level.levelNum);
+                        System.out.println(TowerDefense.level.levelNum);
+                    }
+                }
+                break;
+
+            case 5:
+                TowerDefense.resetGame();
+                break;
+
+            case 6:
+                if(TowerDefense.gameOverScreen && !TowerDefense.playAgain){
+                    TowerDefense.playAgain = true;
+                }
+                break;
+
+            case 7:
+                TowerDefense.basicTowerPresent = true;
+//              TowerDefense.drawTower(1);
+                // I don't know how to pass g into this :(
+                break;
+
         }
-        else if (num == 5) {
-            TowerDefense.resetGame();
-        }
-        else if(num == 6) {
-            if(TowerDefense.gameOverScreen && !TowerDefense.playAgain){
-                TowerDefense.playAgain = true;
-            }
-        }
-        else if (num == 7) {
-            TowerDefense.basicTowerPresent = true;
-//            TowerDefense.drawTower(1);
-            // I don't know how to pass g into this :(
-        }
+
     }
 
 }
