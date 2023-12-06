@@ -74,10 +74,7 @@ public class Screen {
     }
 
     public void drawGameOverScreen(Graphics g,int width,int height){
-        g.setColor(Color.WHITE);
-        g.fillRect(0,0,width,height);
-        g.setColor(Color.BLACK);
-        g.drawString("Game Over",width/2-20, height/2);
+        g.drawImage(ImageHolder.gameOver,0,0,1024,768,null);
         if(TowerDefense.playAgain) {
             drawPlayAgainButton(g, width, height);
         }
