@@ -18,7 +18,7 @@ public class Screen {
         g.drawString("Start",width/2-10,height*5/8);
     }
 
-    //This method draws the screen where the user can choose their map.
+    //This method draws the screen where the user can choose their map, including drawing smaller renditions of the maps
     public void drawChooseMapScreen(Graphics g,int width, int height){
         g.setColor(Color.WHITE);
         g.fillRect(0,0,width,height);

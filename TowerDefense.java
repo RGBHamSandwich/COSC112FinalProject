@@ -152,22 +152,6 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
         System.out.println("The mouse has been clicked at " + x + ", " + y + ".");
         buttonHolder.handleButtonClick(x, y);
 
-        //this can most likely be deleted, we have a functioning game over "button" and a functioning play again button
-        /*
-        if(gameOverScreen){
-            if(!playAgain) {
-                playAgain = true;
-            }
-            else if ((y > playAgainButton.top) && (y < playAgainButton.bottom) && (x > playAgainButton.left) && (x < playAgainButton.right)) {
-                gameOverScreen = false;
-                chooseMapScreen = true;
-                playAgain = false;
-                level.levelNum = 0;
-                lives = 100;
-                coins = 300;
-            }
-        }
-        */
     }
 
     @Override

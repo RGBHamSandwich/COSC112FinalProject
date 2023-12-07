@@ -20,6 +20,7 @@ public class Level {
             if (TowerDefense.map1Screen || TowerDefense.map2Screen) {
                 startPosition = new Pair(96, -20);
                 balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, true);
+                //let's move the initialization of the tower outside of this so we can place towers before pressing "start game"
                 tower = new BasicTower(300, 80);
             } else if (TowerDefense.map3Screen) {
                 startPosition = new Pair(-20, 416);

@@ -94,14 +94,14 @@
           <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/TowerDefense.java</url>
-          <line>155</line>
-          <option name="timeStamp" value="141" />
+          <url>file://$PROJECT_DIR$/Tower.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/TowerDefense.java</url>
-          <line>169</line>
-          <option name="timeStamp" value="142" />
+          <url>file://$PROJECT_DIR$/Tower.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="144" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -26,7 +26,7 @@ abstract class Tower implements Drawable{
     public void drawComponent(Graphics g) {
         g.setColor(Color.blue);
         //I set these two variables up to test switching from mouseX, mouseY to a stationary point (i.e. placing the tower)
-        //feel free to move everything around as needed; these integers will be unnecessary once we actually create a Tower object that has its respective x and y
+        //feel free to move everything around/delete as needed; these integers will be unnecessary once we actually implement button 7 to create a tower that has its respective x and y
         //let me know when you're ready for me to swoop in and play with mouse controls again haha
         int tower1PositionX = (int) TowerDefense.mouseX;
         int tower1PositionY = (int)TowerDefense.mouseY;
@@ -58,6 +58,7 @@ class BasicTower extends Tower {
     public void drawComponent(Graphics g) {
         super.drawComponent(g);
     }
+    //why is this necessary?
 
 
     public static void drawBasicTower() {
