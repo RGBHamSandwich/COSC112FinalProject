@@ -19,11 +19,12 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
     private ButtonHolder buttonHolder;
     static boolean basicTowerPresent;
 
+    //these doubles will keep track of the current x and y position of the mouse)
     static double mouseX = 0;
     static double mouseY = 0;
 
-
-    //these booleans and buttons create a relationship between buttons and screen to determine which screens are displaying
+    //Should these booleans be moved to screen? (we're only creating one "screen" so it should be able to hold them right?0
+    //these booleans will keep track of which screen is displaying (i.e. which screen should be drawn)
     Screen screen;
     int boxSize = Screen.boxSize;
     static Level level;
@@ -37,12 +38,15 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
 
 
     public TowerDefense(){
+        //these three listeners allow us to take input from the mouse and keyboard
         addKeyListener(this);
         addMouseListener(this);
         addMouseMotionListener(this);
+        //these Objects are the defaults we need to create to set up all of the little pieces in the game
         screen = new Screen();
         level = new Level(0);
         buttonHolder = new ButtonHolder();
+        //this sets up the JPanel and gets everything started
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         Thread mainThread = new Thread(new Runner());
         mainThread.start();
@@ -50,6 +54,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
 
 
     public static void main(String[] args){
+        //here we create the instance of TowerDefense and move the focus from "main" to "TowerDefense"
         JFrame frame = new JFrame("Amherst Tower Defense");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         TowerDefense mainInstance = new TowerDefense();
@@ -63,7 +68,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-
+        // let's replace these if/else statements with a switch(case) setup
         if (titleScreen){
             screen.drawTitleScreen(g,getWidth(),getHeight());
             //this is the OG bugtesting goat; leave him be. <3
@@ -97,6 +102,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
 
     public void update(){
         level.update(1.0 / (double) FPS);
+        //this will end the game once you've run out of lives
         if(lives == 0){
             level.balloon = null;
             gameOverScreen = true;
@@ -107,6 +113,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
     }
 
     static void resetGame(){
+        //this will reset the game so it can be played again
         titleScreen = false;
         chooseMapScreen = true;
         map1Screen = false;
@@ -136,16 +143,18 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
 
 
 // I (Beck) think that a mouse-related class would be good to hold all of these things ...
-
+// In the end, let's empty out the methods that aren't used in our game
+//the following are all of the methods that must be overridden from the three imported Listeners
     @Override
     public void mouseClicked(MouseEvent e) {
         double x = e.getX();
         double y = e.getY();
         System.out.println("The mouse has been clicked at " + x + ", " + y + ".");
-
         buttonHolder.handleButtonClick(x, y);
+
+        //this can most likely be deleted, we have a functioning game over "button" and a functioning play again button
         /*
-        if(gameOverScreen){             //Beck, make sure to come back to this to figure out what's happening ~ Beck
+        if(gameOverScreen){
             if(!playAgain) {
                 playAgain = true;
             }
@@ -157,14 +166,14 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
                 lives = 100;
                 coins = 300;
             }
-        }*/
+        }
+        */
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         double x = e.getX();
         double y = e.getY();
-
     }
 
     @Override
@@ -175,11 +184,9 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
 
     @Override
     public void mouseExited(MouseEvent e) {
-        //this is important so the program doesn't crash when the mouse exits the screen
+        //if we use click/drag mechanics, this is important so the program doesn't crash when the mouse exits the screen
         double x = WIDTH/2;
         double y = HEIGHT/2;
-
-
 
     }
 
@@ -190,23 +197,20 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
         double x = e.getX();
         double y = e.getY();
 
-
     }
 
+    @Override
     public void mouseDragged(MouseEvent e) {
-
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
-    }
-
-    public void MouseMoved(MouseEvent e) {
+        //this will update the current x and y of the mouse as it moves
         double x = e.getX();
         double y = e.getY();
         mouseX = x;
         mouseY = y;
+
     }
 
     @Override
@@ -230,217 +234,4 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
     }
 
 
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//This is the end of the TowerDefense Class
-
-
-abstract class Tower implements Drawable{
-    double x;
-    double y;
-    double damage;
-    //determine perspective, and use these if the base of the tower is different from where the bullets will be coming from.
-    int type;
-    List<Bullet> bullets;
-
-
-    //implement a purchase/upgrade button for each tower?
-
-
-    public void fireBullet(double fireX, double fireY, int damage) {
-        //add to an arrayList of bullets?
-    }
-
-
-    @Override
-    public void drawComponent(Graphics g) {
-        g.setColor(Color.blue);
-        g.fillRect((int)x, (int)y, 50, 50);
-        if (type == 1) BasicTower.drawBasicTower();
-        //I'm not sure if x, y will work how I'm thinking they'll work ngl
-    }
-
-}
-
-
-class BasicTower extends Tower {
-    public BasicTower(double x, double y) {
-        this. x = x;
-        this.y = y;
-        damage = 1;
-        type = 1;
-        bullets = new ArrayList<>();
-        bullets.add(new Bullet(new Pair(300, 80), 5, new Pair(-350, 0)));
-    }
-
-
-    @Override
-    public void fireBullet(double fireX, double fireY, int damage) {
-        super.fireBullet(fireX, fireY, (int) this.damage);
-    }
-
-
-    @Override
-    public void drawComponent(Graphics g) {
-        super.drawComponent(g);
-    }
-
-
-    public static void drawBasicTower() {
-        //here we can add the "basic" graphics to the tower
-    }
-}
-
-class Pair{
-    public double x;
-    public double y;
-    public Pair(double initX, double initY){
-        x = initX;
-        y = initY;
-    }
-
-
-    public Pair add(Pair toAdd){
-        return new Pair(x + toAdd.x, y + toAdd.y);
-    }
-
-
-    public Pair divide(double denominator){
-        return new Pair(x / denominator, y / denominator);
-    }
-
-
-    public Pair times(double val){
-        return new Pair(x * val, y * val);
-    }
-}
-
-
-class Button {
-    double x;
-    double y;
-    double width;
-    double height;
-    //The (y) coordinate for the upper side corner of the button
-    double top;
-    //The (y) coordinate for the lower side of the button
-    double bottom;
-    //The (x) coordinate for the left side corner of the button
-    double left;
-    //The (x) coordinate for the right side of the button
-    double right;
-
-    public Button(double x, double y, double width, double height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        right = x + width;
-        left = x;
-        bottom = y + height;
-        top = y;
-
-    }
-
-    public void ifClicked(int num) {
-//      if a button is clicked, these are the functions
-
-        switch(num) {
-            case 0:
-                if(TowerDefense.titleScreen||(TowerDefense.gameOverScreen && TowerDefense.playAgain)) {
-                    TowerDefense.resetGame();
-                }
-                break;
-
-            case 1:
-                TowerDefense.chooseMapScreen = false;
-                TowerDefense.map1Screen = true;
-                System.out.println("Moving to map 1");
-                System.out.println(TowerDefense.lives);
-                break;
-
-            case 2:
-                TowerDefense.chooseMapScreen = false;
-                TowerDefense.map2Screen = true;
-                System.out.println("Moving to map 2");
-                System.out.println(TowerDefense.lives);
-                break;
-
-            case 3:
-                TowerDefense.chooseMapScreen = false;
-                TowerDefense.map3Screen = true;
-                System.out.println("Moving to map 3");
-                System.out.println(TowerDefense.lives);
-                break;
-
-            case 4:
-                if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen){
-                    if (TowerDefense.level.balloon == null) {
-                        System.out.println(TowerDefense.level.levelNum);
-                        TowerDefense.level.levelNum++;
-                        TowerDefense.level = new Level(TowerDefense.level.levelNum);
-                        System.out.println(TowerDefense.level.levelNum);
-                    }
-                }
-                break;
-
-            case 5:
-                TowerDefense.resetGame();
-                break;
-
-            case 6:
-                if(TowerDefense.gameOverScreen && !TowerDefense.playAgain){
-                    TowerDefense.playAgain = true;
-                }
-                break;
-
-            case 7:
-                TowerDefense.basicTowerPresent = true;
-//              TowerDefense.drawTower(1);
-                // I don't know how to pass g into this :(
-                break;
-
-        }
-
-    }
-
-}
-
- class ButtonHolder {
-    Button[] buttonArray;
-    int WIDTH = TowerDefense.WIDTH;
-    int HEIGHT = TowerDefense.HEIGHT;
-    int boxSize = Screen.boxSize;
-
-    public ButtonHolder() {
-        buttonArray = new Button[10]; // here we can edit the number of buttons
-
-        //0 is the Start button
-        buttonArray[0] = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
-        //1, 2, 3 are the buttons to choose between map 1, 2, and 3
-        buttonArray[1] = new Button(boxSize*3/2,boxSize*2, boxSize*4,boxSize*3);
-        buttonArray[2] = new Button(boxSize*13/2,boxSize*2, boxSize*4,boxSize*3);
-        buttonArray[3] = new Button(boxSize*23/2,boxSize*2, boxSize*4, boxSize*3);
-        //4 is the button to start the level
-        buttonArray[4] = new Button(WIDTH - 256,HEIGHT - boxSize, boxSize*4, boxSize);
-        //5, 6 implement a "play again" function
-        buttonArray[5] = new Button(WIDTH/2-30,HEIGHT*5/8 - 20,85,30);
-        buttonArray[6] = new Button(0,0,WIDTH,HEIGHT);
-        //7 is the top-left shop button
-        buttonArray[7] = new Button(784, 87, 63, 63);
-    }
-
-    public void handleButtonClick(double x, double y) {
-        //this will help us figure out if clicks are on the button or somewhere else
-        for (int i = 0; i < buttonArray.length; i++) {
-            Button button = buttonArray[i];
-            if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
-                button.ifClicked(i);
-                System.out.println("Button Clicked: "+i);
-                // Only one button can be clicked at a time, so this keeps us from thumbing through every button for every click
-                break;
-            }
-        }
-    }
 }
