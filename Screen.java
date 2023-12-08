@@ -10,23 +10,18 @@ public class Screen {
 
     //This method draws the Title Screen.
     public void drawTitleScreen(Graphics g, int width, int height){
-        g.setColor(Color.WHITE);
-        g.fillRect(0,0,width,height);
-        g.setColor(Color.BLACK);
-        g.drawString("Amherst Tower Defense",width/2-70, height/2);
+        g.drawImage(ImageHolder.titleScreen,0,0,TowerDefense.WIDTH,TowerDefense.HEIGHT,null);
         g.drawRect(width/2-20,height*5/8-20,50,30);
         g.drawString("Start",width/2-10,height*5/8);
     }
 
     //This method draws the screen where the user can choose their map, including drawing smaller renditions of the maps
     public void drawChooseMapScreen(Graphics g,int width, int height){
-        g.setColor(Color.WHITE);
+        Color cream = new Color(255,255,235);
+        g.setColor(cream);
         g.fillRect(0,0,width,height);
-        g.setColor(Color.green);
         drawMap1Screen(g,boxSize*3/2,boxSize*2,boxSize*3,boxSize*3);
-        g.setColor(Color.cyan);
         drawMap2Screen(g,boxSize*13/2,boxSize*2,boxSize*3,boxSize*3);
-        g.setColor(Color.blue);
         drawMap3Screen(g,boxSize*23/2,boxSize*2,boxSize*3,boxSize*3);
         g.setColor(Color.BLACK);
         g.drawString("Choose Your Map:",width/2-70,50);

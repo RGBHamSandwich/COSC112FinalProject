@@ -12,7 +12,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
     public static final int HEIGHT = 768;
     public static final int FPS = 60;
     public static int popped = 0;
-    public static int lives = 1;
+    public static int lives = 10;
     public static int coins = 300;
 
     static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
@@ -123,7 +123,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
         playAgain = false;
         TowerDefense.level.levelNum = 0;
         TowerDefense.level = new Level(TowerDefense.level.levelNum);
-        TowerDefense.lives = 1;
+        TowerDefense.lives = 20;
         TowerDefense.coins = 300;
     }
 
