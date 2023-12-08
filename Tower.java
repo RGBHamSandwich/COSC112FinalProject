@@ -31,7 +31,7 @@ abstract class Tower implements Drawable{
         int tower1PositionX = (int) TowerDefense.mouseX;
         int tower1PositionY = (int)TowerDefense.mouseY;
         g.fillRect(tower1PositionX, tower1PositionY, 50, 50);
-        if (type == 1) BasicTower.drawBasicTower();
+        if (type == 1) BasicTower.drawBasicTower(g,tower1PositionX,tower1PositionY);
     }
 
 }
@@ -61,7 +61,7 @@ class BasicTower extends Tower {
     //why is this necessary?
 
 
-    public static void drawBasicTower() {
-        //here we can add the "basic" graphics to the tower
+    public static void drawBasicTower(Graphics g,int x,int y) {
+        //g.drawImage(ImageHolder.tower1,x,y,64,64,null);
     }
 }

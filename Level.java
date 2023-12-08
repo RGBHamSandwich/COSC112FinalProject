@@ -82,7 +82,9 @@ public class Level {
                 } else {
                     balloon = null;
                 }
-                TowerDefense.lives--;
+                if(balloon!= null && balloon.radius != 0) {
+                    TowerDefense.lives--;
+                }
             }
         }
     }
