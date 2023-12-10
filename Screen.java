@@ -55,6 +55,7 @@ public class Screen {
         int spacing = 15;
         for(int i = 1; i < 3; i++) {
             for(int j = 0; j < 3;j++) {
+                g.drawOval(width + (j)*boxSize + (j+1)*spacing, i * (boxSize + spacing +8) + (i-1)*(boxSize - 12), boxSize, boxSize);
                 drawCoin(g,width +(j)*boxSize + (j+1)*spacing - 5,(i+1) * (boxSize + spacing) + (i-1)*boxSize - 5);
             }
         }
