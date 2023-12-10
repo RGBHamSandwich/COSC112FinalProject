@@ -47,9 +47,9 @@ abstract class Tower implements Drawable{
             }
 
             //instead of some arbitrary number (10) I need to make a variable that keeps track of the og position of the bullet
-            if (this.bullets.get(bullet).getPosition().x < ogBulletPos.x - 300){
+            if (this.bullets.get(bullet).getPosition().x < ogBulletPos.x - 300 || bullets.get(bullet).damage == 0){
                 this.bullets.remove(bullet);
-                this.bullets.add(new Bullet(ogBulletPos, 5, ogBulletVel));
+                this.bullets.add(new Bullet(ogBulletPos, 1, ogBulletVel));
             }
 //                this.bullets.get(bullet).setVelocity(new Pair(l.startPosition.x, l.startPosition.y));
             this.bullets.get(bullet).update(time);
