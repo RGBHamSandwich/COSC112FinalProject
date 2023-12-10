@@ -1,22 +1,26 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-
 
 public class Balloon implements Drawable {
     int radius;
     Pair position;
     Pair velocity;
     Color color;
+    //used to keep track of the next balloon in the linked list of balloons
     Balloon nextBalloon;
+    //keeps track of if the balloon has finished traveling the path
     boolean pathCleared = false;
+    //determines whether the balloon starts with x or y velocity
     boolean verticalStart;
+    //used to track how many balloons have been created in a given level
     int rank;
+    //used to randomly position a balloon within a set x distance from its center
     int xMargin;
+    //used to randomly position a balloon within a set y distance from its center
     int yMargin;
+
+
+    //Constructor for a balloon given its color, position, and initial direction
     public Balloon(double x, double y, Color color, int rank, boolean verticalStart){
         this.position = new Pair(x,y);
         this.color = color;
@@ -27,6 +31,8 @@ public class Balloon implements Drawable {
         determineMargins();
     }
 
+    //determines the velocity of a balloon given its color and assigns either x or y velocity based on
+    //initial direction
     public void determineVelocity(){
         double velocity = determineVelocity(this.color);
         if(verticalStart) {
@@ -37,6 +43,7 @@ public class Balloon implements Drawable {
         }
     }
 
+    //Determines the total velocity based on the balloon's color
     static double determineVelocity(Color color){
         if(color == Color.red) return 200;
         else if(color == Color.green) return 300;
@@ -45,6 +52,7 @@ public class Balloon implements Drawable {
         else return 0;
     }
 
+    //determines the size of the balloon based on its color
     static int determineSize(Color color){
         if(color == Color.red) return 20;
         else if(color == Color.green) return 27;
@@ -53,6 +61,7 @@ public class Balloon implements Drawable {
         else return 0;
     }
 
+    //determines the random placement of a balloon within a set distance of its centering point
     public void determineMargins(){
         int margin = 10;
         Random rand = new Random();
@@ -71,6 +80,8 @@ public class Balloon implements Drawable {
             this.yMargin = 0;
         }
     }
+
+    //controls balloon movement on the first map, recursively updates the subsequent balloons in the linked list
     public void updateMap1(double time,int levelNum){
         position = position.add(velocity.times(time));
         //Put here a method that determines which level we're on and how many balloons to generate for each level
@@ -108,6 +119,7 @@ public class Balloon implements Drawable {
         }
     }
 
+    //controls balloon movement on the second map, recursively updates the subsequent balloons in the linked list
     public void updateMap2(double time,int levelNum){
         position = position.add(velocity.times(time));
         //Put here a method that determines which level we're on and how many balloons to generate for each level
@@ -199,12 +211,13 @@ public class Balloon implements Drawable {
         }
     }
 
-    //Directs the balloon on a curved path given its position and a center of rotation, most applicable on Map 2
+    //Directs the balloon on a curved path given its position and a center of rotation, applicable only on Map 2
     public void centripetalMotion(Pair center,Pair position){
         velocity.x = velocity.x + (center.x - position.x)/2;
         velocity.y = velocity.y + (center.y - position.y)/2;
     }
 
+    //controls balloon movement on the third map, recursively updates the subsequent balloons in the linked list
     public void updateMap3(double time,int levelNum){
         position = position.add(velocity.times(time));
         Random rand = new Random();
@@ -261,6 +274,7 @@ public class Balloon implements Drawable {
         }
     }
 
+    //controls the number of balloons in each level
     public void determineLevel(int levelNum){
         //Would it be cleaner if we put switch cases here? - Hena
         Pair startPosition = Level.startPosition;
@@ -344,6 +358,7 @@ public class Balloon implements Drawable {
         }
     }
 
+    //draws the balloon. Graphics differ based on map, recursively draws the subsequent balloons in the linked list
     @Override
     public void drawComponent(Graphics g){
         if(color == Color.red){
@@ -384,6 +399,8 @@ public class Balloon implements Drawable {
             nextBalloon.drawComponent(g);
         }
     }
+
+    //This method checks if a balloon has been popped by a bullet, returns whether it has been
     public boolean isShot(Bullet bullet){
         if ((bullet.getPosition().x > this.position.x-radius-2) && (bullet.getPosition().x < position.x+radius-2)){
             if ((bullet.getPosition().y > this.position.y-radius-2) && (bullet.getPosition().y < position.y+radius-2)){
