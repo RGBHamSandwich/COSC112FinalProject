@@ -68,8 +68,8 @@ abstract class Tower implements Drawable{
 }
 
 
-class BasicTower extends Tower {
-    public BasicTower(double x, double y, Level l) {
+class PawnTower extends Tower {
+    public PawnTower(double x, double y, Level l) {
         position = new Pair(x, y);
         bullets = new ArrayList<>();
         ogBulletPos = position;
@@ -90,7 +90,37 @@ class BasicTower extends Tower {
 }
 
 class BishopTower extends Tower {
+    public BishopTower(Pair p){
+        position = new Pair(p.x, p.y);
+        ogBulletPos = new Pair(position.x+25, position.y+20);
+        bullets = new ArrayList<>();
+        int randomFireDirection = 1 + (int)(Math.random()*4);
+        switch (randomFireDirection){
+            case 1:
+                bullets.add(new Bullet(ogBulletPos, 1, new Pair(-250, 250)));
+                bullets.add(new Bullet(ogBulletPos, 1, new Pair(250, 250)));
+                break;
+            case 2:
+                bullets.add(new Bullet(ogBulletPos, 1, new Pair(250, 250)));
+                bullets.add(new Bullet(ogBulletPos, 1, new Pair(250, -250)));
+                break;
+            case 3:
+                bullets.add(new Bullet(ogBulletPos, 1, new Pair(250, -250)));
+                bullets.add(new Bullet(ogBulletPos, 1, new Pair(-250, -250)));
+                break;
+            case 4:
+                bullets.add(new Bullet(ogBulletPos, 1, new Pair(-250, 250)));
+                bullets.add(new Bullet(ogBulletPos, 1, new Pair(-250, -250)));
+                break;
+        }
+    }
 
+    @Override
+    public void drawComponent(Graphics g) {
+        super.drawComponent(g);
+        g.drawImage(ImageHolder.tower2,(int)position.x,(int)position.y,64,64,null);
+
+    }
 }
 class RookTower extends Tower{
     public RookTower(Pair p){
