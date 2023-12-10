@@ -2,8 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
-public class TowerDefense extends JPanel implements MouseListener, KeyListener, MouseMotionListener {
+public class TowerDefense extends JPanel {
     //change panel width and height so that we can have a shop panel and game panel
     //which are independent of the final width and height.
     public static final int WIDTH = 1024;
@@ -17,10 +16,6 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
     //static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
     private ButtonHolder buttonHolder;
     static boolean basicTowerPresent;
-
-    //these doubles will keep track of the current x and y position of the mouse)
-    static double mouseX = 0;
-    static double mouseY = 0;
 
     //Should these booleans be moved to screen? (we're only creating one "screen" so it should be able to hold them right?0
     //these booleans will keep track of which screen is displaying (i.e. which screen should be drawn)
@@ -41,10 +36,10 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
 
 
     public TowerDefense(){
-        //these three listeners allow us to take input from the mouse and keyboard
-        addKeyListener(this);
-        addMouseListener(this);
-        addMouseMotionListener(this);
+        //these fou lines allow us to use all of the mouse functions within the MouseFunctions class
+        MouseFunctions mouse = new MouseFunctions();
+        addMouseListener(mouse);
+        addMouseMotionListener(mouse);
         //these Objects are the defaults we need to create to set up all of the little pieces in the game
         screen = new Screen();
         level = new Level(0);
@@ -98,7 +93,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
         }
 
         if(basicTowerPresent) {
-            g.drawRect((int) mouseX, (int)mouseY, 50, 50);
+            g.drawRect((int) MouseFunctions.mouseX, (int) MouseFunctions.mouseY, 50, 50);
         }
 
     }
@@ -125,6 +120,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
         TowerDefense.level = new Level(0);
         TowerDefense.lives = 20;
         TowerDefense.coins = 300;
+        TowerDefense.popped = 0;
     }
 
     //loads Game Over screen and gets rid of extra balloons
@@ -154,77 +150,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
 // I (Beck) think that a mouse-related class would be good to hold all of these things ...
 // In the end, let's empty out the methods that aren't used in our game
 //the following are all of the methods that must be overridden from the three imported Listeners
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        double x = e.getX();
-        double y = e.getY();
-        System.out.println("The mouse has been clicked at " + x + ", " + y + ".");
-        buttonHolder.handleButtonClick(x, y);
 
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        double x = e.getX();
-        double y = e.getY();
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        double x = e.getX();
-        double y = e.getY();
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        //if we use click/drag mechanics, this is important so the program doesn't crash when the mouse exits the screen
-        double x = WIDTH/2;
-        double y = HEIGHT/2;
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        //we need to use this in tandem with mouseExited to get the drag and drop working again
-        //on the other hand, we could just cancel the drag and drop when the mouse exits the screen
-        double x = e.getX();
-        double y = e.getY();
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        //this will update the current x and y of the mouse as it moves
-        double x = e.getX();
-        double y = e.getY();
-        mouseX = x;
-        mouseY = y;
-
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        char k = e.getKeyChar();
-        System.out.println("The key " + k + " has been pressed.");
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        char k = e.getKeyChar();
-
-    }
-
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        char k = e.getKeyChar();
-
-    }
 
 
 }
