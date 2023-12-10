@@ -1,8 +1,4 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Screen {
@@ -39,11 +35,13 @@ public class Screen {
     public void drawMap2Screen(Graphics g,int x, int y,int width, int height){
         g.drawImage(ImageHolder.map2,x,y,width,height,null);
     }
+
     //This method draws the screen for the third map.
     public void drawMap3Screen(Graphics g,int x, int y,int width, int height){
         g.drawImage(ImageHolder.map3,x,y,width,height,null);
     }
 
+    //draws the panel on the right side of the screen for the shop
     public void drawShopScreen(Graphics g){
         g.drawImage(ImageHolder.shop,768,0,256,768,null);
         int width = TowerDefense.WIDTH - 256;
@@ -65,14 +63,17 @@ public class Screen {
         g.drawOval(784, 87, 63, 63);
     }
 
+    //draws the coin icon at a given position
     static void drawCoin(Graphics g,int x,int y){
         g.drawImage(ImageHolder.coin,x,y,boxSize/2,boxSize/2,null);
     }
 
+    //draws the life icon at the given location
     static void drawLifeToken(Graphics g,int x,int y){
         g.drawImage(ImageHolder.heart,x,y,boxSize/2,boxSize/2,null);
     }
 
+    //draws the game over screen
     public void drawGameOverScreen(Graphics g,int width,int height){
         g.drawImage(ImageHolder.gameOver,0,0,1024,768,null);
         if(TowerDefense.playAgain) {
@@ -80,6 +81,7 @@ public class Screen {
         }
     }
 
+    //draws the play again button
     static void drawPlayAgainButton(Graphics g,int width, int height){
         g.setColor(Color.BLACK);
         g.drawRect(width/2-30,height*5/8 - 20,85,30);

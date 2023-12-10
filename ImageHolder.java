@@ -1,5 +1,8 @@
 import java.awt.*;
+
+//Holds all the graphics pngs used in the game
 public class ImageHolder {
+
     static Image map1 = Toolkit.getDefaultToolkit().getImage("Map1.png");
     static Image map2 = Toolkit.getDefaultToolkit().getImage("Map2.png");
     static Image map3 = Toolkit.getDefaultToolkit().getImage("Map3.png");

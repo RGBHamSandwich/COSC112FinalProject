@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class TowerDefense extends JPanel implements MouseListener, KeyListener, MouseMotionListener {
@@ -15,7 +13,8 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
     public static int lives = 10;
     public static int coins = 300;
 
-    static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
+    //The original bug testing goat
+    //static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
     private ButtonHolder buttonHolder;
     static boolean basicTowerPresent;
 
@@ -28,12 +27,16 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
     Screen screen;
     int boxSize = Screen.boxSize;
     static Level level;
+
+    //If following booleans are true, draws a specific screen. Only one should be true at a time
     static boolean titleScreen = true;
     static boolean chooseMapScreen = false;
     static boolean map1Screen = false;
     static boolean map2Screen = false;
     static boolean map3Screen = false;
     static boolean gameOverScreen = false;
+
+    //if true, draws play again button
     static boolean playAgain = false;
 
 
@@ -52,7 +55,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
         mainThread.start();
     }
 
-
+    //This in the main method, duh
     public static void main(String[] args){
         //here we create the instance of TowerDefense and move the focus from "main" to "TowerDefense"
         JFrame frame = new JFrame("Amherst Tower Defense");
@@ -63,7 +66,7 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
         frame.setVisible(true);
     }
 
-
+    //draws all the different parts of the Tower Defense Game
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -100,20 +103,17 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
 
     }
 
+    //updates the components of the game
     public void update(){
         level.update(1.0 / (double) FPS);
         //this will end the game once you've run out of lives
         if(lives == 0){
-            level.balloon = null;
-            gameOverScreen = true;
-            map1Screen = false;
-            map2Screen = false;
-            map3Screen = false;
+            endGame();
         }
     }
 
+    //this will reset the game so that it can be played again
     static void resetGame(){
-        //this will reset the game so it can be played again
         titleScreen = false;
         chooseMapScreen = true;
         map1Screen = false;
@@ -121,10 +121,19 @@ public class TowerDefense extends JPanel implements MouseListener, KeyListener, 
         map3Screen = false;
         gameOverScreen = false;
         playAgain = false;
-        TowerDefense.level.levelNum = 0;
-        TowerDefense.level = new Level(TowerDefense.level.levelNum);
+        //sets the level number back to zero
+        TowerDefense.level = new Level(0);
         TowerDefense.lives = 20;
         TowerDefense.coins = 300;
+    }
+
+    //loads Game Over screen and gets rid of extra balloons
+    static void endGame(){
+            level.balloon = null;
+            gameOverScreen = true;
+            map1Screen = false;
+            map2Screen = false;
+            map3Screen = false;
     }
 
 

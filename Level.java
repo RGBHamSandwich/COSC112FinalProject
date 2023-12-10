@@ -1,14 +1,14 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class Level {
     BasicTower tower;
+
+    //A linked list of balloons, keeps track of all balloons in a level
     Balloon balloon;
+
+    //tracks which level the player is in
     int levelNum;
+
+    //The position where balloons start in a given map
     static Pair startPosition;
 
     // start position can also be used to determine the direction of the bullts firing - hena
@@ -89,6 +89,7 @@ public class Level {
         }
     }
 
+    //draws all the components of a level
     public void draw(Graphics g) {
         if (balloon != null) {
             balloon.drawComponent(g);
