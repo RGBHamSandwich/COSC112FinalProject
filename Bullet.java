@@ -6,7 +6,7 @@ public class Bullet implements Drawable {
     private Pair position;
     private Pair velocity;
     //damage also determined by tower
-    private int damage;
+    int damage;
     //    public Bullet nextBullet;
     private int radius = 3;
     public Bullet(Pair p, int d, Pair v){

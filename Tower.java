@@ -30,6 +30,8 @@ abstract class Tower implements Drawable{
                 if (temp.isShot(this.bullets.get(bullet))) {
                     //we stop drawing it
                     temp.radius = 0;
+                    TowerDefense.popped++;
+                    this.bullets.get(bullet).damage--;
                     if (temp.nextBalloon == null) {
                         //this part I need Kiara to look at cuz rn im just creating rank 1 balloons - Hena
                         temp = new Balloon(l.startPosition.x, l.startPosition.y, Color.red, 1, true);
