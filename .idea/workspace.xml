@@ -85,12 +85,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Tower.java</url>
-          <line>96</line>
+          <line>95</line>
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Tower.java</url>
-          <line>93</line>
+          <line>92</line>
           <option name="timeStamp" value="144" />
         </line-breakpoint>
       </breakpoints>
