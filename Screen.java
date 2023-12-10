@@ -53,15 +53,16 @@ public class Screen {
         g.drawString(Integer.toString(TowerDefense.coins),width+boxSize*21/8,boxSize/2 + 20);
         //draws 6 coins in a grid.
         int spacing = 15;
-        for(int i = 1; i < 3; i++) {
+        for(int i = 1; i < 2; i++) {
             for(int j = 0; j < 3;j++) {
                 g.drawOval(width + (j)*boxSize + (j+1)*spacing, i * (boxSize + spacing +8) + (i-1)*(boxSize - 12), boxSize, boxSize);
                 drawCoin(g,width +(j)*boxSize + (j+1)*spacing - 5,(i+1) * (boxSize + spacing) + (i-1)*boxSize - 5);
             }
         }
+        g.drawImage(ImageHolder.tower1,width + spacing, boxSize + spacing +8, boxSize, boxSize,null);
+        g.drawImage(ImageHolder.tower2,width + boxSize + 2*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
+        g.drawImage(ImageHolder.tower3,width + 2*boxSize + 3*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
         //this oval outlines the top left shop bubble
-        g.setColor(Color.blue);
-        g.drawOval(784, 87, 63, 63);
     }
 
     //draws the coin icon at a given position
