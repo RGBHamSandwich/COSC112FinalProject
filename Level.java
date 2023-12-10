@@ -1,6 +1,7 @@
 import java.awt.*;
 public class Level {
     BasicTower tower;
+    RookTower rookTower;
 
     //A linked list of balloons, keeps track of all balloons in a level
     Balloon balloon;
@@ -22,6 +23,7 @@ public class Level {
                 balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, true);
                 //let's move the initialization of the tower outside of this so we can place towers before pressing "start game"
                 tower = new BasicTower(Math.random()*768, Math.random()*768, this);
+                rookTower = new RookTower(new Pair(Math.random()*768, Math.random()*768));
             } else if (TowerDefense.map3Screen) {
                 startPosition = new Pair(-20, 416);
                 balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, false);
@@ -36,6 +38,7 @@ public class Level {
                 balloon.updateMap1(time, levelNum);
                 //for some reason the update gets faster and slower?
                 tower.fireBullet(this, time);
+                rookTower.fireBullet(this, time);
             }
             if (TowerDefense.map2Screen) {
                 balloon.updateMap2(time, levelNum);
@@ -64,6 +67,7 @@ public class Level {
         }
         if (tower != null) {
             tower.drawComponent(g);
+            rookTower.drawComponent(g);
 //            for (Bullet b : tower.bullets) {
 //                b.drawComponent(g);
 //            }
