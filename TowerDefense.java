@@ -50,7 +50,8 @@ public class TowerDefense extends JPanel {
         mainThread.start();
     }
 
-    //This in the main method, duh
+
+    //This is the main method, duh
     public static void main(String[] args){
         //here we create the instance of TowerDefense and move the focus from "main" to "TowerDefense"
         JFrame frame = new JFrame("Amherst Tower Defense");
@@ -150,7 +151,5 @@ public class TowerDefense extends JPanel {
 // I (Beck) think that a mouse-related class would be good to hold all of these things ...
 // In the end, let's empty out the methods that aren't used in our game
 //the following are all of the methods that must be overridden from the three imported Listeners
-
-
 
 }
