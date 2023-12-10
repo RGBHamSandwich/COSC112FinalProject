@@ -62,7 +62,7 @@ public class Screen {
         g.drawImage(ImageHolder.tower1,width + spacing, boxSize + spacing +8, boxSize, boxSize,null);
         g.drawImage(ImageHolder.tower2,width + boxSize + 2*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
         g.drawImage(ImageHolder.tower3,width + 2*boxSize + 3*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
-        //this oval outlines the top left shop bubble
+        g.drawString(Integer.toString(TowerDefense.popped), width + boxSize*2 + 15,TowerDefense.HEIGHT - boxSize *3/2 + 15);
     }
 
     //draws the coin icon at a given position
