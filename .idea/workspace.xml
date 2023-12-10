@@ -71,7 +71,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/TowerDefense.java</url>
-          <line>77</line>
+          <line>72</line>
           <properties class="TowerDefense">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -80,7 +80,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/TowerDefense.java</url>
-          <line>56</line>
+          <line>51</line>
           <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -92,6 +92,21 @@
           <url>file://$PROJECT_DIR$/Tower.java</url>
           <line>92</line>
           <option name="timeStamp" value="144" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TowerDefense.java</url>
+          <line>149</line>
+          <option name="timeStamp" value="147" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TowerDefense.java</url>
+          <line>148</line>
+          <option name="timeStamp" value="148" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TowerDefense.java</url>
+          <line>150</line>
+          <option name="timeStamp" value="149" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

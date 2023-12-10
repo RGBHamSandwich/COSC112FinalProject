@@ -102,7 +102,7 @@ class Button {
 }
 
 class ButtonHolder {
-    Button[] buttonArray;
+    static Button[] buttonArray;
     int WIDTH = TowerDefense.WIDTH;
     int HEIGHT = TowerDefense.HEIGHT;
     int boxSize = Screen.boxSize;
@@ -126,7 +126,7 @@ class ButtonHolder {
         buttonArray[7] = new Button(784, 87, 63, 63);
     }
 
-    public void handleButtonClick(double x, double y) {
+    public static void handleButtonClick(double x, double y) {
         //this will help us figure out if clicks are on the button or somewhere else
         Button button = buttonArray[0];
 
@@ -163,7 +163,7 @@ class ButtonHolder {
 
     }
 
-    public boolean checkClick(double x, double y, Button button) {
+    public static boolean checkClick(double x, double y, Button button) {
         //this method checks if the click is within the bounds of the button
         if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
             return true;
