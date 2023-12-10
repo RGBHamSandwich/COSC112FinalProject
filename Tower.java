@@ -11,10 +11,17 @@ abstract class Tower implements Drawable{
 //    int type;
     List<Bullet> bullets;
     Pair ogBulletPos;
+    Pair ogBulletVel;
 
 
     //implement a purchase/upgrade button for each tower?
-
+    public Pair determineVelocity(Pair target){
+        //using this to determine the initial firing direction of the balloon
+        //this is also what we're gonna use if we make "tracking balloons"
+//        this.velocity.x = (target.x-position.x)/0.3;
+//        this.velocity.y = (target.y-position.y)/0.3;
+        return new Pair((target.x-position.x), (target.y-position.y));
+    }
 
     public void fireBullet(Level l, double time) {
         for (int bullet = 0; bullet < this.bullets.size(); bullet++){
@@ -37,10 +44,11 @@ abstract class Tower implements Drawable{
                 temp = temp.nextBalloon;
 
                 //instead of some arbitrary number (10) I need to make a variable that keeps track of the og position of the bullet
-                if (this.bullets.get(bullet).getPosition().x < 10){
+                if (this.bullets.get(bullet).getPosition().x < ogBulletPos.x - 300){
                     this.bullets.remove(bullet);
-                    this.bullets.add(new Bullet(ogBulletPos, 5, new Pair(-40, 0)));
+                    this.bullets.add(new Bullet(ogBulletPos, 5, this.determineVelocity(new Pair(l.startPosition.x/20, l.startPosition.y/20))));
                 }
+//                this.bullets.get(bullet).setVelocity(new Pair(l.startPosition.x, l.startPosition.y));
                 this.bullets.get(bullet).update(time);
             }
         }
@@ -66,12 +74,13 @@ abstract class Tower implements Drawable{
 
 
 class BasicTower extends Tower {
-    public BasicTower(double x, double y) {
+    public BasicTower(double x, double y, Level l) {
         position = new Pair(x, y);
         bullets = new ArrayList<>();
         ogBulletPos = this.position;
+        ogBulletVel = this.determineVelocity(new Pair(l.startPosition.x/20, l.startPosition.y/20));
         //need a method that determines the og velocity of the bullet
-        bullets.add(new Bullet(ogBulletPos, 1, new Pair(-350, 0)));
+        bullets.add(new Bullet(ogBulletPos, 1, ogBulletVel));
     }
     @Override
     public void fireBullet(Level l, double time) {

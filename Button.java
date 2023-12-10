@@ -92,7 +92,7 @@ class Button {
 //                TowerDefense.basicTowerPresent = true;            //I don't think this is what I need
 //              TowerDefense.drawTower(1);                          // I don't know how to pass g into this :(
                 //I'm not actually using this right now, but this is where tower creation will happen!
-                BasicTower basicTower = new BasicTower(10, 100);
+//                BasicTower basicTower = new BasicTower(10, 100);
                 break;
 
         }

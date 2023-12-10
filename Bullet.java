@@ -23,6 +23,7 @@ public class Bullet implements Drawable {
         this.velocity.x = (target.x-position.x)/0.3;
         this.velocity.y = (target.y-position.y)/0.3;
     }
+
     public void update(double time) {
         position = position.add(velocity.times(time));
     }
