@@ -72,6 +72,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/TowerDefense.java</url>
           <line>71</line>
+          <line>77</line>
           <properties class="TowerDefense">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -90,6 +91,7 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/TowerDefense.java</url>
           <line>50</line>
+          <line>56</line>
           <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

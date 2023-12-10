@@ -29,7 +29,7 @@ class Button {
 
     }
 
-    public void ifClicked(int num) {
+    public static void ifClicked(int num) {
 
         if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen) {
             //based on the current screen and probably a "placingTower" boolean, this would change a mid-air tower's x and y
@@ -111,7 +111,7 @@ class ButtonHolder {
         buttonArray = new Button[10]; // here we can edit the number of buttons
 
         //0 is the Start button
-        buttonArray[0] = new Button(WIDTH/2-20,HEIGHT*5/8-20,50,30);
+        buttonArray[0] = new Button((double) WIDTH/2-20,(double) HEIGHT*5/8-20,50,30);
         //1, 2, 3 are the buttons to choose between map 1, 2, and 3
         buttonArray[1] = new Button(boxSize,boxSize*2,boxSize*4,boxSize*3);
         buttonArray[2] = new Button(boxSize*6,boxSize*2,boxSize*4,boxSize*3);
@@ -121,7 +121,7 @@ class ButtonHolder {
         //5 registers a click anywhere on the "game over" screen to materialize the "play again" button
         buttonArray[5] = new Button(0,0,WIDTH,HEIGHT);
         //button 6 is the play again button
-        buttonArray[6] = new Button(WIDTH/2-30,HEIGHT*5/8 - 20,85,30);
+        buttonArray[6] = new Button((double) WIDTH /2-30,(double) HEIGHT*5/8 - 20,85,30);
         //7 is the top-left shop button
         buttonArray[7] = new Button(784, 87, 63, 63);
     }
@@ -134,26 +134,26 @@ class ButtonHolder {
         //I've overcomplicated this section to ensure that buttons are only clicked when the appropriate screen is showing
 
         //this detects a start button click
-        if (TowerDefense.titleScreen && checkClick(x, y, button)) button.ifClicked(0);
+        if (TowerDefense.titleScreen && checkClick(x, y, button)) Button.ifClicked(0);
         //these detect a map selection click
         else if (TowerDefense.chooseMapScreen) {
-            if (checkClick(x, y, buttonArray[1])) button.ifClicked(1);
-            else if (checkClick(x, y, buttonArray[2])) button.ifClicked(2);
-            else if (checkClick(x, y, buttonArray[3])) button.ifClicked(3);
+            if (checkClick(x, y, buttonArray[1])) Button.ifClicked(1);
+            else if (checkClick(x, y, buttonArray[2])) Button.ifClicked(2);
+            else if (checkClick(x, y, buttonArray[3])) Button.ifClicked(3);
         }
         //this detects a "game over" click
-        else if(TowerDefense.lives == 0 && !TowerDefense.playAgain) button.ifClicked(5);
+        else if(TowerDefense.lives == 0 && !TowerDefense.playAgain) Button.ifClicked(5);
         //this detects a click to play again
-        else if(TowerDefense.gameOverScreen) button.ifClicked(6);
+        else if(TowerDefense.gameOverScreen) Button.ifClicked(6);
         //all of the next clicks happen on the map screens, so they're grouped together
         else if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen) {
             //this detects a "start level" click
-            if(checkClick(x, y, buttonArray[4])) button.ifClicked(4);
+            if(checkClick(x, y, buttonArray[4])) Button.ifClicked(4);
             //these detect clicks on the shop buttons
-            for (int i = 7; i < buttonArray.length; i++) {
+            for (int i = 0; i < buttonArray.length; i++) {
                 button = buttonArray[i];
                 if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
-                    button.ifClicked(i);
+                    Button.ifClicked(i);
                     System.out.println("Button Clicked: " + i);
                     // Only one button can be clicked at a time, so this keeps us from thumbing through every button for every click
                     break;

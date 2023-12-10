@@ -120,6 +120,7 @@ public class TowerDefense extends JPanel {
         TowerDefense.level = new Level(0);
         TowerDefense.lives = 20;
         TowerDefense.coins = 300;
+        TowerDefense.popped = 0;
     }
 
     //loads Game Over screen and gets rid of extra balloons
