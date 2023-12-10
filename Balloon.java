@@ -280,6 +280,12 @@ public class Balloon implements Drawable {
         Pair startPosition = Level.startPosition;
         //Level 1
         if(levelNum == 1) {
+            if (rank < 11) {
+                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+            }
+        }
+        //Level 2
+        if(levelNum == 2) {
             if (rank < 10) {
                 this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
             }
@@ -290,8 +296,8 @@ public class Balloon implements Drawable {
                 this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
             }
         }
-        //Level 2
-        if(levelNum == 2){
+        //Level 3
+        if(levelNum == 3){
             if (rank < 10) {
                 this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
             }
@@ -308,8 +314,8 @@ public class Balloon implements Drawable {
                 this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
             }
         }
-        //Level 3
-        else if(levelNum == 3){
+        //Level 4
+        else if(levelNum == 4){
             if (rank < 10) {
                 this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
             }
@@ -332,8 +338,8 @@ public class Balloon implements Drawable {
                 this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
             }
         }
-        //Level 4
-        else if(levelNum >= 4){
+        //Level 5
+        else if(levelNum >= 5){
             if (rank < 10) {
                 this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
             }
