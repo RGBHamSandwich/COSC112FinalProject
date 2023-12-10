@@ -17,7 +17,7 @@ class Button {
     double left;
     double right;
 
-    public Button(double x, double y, double width, double height) {
+    public Button(double x, double y, double width, double height) {        //let's update this to use Pair instead of x, y
         this.x = x;
         this.y = y;
         this.width = width;
