@@ -63,6 +63,9 @@ public class Screen {
         g.drawImage(ImageHolder.tower2,width + boxSize + 2*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
         g.drawImage(ImageHolder.tower3,width + 2*boxSize + 3*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
         g.drawString(Integer.toString(TowerDefense.popped), width + boxSize*2 + 15,TowerDefense.HEIGHT - boxSize *3/2 + 15);
+        g.drawString("100",width + spacing + 25,2*boxSize + spacing + 32);
+        g.drawString("200",width + spacing + boxSize + 40,2*boxSize + spacing + 32);
+        g.drawString("325",width + spacing + 2*boxSize + 55,2*boxSize + spacing + 32);
     }
 
     //draws the coin icon at a given position
