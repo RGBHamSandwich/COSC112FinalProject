@@ -1,6 +1,4 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +29,7 @@ abstract class Tower implements Drawable{
                     //we stop drawing it
                     temp.radius = 0;
                     TowerDefense.popped++;
+                    TowerDefense.coins++;
                     this.bullets.get(bullet).damage--;
                     if (temp.nextBalloon == null) {
                         //this part I need Kiara to look at cuz rn im just creating rank 1 balloons - Hena
