@@ -6,32 +6,60 @@ import java.util.List;
 
 
 abstract class Tower implements Drawable{
-    double x;
-    double y;
-    double damage;
+    Pair position;
     //determine perspective, and use these if the base of the tower is different from where the bullets will be coming from.
-    int type;
+//    int type;
     List<Bullet> bullets;
+    Pair ogBulletPos;
 
 
     //implement a purchase/upgrade button for each tower?
 
 
-    public void fireBullet(double fireX, double fireY, int damage) {
-        //add to an arrayList of bullets?
+    public void fireBullet(Level l, double time) {
+        for (int bullet = 0; bullet < this.bullets.size(); bullet++){
+            Balloon temp = l.balloon;
+            while (temp != null){
+                if (temp.isShot(this.bullets.get(bullet))) {
+                    //we stop drawing it
+                    temp.radius = 0;
+                    if (temp.nextBalloon == null) {
+                        //this part I need Kiara to look at cuz rn im just creating rank 1 balloons - Hena
+                        temp = new Balloon(l.startPosition.x, l.startPosition.y, Color.red, 1, true);
+                        // temp = temp.determineLevel(l.levelNum); (i wanna mess around w this)
+                    } else {
+                        //this line isnt doing much rn.. its more so for if we decide to mess around w
+                        //indexes later on
+//                                prev.nextBalloon = temp.nextBalloon;
+                        temp = temp.nextBalloon;
+                    }
+                }
+                temp = temp.nextBalloon;
+
+                //instead of some arbitrary number (10) I need to make a variable that keeps track of the og position of the bullet
+                if (this.bullets.get(bullet).getPosition().x < 10){
+                    this.bullets.remove(bullet);
+                    this.bullets.add(new Bullet(ogBulletPos, 5, new Pair(-40, 0)));
+                }
+                this.bullets.get(bullet).update(time);
+            }
+        }
     }
 
 
     @Override
     public void drawComponent(Graphics g) {
-        g.setColor(Color.blue);
-        //I set these two variables up to test switching from mouseX, mouseY to a stationary point (i.e. placing the tower)
-        //feel free to move everything around/delete as needed; these integers will be unnecessary once we actually implement button 7 to create a tower that has its respective x and y
-        //let me know when you're ready for me to swoop in and play with mouse controls again haha
-        int tower1PositionX = (int) TowerDefense.mouseX;
-        int tower1PositionY = (int)TowerDefense.mouseY;
-        g.fillRect(tower1PositionX, tower1PositionY, 50, 50);
-        if (type == 1) BasicTower.drawBasicTower(g,tower1PositionX,tower1PositionY);
+        for (Bullet bullet : bullets){
+            bullet.drawComponent(g);
+        }
+//        g.setColor(Color.blue);
+//        //I set these two variables up to test switching from mouseX, mouseY to a stationary point (i.e. placing the tower)
+//        //feel free to move everything around/delete as needed; these integers will be unnecessary once we actually implement button 7 to create a tower that has its respective x and y
+//        //let me know when you're ready for me to swoop in and play with mouse controls again haha
+//        int tower1PositionX = (int) TowerDefense.mouseX;
+//        int tower1PositionY = (int)TowerDefense.mouseY;
+//        g.fillRect(tower1PositionX, tower1PositionY, 50, 50);
+//        if (type == 1) BasicTower.drawBasicTower(g,tower1PositionX,tower1PositionY);
     }
 
 }
@@ -39,29 +67,20 @@ abstract class Tower implements Drawable{
 
 class BasicTower extends Tower {
     public BasicTower(double x, double y) {
-        this. x = x;
-        this.y = y;
-        damage = 1;
-        type = 1;
+        position = new Pair(x, y);
         bullets = new ArrayList<>();
-        bullets.add(new Bullet(new Pair(300, 80), 5, new Pair(-350, 0)));
+        ogBulletPos = this.position;
+        //need a method that determines the og velocity of the bullet
+        bullets.add(new Bullet(ogBulletPos, 1, new Pair(-350, 0)));
     }
-
-
     @Override
-    public void fireBullet(double fireX, double fireY, int damage) {
-        super.fireBullet(fireX, fireY, (int) this.damage);
-    }
-
-
+    public void fireBullet(Level l, double time) {
+        super.fireBullet(l, time);
+    }//this might be unnecessary
     @Override
     public void drawComponent(Graphics g) {
         super.drawComponent(g);
+        g.drawImage(ImageHolder.tower1,(int)position.x,(int)position.y,64,64,null);
     }
-    //why is this necessary?
 
-
-    public static void drawBasicTower(Graphics g,int x,int y) {
-        //g.drawImage(ImageHolder.tower1,x,y,64,64,null);
-    }
 }
