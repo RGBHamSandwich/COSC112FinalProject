@@ -69,8 +69,9 @@ public class TowerDefense extends JPanel {
 
         // let's replace these if/else statements with a switch(case) setup
         if (titleScreen){
-            screen.drawTitleScreen(g,getWidth(),getHeight());
+            screen.drawTitleScreen(g);
             //this is the OG bugtesting goat; leave him be. <3
+            //p.s. we can't turn him in unless we make a goat button
 //            g.drawImage(TowerDefense.image, 10, 10, this);
         }
         else if(chooseMapScreen){

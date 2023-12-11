@@ -13,7 +13,7 @@ public class MouseFunctions implements MouseListener, MouseMotionListener {
         double x = e.getX();
         double y = e.getY();
         System.out.println("The mouse has been clicked at " + x + ", " + y + ".");
-        ButtonHolder.handleButtonClick(x, y);
+        ButtonHolder.handleClick(x, y);
 
     }
 

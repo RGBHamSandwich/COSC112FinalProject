@@ -4,11 +4,10 @@ import java.awt.*;
 public class Screen {
     static int boxSize = 64;
 
-    //This method draws the Title Screen.
-    public void drawTitleScreen(Graphics g, int width, int height){
+    //this draws the title screen
+    public void drawTitleScreen(Graphics g){
         g.drawImage(ImageHolder.titleScreen,0,0,TowerDefense.WIDTH,TowerDefense.HEIGHT,null);
-        g.drawRect(width/2-20,height*5/8-20,50,30);
-        g.drawString("Start",width/2-10,height*5/8);
+        ButtonHolder.drawButton(0, g);
     }
 
     //This method draws the screen where the user can choose their map, including drawing smaller renditions of the maps
@@ -21,9 +20,7 @@ public class Screen {
         drawMap3Screen(g,boxSize*23/2,boxSize*2,boxSize*3,boxSize*3);
         g.setColor(Color.BLACK);
         g.drawString("Choose Your Map:",width/2-70,50);
-        g.drawRect(boxSize,boxSize*2,boxSize*4,boxSize*3);
-        g.drawRect(boxSize*6,boxSize*2,boxSize*4,boxSize*3);
-        g.drawRect(boxSize*11,boxSize*2,boxSize*4,boxSize*3);
+        ButtonHolder.drawButton(1, g);
     }
 
     //This method draws the screen for the first map.
@@ -80,17 +77,11 @@ public class Screen {
 
     //draws the game over screen
     public void drawGameOverScreen(Graphics g,int width,int height){
-        g.drawImage(ImageHolder.gameOver,0,0,1024,768,null);
+        g.drawImage(ImageHolder.gameOver,0,0,width,height,null);
         if(TowerDefense.playAgain) {
-            drawPlayAgainButton(g, width, height);
+            ButtonHolder.drawButton(6, g);
         }
     }
 
-    //draws the play again button
-    static void drawPlayAgainButton(Graphics g,int width, int height){
-        g.setColor(Color.BLACK);
-        g.drawRect(width/2-30,height*5/8 - 20,85,30);
-        g.drawString("Play again?",width/2-20,height*5/8);
-    }
 
 }

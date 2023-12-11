@@ -7,26 +7,120 @@ import java.util.List;
 
 class Button {
     //these are the parameters used to "draw" each button
-    double x;
-    double y;
-    double width;
-    double height;
+    Pair position = new Pair(0, 0);
+    Pair dimension = new Pair(0, 0);
+
     //these four doubles give coordinates for the top (y), bottom (y), left (x), and right (x) of the button
     double top;
     double bottom;
     double left;
     double right;
 
-    public Button(double x, double y, double width, double height) {        //let's update this to use Pair instead of x, y
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    public Button(double x, double y, double width, double height) {
+        //here we set the values for each side of the button as well as filling out position (x, y) and dimension (width, height)
+        position.x = x;
+        position.y = y;
+        dimension.x = width;
+        dimension.y = height;
         right = x + width;
         left = x;
         bottom = y + height;
         top = y;
 
+    }
+
+}
+
+class ButtonHolder {
+    static Button[] buttonArray;
+    static int WIDTH = TowerDefense.WIDTH;
+    static int HEIGHT = TowerDefense.HEIGHT;
+    static int boxSize = Screen.boxSize;
+
+    //here is where all of the buttons are initialized
+    //here's the info for button 0, the start button
+    static Button start0 = new Button(WIDTH/2-20,HEIGHT*5/8-20, 50, 30);
+    //1, 2, 3 are the buttons to choose between map 1, 2, and 3
+    static Button map1 = new Button(boxSize, boxSize*2, boxSize*4,boxSize*3);
+    static Button map2 = new Button(boxSize*6,boxSize*2, boxSize*4,boxSize*3);
+    static Button map3 = new Button(boxSize*11,boxSize*2, boxSize*4,boxSize*3);
+    //4 is the button to start the level
+    static Button startLevel4 = new Button(WIDTH - 256,HEIGHT - boxSize, boxSize*4, boxSize);
+    //5 registers a click anywhere on the "game over" screen to materialize the "play again" button
+    static Button gameOver5 = new Button(0, 0, WIDTH, HEIGHT);
+    //button 6 is the play again button
+    static Button playAgain6 = new Button(WIDTH /2-30,HEIGHT*5/8 - 20, 85, 30);
+    //7 is the top-left shop button
+    static Button shop7 = new Button(784, 87, 63, 63);
+    static Button shop8;
+    static Button shop9;
+    //here is where we'll add more buttons
+
+
+
+    public ButtonHolder() {
+        buttonArray = new Button[10]; // here we can edit the number of buttons
+
+        //here's all of the the buttons being slotted into the array so we can reference them easier by cases
+        buttonArray[0] = start0;
+        buttonArray[1] = map1;
+        buttonArray[2] = map2;
+        buttonArray[3] = map3;
+        buttonArray[4] = startLevel4;
+        buttonArray[5] = gameOver5;
+        buttonArray[6] = playAgain6;
+        buttonArray[7] = shop7;
+        buttonArray[8] = shop8;
+        buttonArray[9] = shop9;
+        //we'll add more buttons here
+
+    }
+
+    //this will help us determine if clicks are on the button or somewhere else
+
+    public static void handleClick(double x, double y) {
+        //this section is dense, but it ensures that buttons are only clicked when the appropriate screen is showing
+
+        //this detects a start button click
+        if (TowerDefense.titleScreen && checkClick(x, y, buttonArray[0])) ButtonHolder.ifClicked(0);
+
+        //these detect a map selection click
+        else if (TowerDefense.chooseMapScreen) {
+            if (checkClick(x, y, buttonArray[1])) ButtonHolder.ifClicked(1);
+            else if (checkClick(x, y, buttonArray[2])) ButtonHolder.ifClicked(2);
+            else if (checkClick(x, y, buttonArray[3])) ButtonHolder.ifClicked(3);
+        }
+
+        //this detects a "game over" click
+        else if(TowerDefense.lives == 0 && !TowerDefense.playAgain) ButtonHolder.ifClicked(5);
+
+        //this detects a click to play again
+        else if(TowerDefense.gameOverScreen) ButtonHolder.ifClicked(6);
+
+        //all of the next clicks happen on the map screens, so they're grouped together
+        else if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen) {
+            //this detects a "start level" click
+            if(checkClick(x, y, buttonArray[4])) ButtonHolder.ifClicked(4);
+            //these detect clicks on the shop buttons; Since this is a for loop, we can keep adding shop buttons without editing this part
+            for (int i = 7; i < buttonArray.length; i++) {
+                Button button = buttonArray[i];
+                if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
+                    ButtonHolder.ifClicked(i);
+                    System.out.println("Button Clicked: " + i);
+                    // Only one button can be clicked at a time, so this keeps us from thumbing through every button for every click
+                    break;
+                }
+            }
+        }
+
+    }
+
+    //this method checks if the click is within the bounds of the button
+    public static boolean checkClick(double x, double y, Button button) {
+        if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
+            return true;
+        }
+        else return false;
     }
 
     public static void ifClicked(int num) {
@@ -43,7 +137,7 @@ class Button {
             case 0:
                 //here's the start button, it starts the game
                 if(TowerDefense.titleScreen||(TowerDefense.gameOverScreen && TowerDefense.playAgain)) {
-                    TowerDefense.resetGame();
+                    TowerDefense.resetGame();       //this sends you to the chooseMapScreen
                 }
                 break;
 
@@ -86,7 +180,7 @@ class Button {
 
             case 6:
                 TowerDefense.resetGame();
-            break;
+                break;
 
             case 7:
 //                TowerDefense.basicTowerPresent = true;            //I don't think this is what I need
@@ -99,76 +193,39 @@ class Button {
 
     }
 
-}
+    public static void drawButton(int num, Graphics g){
+        Button b = ButtonHolder.buttonArray[num];
+        Pair position = b.position;
+        Pair dimension = b.dimension;
 
-class ButtonHolder {
-    static Button[] buttonArray;
-    int WIDTH = TowerDefense.WIDTH;
-    int HEIGHT = TowerDefense.HEIGHT;
-    int boxSize = Screen.boxSize;
+        //similar to ifClicked, the following cases detail how to draw a button
+        //it's important to note that we don't have to draw ALL of the buttons
+        switch(num) {
+            case 0: //the start button
+                g.drawRect((int) position.x,(int) position.y,(int) dimension.x,(int) dimension.y);
+                g.drawString("Start",(int) position.x + 10,(int) position.y + 20);
+                break;
 
-    public ButtonHolder() {
-        buttonArray = new Button[10]; // here we can edit the number of buttons
+            case 1: //the map buttons (1, 2, and 3 are encompassed here)
+                g.drawRect((int) position.x,(int) position.y,(int) dimension.x,(int) dimension.y);
+                b = ButtonHolder.buttonArray[2];
+                g.drawRect((int) b.position.x,(int) b.position.y,(int) b.dimension.x,(int) b.dimension.y);
+                b = ButtonHolder.buttonArray[3];
+                g.drawRect((int) b.position.x,(int) b.position.y,(int) b.dimension.x,(int) b.dimension.y);
+                break;
 
-        //0 is the Start button
-        buttonArray[0] = new Button((double) WIDTH/2-20,(double) HEIGHT*5/8-20,50,30);
-        //1, 2, 3 are the buttons to choose between map 1, 2, and 3
-        buttonArray[1] = new Button(boxSize,boxSize*2,boxSize*4,boxSize*3);
-        buttonArray[2] = new Button(boxSize*6,boxSize*2,boxSize*4,boxSize*3);
-        buttonArray[3] = new Button(boxSize*11,boxSize*2,boxSize*4,boxSize*3);
-        //4 is the button to start the level
-        buttonArray[4] = new Button(WIDTH - 256,HEIGHT - boxSize, boxSize*4, boxSize);
-        //5 registers a click anywhere on the "game over" screen to materialize the "play again" button
-        buttonArray[5] = new Button(0,0,WIDTH,HEIGHT);
-        //button 6 is the play again button
-        buttonArray[6] = new Button((double) WIDTH /2-30,(double) HEIGHT*5/8 - 20,85,30);
-        //7 is the top-left shop button
-        buttonArray[7] = new Button(784, 87, 63, 63);
-    }
+            case 6:
+                g.setColor(Color.BLACK);
+                g.drawRect((int) position.x,(int) position.y,(int) dimension.x,(int) dimension.y);
+                g.drawString("Play again?", (int) position.x + 10, (int) position.y + 20);
+                break;
 
-    public static void handleButtonClick(double x, double y) {
-        //this will help us figure out if clicks are on the button or somewhere else
-        Button button = buttonArray[0];
+//            case 5:
+//                break;
 
-        //Perhaps Hena could help me figure out a better way to write all these if/else things.
-        //I've overcomplicated this section to ensure that buttons are only clicked when the appropriate screen is showing
-
-        //this detects a start button click
-        if (TowerDefense.titleScreen && checkClick(x, y, button)) Button.ifClicked(0);
-        //these detect a map selection click
-        else if (TowerDefense.chooseMapScreen) {
-            if (checkClick(x, y, buttonArray[1])) Button.ifClicked(1);
-            else if (checkClick(x, y, buttonArray[2])) Button.ifClicked(2);
-            else if (checkClick(x, y, buttonArray[3])) Button.ifClicked(3);
-        }
-        //this detects a "game over" click
-        else if(TowerDefense.lives == 0 && !TowerDefense.playAgain) Button.ifClicked(5);
-        //this detects a click to play again
-        else if(TowerDefense.gameOverScreen) Button.ifClicked(6);
-        //all of the next clicks happen on the map screens, so they're grouped together
-        else if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen) {
-            //this detects a "start level" click
-            if(checkClick(x, y, buttonArray[4])) Button.ifClicked(4);
-            //these detect clicks on the shop buttons
-            for (int i = 0; i < buttonArray.length; i++) {
-                button = buttonArray[i];
-                if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
-                    Button.ifClicked(i);
-                    System.out.println("Button Clicked: " + i);
-                    // Only one button can be clicked at a time, so this keeps us from thumbing through every button for every click
-                    break;
-                }
-            }
         }
 
     }
 
-    public static boolean checkClick(double x, double y, Button button) {
-        //this method checks if the click is within the bounds of the button
-        if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
-            return true;
-        }
-        else return false;
-    }
 
 }
