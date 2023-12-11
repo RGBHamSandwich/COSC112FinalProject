@@ -140,6 +140,9 @@ public class TowerDefense extends JPanel {
             map1Screen = false;
             map2Screen = false;
             map3Screen = false;
+            ButtonHolder.Tower1InAir = false;
+            ButtonHolder.Tower2InAir = false;
+            ButtonHolder.Tower3InAir = false;
     }
 
 

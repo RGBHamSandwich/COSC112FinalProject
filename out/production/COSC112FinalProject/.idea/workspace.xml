@@ -135,12 +135,6 @@
           <properties field="placeTower7" class="ButtonHolder" />
           <option name="timeStamp" value="164" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/Level.java</url>
-          <line>15</line>
-          <properties field="startPosition" class="Level" />
-          <option name="timeStamp" value="177" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
