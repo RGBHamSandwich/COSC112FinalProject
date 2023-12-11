@@ -1,6 +1,6 @@
-import java.awt.*;
+
 import java.awt.event.*;
-import static com.sun.java.accessibility.util.AWTEventMonitor.*;
+
 
 public class MouseFunctions implements MouseListener, MouseMotionListener {
     //these doubles will keep track of the current x and y position of the mouse)
@@ -57,6 +57,7 @@ public class MouseFunctions implements MouseListener, MouseMotionListener {
         double y = e.getY();
         mouseX = x;
         mouseY = y;
+//        System.out.println("new X: " + mouseX + ", new Y: " + mouseY);
 
     }
 

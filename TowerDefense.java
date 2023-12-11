@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+
 
 public class TowerDefense extends JPanel {
     //change panel width and height so that we can have a shop panel and game panel
@@ -9,18 +9,17 @@ public class TowerDefense extends JPanel {
     public static final int HEIGHT = 768;
     public static final int FPS = 60;
     public static int popped = 0;
-    public static int lives = 10;
+    public static int lives = 20;
     public static int coins = 300;
 
     //The original bug testing goat
     //static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
+
     private ButtonHolder buttonHolder;
-    static boolean basicTowerPresent;
 
     //Should these booleans be moved to screen? (we're only creating one "screen" so it should be able to hold them right?0
     //these booleans will keep track of which screen is displaying (i.e. which screen should be drawn)
     Screen screen;
-    int boxSize = Screen.boxSize;
     static Level level;
 
     //If following booleans are true, draws a specific screen. Only one should be true at a time
@@ -30,13 +29,12 @@ public class TowerDefense extends JPanel {
     static boolean map2Screen = false;
     static boolean map3Screen = false;
     static boolean gameOverScreen = false;
-
     //if true, draws play again button
     static boolean playAgain = false;
 
 
     public TowerDefense(){
-        //these fou lines allow us to use all of the mouse functions within the MouseFunctions class
+        //these three lines allow us to use all of the mouse functions within the MouseFunctions class
         MouseFunctions mouse = new MouseFunctions();
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
@@ -94,9 +92,19 @@ public class TowerDefense extends JPanel {
             screen.drawShopScreen(g);
         }
 
-        if(basicTowerPresent) {
-            g.drawRect((int) MouseFunctions.mouseX, (int) MouseFunctions.mouseY, 50, 50);
-        }
+        //these are adjusted mouseX and mouseY values so the mouse looks like it's holding the pieces
+        int mouseXadj = (int) MouseFunctions.mouseX - 30;
+        int mouseYadj = (int) MouseFunctions.mouseY - 15;
+
+        //here's the start of the tower logic
+        if (ButtonHolder.Tower1InAir) g.drawImage(ImageHolder.tower1,mouseXadj,mouseYadj,64,64,null);
+        else if (ButtonHolder.Tower1Placed) ButtonHolder.disableShop(g, 8);
+        if (ButtonHolder.Tower2InAir) g.drawImage(ImageHolder.tower2,mouseXadj,mouseYadj,64,64,null);
+        else if (ButtonHolder.Tower2Placed) ButtonHolder.disableShop(g, 8);
+        if (ButtonHolder.Tower3InAir) g.drawImage(ImageHolder.tower3,mouseXadj,mouseYadj,64,64,null);
+        else if (ButtonHolder.Tower3Placed) ButtonHolder.disableShop(g, 8);
+
+
 
     }
 
@@ -120,12 +128,12 @@ public class TowerDefense extends JPanel {
         playAgain = false;
         //sets the level number back to zero
         TowerDefense.level = new Level(0);
-        TowerDefense.lives = 20;
+        TowerDefense.lives = 1;
         TowerDefense.coins = 300;
         TowerDefense.popped = 0;
     }
 
-    //loads Game Over screen and gets rid of extra balloons
+    //loads the "Game Over" screen and gets rid of extra balloons
     static void endGame(){
             level.balloon = null;
             gameOverScreen = true;
@@ -149,8 +157,5 @@ public class TowerDefense extends JPanel {
     }
 
 
-// I (Beck) think that a mouse-related class would be good to hold all of these things ...
-// In the end, let's empty out the methods that aren't used in our game
-//the following are all of the methods that must be overridden from the three imported Listeners
 
 }

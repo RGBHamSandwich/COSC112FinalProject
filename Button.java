@@ -1,8 +1,4 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 class Button {
@@ -50,16 +46,25 @@ class ButtonHolder {
     static Button gameOver5 = new Button(0, 0, WIDTH, HEIGHT);
     //button 6 is the play again button
     static Button playAgain6 = new Button(WIDTH /2-30,HEIGHT*5/8 - 20, 85, 30);
-    //7 is the top-left shop button
-    static Button shop7 = new Button(784, 87, 63, 63);
-    static Button shop8;
-    static Button shop9;
-    //here is where we'll add more buttons
+    static Button placeTower7 = new Button(0,0,768,768);
+    //8 is the top-left shop button, and the tower number increases from left to right
+    static Button shop8 = new Button(782, 87, 65, 100);
+    static boolean Tower1InAir;
+    static boolean Tower1Placed;
+    static int Tower1Price = 100;
+    static Button shop9 = new Button(860, 87, 65, 100);
+    static boolean Tower2InAir;
+    static boolean Tower2Placed;
+    static int Tower2Price = 200;
+    static Button shop10 = new Button(938, 87, 65, 100);
+    static boolean Tower3InAir;
+    static boolean Tower3Placed;
+    static int Tower3Price = 325;
 
 
 
     public ButtonHolder() {
-        buttonArray = new Button[10]; // here we can edit the number of buttons
+        buttonArray = new Button[11]; // here we can edit the number of buttons
 
         //here's all of the the buttons being slotted into the array so we can reference them easier by cases
         buttonArray[0] = start0;
@@ -69,20 +74,23 @@ class ButtonHolder {
         buttonArray[4] = startLevel4;
         buttonArray[5] = gameOver5;
         buttonArray[6] = playAgain6;
-        buttonArray[7] = shop7;
+        buttonArray[7] = placeTower7;
         buttonArray[8] = shop8;
         buttonArray[9] = shop9;
+        buttonArray[10] = shop10;
         //we'll add more buttons here
 
     }
 
-    //this will help us determine if clicks are on the button or somewhere else
-
+    //this is the first step in deciding if a button has been clicked and what to do about it
     public static void handleClick(double x, double y) {
+        boolean anyTowerInAir = false;
+        if (Tower1InAir || Tower2InAir || Tower3InAir) anyTowerInAir = true;
         //this section is dense, but it ensures that buttons are only clicked when the appropriate screen is showing
+        //it also keeps most of the conditionals confined to one space so "ifClicked" is more straightforward for all of us
 
         //this detects a start button click
-        if (TowerDefense.titleScreen && checkClick(x, y, buttonArray[0])) ButtonHolder.ifClicked(0);
+        if ((TowerDefense.titleScreen || (TowerDefense.gameOverScreen && TowerDefense.playAgain)) && checkClick(x, y, buttonArray[0])) ButtonHolder.ifClicked(0);
 
         //these detect a map selection click
         else if (TowerDefense.chooseMapScreen) {
@@ -101,12 +109,13 @@ class ButtonHolder {
         else if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen) {
             //this detects a "start level" click
             if(checkClick(x, y, buttonArray[4])) ButtonHolder.ifClicked(4);
+            //if a tower is in-air, this detects if it will be placed
+            if(anyTowerInAir && checkClick(x, y, buttonArray[7])) ButtonHolder.ifClicked(7);
             //these detect clicks on the shop buttons; Since this is a for loop, we can keep adding shop buttons without editing this part
-            for (int i = 7; i < buttonArray.length; i++) {
+            for (int i = 8; i < buttonArray.length; i++) {
                 Button button = buttonArray[i];
                 if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
                     ButtonHolder.ifClicked(i);
-                    System.out.println("Button Clicked: " + i);
                     // Only one button can be clicked at a time, so this keeps us from thumbing through every button for every click
                     break;
                 }
@@ -123,22 +132,22 @@ class ButtonHolder {
         else return false;
     }
 
+    //if a button has been clicked, it's passed into here
     public static void ifClicked(int num) {
-
-        if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen) {
-            //based on the current screen and probably a "placingTower" boolean, this would change a mid-air tower's x and y
-            //i.e. this would indicate where a tower (presumably attached to the mouse) would sit based on where you click
-        }
+        //we'll use this for the shop buttons
+        int price;
+        int mouseXadj = (int) MouseFunctions.mouseX - 30;
+        int mouseYadj = (int) MouseFunctions.mouseY - 15;
+        System.out.println("Button " + num + " clicked.");
 
         //the following cases detail what happens when a specific button is clicked
         //recall that each position [?] in the array correlates to a particular button function
         //these numbers are consistent with those, so case 0 and buttonArray[0] pertain to the same button
         switch(num) {
+            //here's the start and play again button to send you to the chooseMapScreen
             case 0:
-                //here's the start button, it starts the game
-                if(TowerDefense.titleScreen||(TowerDefense.gameOverScreen && TowerDefense.playAgain)) {
-                    TowerDefense.resetGame();       //this sends you to the chooseMapScreen
-                }
+            case 6:
+                    TowerDefense.resetGame();
                 break;
 
             //the next three buttons are to choose between map 1, 2, and 3
@@ -163,8 +172,8 @@ class ButtonHolder {
                 System.out.println(TowerDefense.lives);
                 break;
 
+            //this is the "start level" button
             case 4:
-                //this is the "start level" button
                 if (TowerDefense.level.balloon == null) {
                     System.out.println(TowerDefense.level.levelNum);
                     TowerDefense.level.levelNum++;
@@ -173,26 +182,60 @@ class ButtonHolder {
                 }
                 break;
 
-            //the next two buttons are for restarting the game after you lose
+            //this prompts the "play again" button to pop up
             case 5:
                 TowerDefense.playAgain = true;
                 break;
 
-            case 6:
-                TowerDefense.resetGame();
+            //this places a tower if you're holding one
+            case 7:
+                System.out.println("Ideally, the tower would be placed where you just clicked.");
+//                if (Tower1InAir) new PawnTower(mouseXadj, mouseYadj, TowerDefense.level);
+//                else if (Tower2InAir) new BishopTower(mouseXadj, mouseYadj, TowerDefense.level);
                 break;
 
-            case 7:
-//                TowerDefense.basicTowerPresent = true;            //I don't think this is what I need
-//              TowerDefense.drawTower(1);                          // I don't know how to pass g into this :(
-                //I'm not actually using this right now, but this is where tower creation will happen!
-//                BasicTower basicTower = new BasicTower(10, 100);
+            case 8:
+                price = Tower1Price;
+                if (Tower1InAir) {
+                    Tower1InAir = false;
+                    TowerDefense.coins += price;
+                }
+                else if (!(Tower1Placed || Tower1InAir) && price <= TowerDefense.coins) {
+                    Tower1InAir = true;
+                    TowerDefense.coins -= price;
+                }
+                break;
+
+            case 9:
+                price = Tower2Price;
+                if (Tower2InAir) {
+                    Tower2InAir = false;
+                    TowerDefense.coins += price;
+                }
+                else if (!(Tower2Placed || Tower2InAir) && price <= TowerDefense.coins) {
+                    Tower2InAir = true;
+                    TowerDefense.coins -= price;
+                }
+                break;
+
+            case 10:
+                price = Tower3Price;
+                if (Tower3InAir) {
+                    Tower3InAir = false;
+                    TowerDefense.coins += price;
+                }
+                else if (!(Tower3Placed || Tower3InAir) && price <= TowerDefense.coins) {
+                    Tower3InAir = true;
+                    TowerDefense.coins -= price;
+                }
                 break;
 
         }
 
     }
 
+
+    //for the buttons that need to be drawn, their physical details are here
     public static void drawButton(int num, Graphics g){
         Button b = ButtonHolder.buttonArray[num];
         Pair position = b.position;
@@ -225,6 +268,14 @@ class ButtonHolder {
 
         }
 
+    }
+
+    //when a tower is placed, this will place a graphic over it to show that it cannot be bought again
+    public static void disableShop(Graphics g, int num) {
+        Pair position = buttonArray[num].position;
+        Pair dimension = buttonArray[num].dimension;
+        g.setColor(Color.red);
+        g.fillRect((int) position.x, (int) position.y, (int) dimension.x, (int) dimension.y);
     }
 
 

@@ -1,4 +1,5 @@
 import java.awt.*;
+
 public class Level {
     PawnTower tower;
     RookTower rookTower;
@@ -11,9 +12,9 @@ public class Level {
     int levelNum;
 
     //The position where balloons start in a given map
-    static Pair startPosition;
+    static Pair startPosition = new Pair(0, 0);
 
-    // start position can also be used to determine the direction of the bullts firing - hena
+    // start position can also be used to determine the direction of the bullets firing - hena
     public Level(int levelNum) {
         this.levelNum = levelNum;
         if (levelNum == 0) {

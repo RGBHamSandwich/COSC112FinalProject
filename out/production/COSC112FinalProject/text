@@ -1,0 +1,24 @@
+I think that we should have an instructions page ~
+
+Intro:
+    Welcome to Amherst Tower Defense! In our game, you'll be using towers—each representing a distinct chess
+    piece—that unleash a barrage of bullets to defend against incoming waves of colorful balloons. First,
+    you'll choose a map!
+
+Towers:
+    Once you've chosen your map, it's time to think about your strategy!
+    On the right side of the screen, you'll see a shop. There, you can use your coins to buy towers to pop
+        oncoming balloons.
+    If you have enough coins, simply left-click on a tower to pick it up! Then you can place it on the map as
+        you please. [insert optional notion about the map grid]
+    If you change your mind about the tower, you can click on the empty bubble to put it back in the shop.
+
+
+
+
+We can add also specific details to compensate for features we don't add, such as:
+- the map grid: "While you can technically place your towers anywhere, keep a couple of things in mind:
+                Placing a tower on a path doesn't block balloons; they'll just float past you!
+                Every tower has it's own firing pattern—think about how a chess piece attacks!
+                You can only place one of each tower!
+- etc

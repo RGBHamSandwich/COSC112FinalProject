@@ -56,13 +56,15 @@ public class Screen {
                 drawCoin(g,width +(j)*boxSize + (j+1)*spacing - 5,(i+1) * (boxSize + spacing) + (i-1)*boxSize - 5);
             }
         }
-        g.drawImage(ImageHolder.tower1,width + spacing, boxSize + spacing +8, boxSize, boxSize,null);
-        g.drawImage(ImageHolder.tower2,width + boxSize + 2*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
-        g.drawImage(ImageHolder.tower3,width + 2*boxSize + 3*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
+
+        //the chess icons only appear if they haven't been bought yet (i.e. they're not on the map yet)
+        if (!(ButtonHolder.Tower1InAir || ButtonHolder.Tower1Placed)) g.drawImage(ImageHolder.tower1,width + spacing, boxSize + spacing +8, boxSize, boxSize,null);
+        if (!(ButtonHolder.Tower2InAir || ButtonHolder.Tower2Placed))g.drawImage(ImageHolder.tower2,width + boxSize + 2*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
+        if (!(ButtonHolder.Tower3InAir || ButtonHolder.Tower3Placed))g.drawImage(ImageHolder.tower3,width + 2*boxSize + 3*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
         g.drawString(Integer.toString(TowerDefense.popped), width + boxSize*2 + 15,TowerDefense.HEIGHT - boxSize *3/2 + 15);
-        g.drawString("100",width + spacing + 25,2*boxSize + spacing + 32);
-        g.drawString("200",width + spacing + boxSize + 40,2*boxSize + spacing + 32);
-        g.drawString("325",width + spacing + 2*boxSize + 55,2*boxSize + spacing + 32);
+        g.drawString(ButtonHolder.Tower1Price + "",width + spacing + 25,2*boxSize + spacing + 32);
+        g.drawString(ButtonHolder.Tower2Price + "",width + spacing + boxSize + 40,2*boxSize + spacing + 32);
+        g.drawString(ButtonHolder.Tower3Price + "",width + spacing + 2*boxSize + 55,2*boxSize + spacing + 32);
     }
 
     //draws the coin icon at a given position

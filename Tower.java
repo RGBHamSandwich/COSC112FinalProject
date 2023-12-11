@@ -11,7 +11,6 @@ abstract class Tower implements Drawable{
     Pair ogBulletVel;
     Pair ogBulletPos;
 
-
     //implement a purchase/upgrade button for each tower?
     public Pair determineVelocity(Pair target){
         return new Pair((target.x-position.x), (target.y-position.y));
@@ -55,14 +54,7 @@ abstract class Tower implements Drawable{
         for (Bullet bullet : bullets){
             bullet.drawComponent(g);
         }
-//        g.setColor(Color.blue);
-//        //I set these two variables up to test switching from mouseX, mouseY to a stationary point (i.e. placing the tower)
-//        //feel free to move everything around/delete as needed; these integers will be unnecessary once we actually implement button 7 to create a tower that has its respective x and y
-//        //let me know when you're ready for me to swoop in and play with mouse controls again haha
-//        int tower1PositionX = (int) TowerDefense.mouseX;
-//        int tower1PositionY = (int)TowerDefense.mouseY;
-//        g.fillRect(tower1PositionX, tower1PositionY, 50, 50);
-//        if (type == 1) BasicTower.drawBasicTower(g,tower1PositionX,tower1PositionY);
+
     }
 
 }
@@ -76,6 +68,7 @@ class PawnTower extends Tower {
         ogBulletVel = this.determineVelocity(new Pair(l.startPosition.x/20, l.startPosition.y/20));
         //need a method that determines the og velocity of the bullet
         bullets.add(new Bullet(position, 1, ogBulletVel));
+
     }
     @Override
     public void fireBullet(Level l, double time) {
