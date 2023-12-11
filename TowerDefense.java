@@ -128,7 +128,7 @@ public class TowerDefense extends JPanel {
         playAgain = false;
         //sets the level number back to zero
         TowerDefense.level = new Level(0);
-        TowerDefense.lives = 1;
+        TowerDefense.lives = 50;
         TowerDefense.coins = 300;
         TowerDefense.popped = 0;
     }

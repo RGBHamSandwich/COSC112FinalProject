@@ -29,8 +29,10 @@ abstract class Tower implements Drawable{
                     this.bullets.get(bullet).damage--;
                     if (temp.nextBalloon == null) {
                         //this part I need Kiara to look at cuz rn im just creating rank 1 balloons - Hena
-                        temp = new Balloon(l.startPosition.x, l.startPosition.y, Color.red, 1, true);
-                        // temp = temp.determineLevel(l.levelNum); (i wanna mess around w this)
+                        temp = new Balloon(l.startPosition.x, l.startPosition.y, temp.color, temp.rank + 1, true);
+                        //(i wanna mess around w this)
+
+//                        temp = temp.determineLevel(l.levelNum);
                     } else {
                         temp = temp.nextBalloon;
                     }

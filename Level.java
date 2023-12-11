@@ -52,16 +52,33 @@ public class Level {
                 if (pawnTower != null){
                     pawnTower.fireBullet(this, time);
                 }
+                if (bishopTower != null){
+                   bishopTower.fireBullet(this, time);
+                }
+                if (pawnTower != null){
+                    pawnTower.fireBullet(this, time);
+                }
                 //for some reason the update gets faster and slower?
 //                rookTower.fireBullet(this, time);
 //                bishopTower.fireBullet(this, time);
             }
             if (TowerDefense.map2Screen) {
                 balloon.updateMap2(time, levelNum);
-
+                if (pawnTower != null){
+                    pawnTower.fireBullet(this, time);
+                }
+                if (bishopTower != null){
+                    bishopTower.fireBullet(this, time);
+                }
             }
             if (TowerDefense.map3Screen) {
                 balloon.updateMap3(time, levelNum);
+                if (pawnTower != null){
+                    pawnTower.fireBullet(this, time);
+                }
+                if (bishopTower != null){
+                    bishopTower.fireBullet(this, time);
+                }
             }
             if (balloon.pathCleared) {
                 if (balloon.nextBalloon != null) {
