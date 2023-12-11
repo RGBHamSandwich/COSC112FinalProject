@@ -1,5 +1,5 @@
 import java.awt.*;
-import java.lang.runtime.SwitchBootstraps;
+//import java.lang.runtime.SwitchBootstraps;
 import java.util.Random;
 public class Balloon implements Drawable {
     int radius;
