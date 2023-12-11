@@ -190,8 +190,18 @@ class ButtonHolder {
             //this places a tower if you're holding one
             case 7:
                 System.out.println("Ideally, the tower would be placed where you just clicked.");
-//                if (Tower1InAir) new PawnTower(mouseXadj, mouseYadj, TowerDefense.level);
-//                else if (Tower2InAir) new BishopTower(mouseXadj, mouseYadj, TowerDefense.level);
+                if (Tower1InAir) {
+                   TowerDefense.level.createTowers(1, new Pair(mouseXadj, mouseYadj));
+                    Tower1InAir = false;
+                }
+                else if (Tower2InAir){
+                    TowerDefense.level.createTowers(2, new Pair(mouseXadj, mouseYadj));
+                    Tower2InAir = false;
+                }
+                else if (Tower3InAir){
+                    TowerDefense.level.createTowers(3, new Pair(mouseXadj, mouseYadj));
+                    Tower3InAir = false;
+                }
                 break;
 
             case 8:

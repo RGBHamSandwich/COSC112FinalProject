@@ -61,13 +61,12 @@ abstract class Tower implements Drawable{
 
 
 class PawnTower extends Tower {
-    public PawnTower(double x, double y, Level l) {
-        position = new Pair(x, y);
+    public PawnTower(Pair p, Level l) {
+        position = new Pair(p.x, p.y);
         bullets = new ArrayList<>();
-        ogBulletPos = position;
-        ogBulletVel = this.determineVelocity(new Pair(l.startPosition.x/20, l.startPosition.y/20));
+        ogBulletPos = new Pair(p.x + 31, p.y+30);
         //need a method that determines the og velocity of the bullet
-        bullets.add(new Bullet(position, 1, ogBulletVel));
+        bullets.add(new Bullet(ogBulletPos, 1, new Pair(0, -350)));
 
     }
     @Override
@@ -85,7 +84,7 @@ class PawnTower extends Tower {
 class BishopTower extends Tower {
     public BishopTower(Pair p){
         position = new Pair(p.x, p.y);
-        ogBulletPos = new Pair(position.x+25, position.y+20);
+        ogBulletPos = new Pair(position.x+30, position.y+30);
         bullets = new ArrayList<>();
         int randomFireDirection = 1 + (int)(Math.random()*4);
         switch (randomFireDirection){
@@ -118,7 +117,7 @@ class BishopTower extends Tower {
 class RookTower extends Tower{
     public RookTower(Pair p){
         position = new Pair(p.x, p.y);
-        ogBulletPos = new Pair(position.x+25, position.y+20);
+        ogBulletPos = new Pair(position.x+30, position.y+30);
         bullets = new ArrayList<>();
         bullets.add(new Bullet(ogBulletPos, 1, new Pair(-350, 0)));
         bullets.add(new Bullet(ogBulletPos, 1, new Pair(350, 0)));

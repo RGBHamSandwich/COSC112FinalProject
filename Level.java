@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class Level {
-    PawnTower tower;
+    PawnTower pawnTower;
     RookTower rookTower;
     BishopTower bishopTower;
 
@@ -24,9 +24,6 @@ public class Level {
                 startPosition = new Pair(96, -20);
                 balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, true);
                 //let's move the initialization of the tower outside of this so we can place towers before pressing "start game"
-                tower = new PawnTower(Math.random()*768, Math.random()*768, this);
-                rookTower = new RookTower(new Pair(Math.random()*768, Math.random()*768));
-                bishopTower = new BishopTower(new Pair(Math.random()*768, Math.random()*768));
             } else if (TowerDefense.map3Screen) {
                 startPosition = new Pair(-20, 416);
                 balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, false);
@@ -34,15 +31,30 @@ public class Level {
             }
         }
     }
+    public void createTowers(int t, Pair p){
+        switch (t){
+            case 1:
+                pawnTower = new PawnTower(p, this);
+                break;
+            case 2:
+                bishopTower = new BishopTower(p);
+                break;
+            case 3:
+                rookTower = new RookTower(p);
+                break;
+        }
+    }
 
     public void update(double time) {
         if (balloon != null) {
             if (TowerDefense.map1Screen) {
                 balloon.updateMap1(time, levelNum);
+                if (pawnTower != null){
+                    pawnTower.fireBullet(this, time);
+                }
                 //for some reason the update gets faster and slower?
-                tower.fireBullet(this, time);
-                rookTower.fireBullet(this, time);
-                bishopTower.fireBullet(this, time);
+//                rookTower.fireBullet(this, time);
+//                bishopTower.fireBullet(this, time);
             }
             if (TowerDefense.map2Screen) {
                 balloon.updateMap2(time, levelNum);
@@ -70,13 +82,14 @@ public class Level {
         if (balloon != null) {
             balloon.drawComponent(g);
         }
-        if (tower != null) {
-            tower.drawComponent(g);
-            rookTower.drawComponent(g);
+        if (pawnTower != null) {
+            pawnTower.drawComponent(g);
+        }
+        if (bishopTower != null){
             bishopTower.drawComponent(g);
-//            for (Bullet b : tower.bullets) {
-//                b.drawComponent(g);
-//            }
+        }
+        if (rookTower != null){
+            rookTower.drawComponent(g);
         }
     }
 }
