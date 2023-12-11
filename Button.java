@@ -60,11 +60,12 @@ class ButtonHolder {
     static boolean Tower3InAir;
     static boolean Tower3Placed;
     static int Tower3Price = 325;
+    static Button shop11;
 
 
 
     public ButtonHolder() {
-        buttonArray = new Button[11]; // here we can edit the number of buttons
+        buttonArray = new Button[13]; // here we can edit the number of buttons
 
         //here's all of the the buttons being slotted into the array so we can reference them easier by cases
         buttonArray[0] = start0;
@@ -78,6 +79,8 @@ class ButtonHolder {
         buttonArray[8] = shop8;
         buttonArray[9] = shop9;
         buttonArray[10] = shop10;
+        buttonArray[11] = shop11;
+//        buttonArray[12] = instructions12;
         //we'll add more buttons here
 
     }
@@ -85,7 +88,7 @@ class ButtonHolder {
     //this is the first step in deciding if a button has been clicked and what to do about it
     public static void handleClick(double x, double y) {
         boolean anyTowerInAir = false;
-        if (Tower1InAir || Tower2InAir || Tower3InAir) anyTowerInAir = true;
+//        if (Tower1InAir || Tower2InAir || Tower3InAir || Tower4InAir) anyTowerInAir = true;
         //this section is dense, but it ensures that buttons are only clicked when the appropriate screen is showing
         //it also keeps most of the conditionals confined to one space so "ifClicked" is more straightforward for all of us
 
@@ -206,37 +209,40 @@ class ButtonHolder {
 
             case 8:
                 price = Tower1Price;
-                if (Tower1InAir) {
-                    Tower1InAir = false;
-                    TowerDefense.coins += price;
-                }
-                else if (!(Tower1Placed || Tower1InAir) && price <= TowerDefense.coins) {
+                if (!(Tower1Placed || Tower1InAir) && price <= TowerDefense.coins) {
+                    putTowersDown();
                     Tower1InAir = true;
                     TowerDefense.coins -= price;
+                }
+                else if (Tower1InAir) {
+                    Tower1InAir = false;
+                    TowerDefense.coins += price;
                 }
                 break;
 
             case 9:
                 price = Tower2Price;
-                if (Tower2InAir) {
-                    Tower2InAir = false;
-                    TowerDefense.coins += price;
-                }
-                else if (!(Tower2Placed || Tower2InAir) && price <= TowerDefense.coins) {
+                if (!(Tower2Placed || Tower2InAir) && price <= TowerDefense.coins) {
+                    putTowersDown();
                     Tower2InAir = true;
                     TowerDefense.coins -= price;
+                }
+                else if (Tower2InAir) {
+                    Tower2InAir = false;
+                    TowerDefense.coins += price;
                 }
                 break;
 
             case 10:
                 price = Tower3Price;
-                if (Tower3InAir) {
-                    Tower3InAir = false;
-                    TowerDefense.coins += price;
-                }
-                else if (!(Tower3Placed || Tower3InAir) && price <= TowerDefense.coins) {
+                if (!(Tower3Placed || Tower3InAir) && price <= TowerDefense.coins) {
+                    putTowersDown();
                     Tower3InAir = true;
                     TowerDefense.coins -= price;
+                }
+                else if (Tower3InAir) {
+                    Tower3InAir = false;
+                    TowerDefense.coins += price;
                 }
                 break;
 
@@ -244,6 +250,24 @@ class ButtonHolder {
 
     }
 
+    public static void putTowersDown() {
+        if (Tower1InAir) {
+            Tower1InAir = false;
+            TowerDefense.coins += Tower1Price;
+        }
+        if (Tower2InAir) {
+            ButtonHolder.Tower2InAir = false;
+            TowerDefense.coins += Tower2Price;
+        }
+        if (Tower3InAir) {
+            ButtonHolder.Tower3InAir = false;
+            TowerDefense.coins += Tower3Price;
+        }
+//        if (Tower4InAir) {
+//        ButtonHolder.Tower4InAir = false;
+//        TowerDefence.coins += Tower4Price;
+//        }
+    }
 
     //for the buttons that need to be drawn, their physical details are here
     public static void drawButton(int num, Graphics g){
