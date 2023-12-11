@@ -28,3 +28,91 @@ I just have this here in case I need to go back to it at any point - Hena
 //                    tower.bullets.get(i).update(time);
 //                    System.out.println("g");
 //                }
+
+
+//    public Balloon determineLevel(int levelNum){
+//        //Would it be cleaner if we put switch cases here? - Hena
+//        Pair startPosition = Level.startPosition;
+//        //Level 1
+//        switch (levelNum){
+//            case 1:
+//                if (rank < 11) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                break;
+//            case 2:
+//                if (rank < 10) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank == 10) {
+//                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank < 15) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                break;
+//            case 3: //Level 3
+//                if (rank < 10) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank == 10) {
+//                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank < 15) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank == 15){
+//                    return new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank < 20) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                break;
+//            case 4:
+//                if (rank < 10) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank == 10) {
+//                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank < 15) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank == 15){
+//                    return new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank < 20) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank == 20){
+//                    return new Balloon(startPosition.x, startPosition.y, Color.yellow, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank < 25) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                break;
+//            case 5:
+//                if (rank < 10) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank == 10) {
+//                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank < 15) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank == 15){
+//                    return new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank < 20) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank == 20){
+//                    return new Balloon(startPosition.x, startPosition.y, Color.yellow, this.rank + 1,this.verticalStart);
+//                }
+//                else if (rank < 35) {
+//                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+//                }
+//        }
+//       return null;
+//    }
