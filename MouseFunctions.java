@@ -57,8 +57,6 @@ public class MouseFunctions implements MouseListener, MouseMotionListener {
         double y = e.getY();
         mouseX = x;
         mouseY = y;
-//        System.out.println("new X: " + mouseX + ", new Y: " + mouseY);
-
     }
 
 }
