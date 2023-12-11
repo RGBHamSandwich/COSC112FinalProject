@@ -89,7 +89,7 @@ public class Balloon implements Drawable {
         Random rand = new Random();
         int r = rand.nextInt(25,175);
         if(nextBalloon == null && position.y > r && position.x < 100){
-            determineLevel(levelNum);
+            nextBalloon = determineLevel(levelNum);
         }
         if(nextBalloon != null){
             nextBalloon.updateMap1(time,levelNum);
@@ -127,7 +127,7 @@ public class Balloon implements Drawable {
         Random rand = new Random();
         int r = rand.nextInt(25,175);
         if(nextBalloon == null && position.y > r && position.x < 100){
-            determineLevel(levelNum);
+            nextBalloon = determineLevel(levelNum);
         }
         if(nextBalloon != null){
             nextBalloon.updateMap2(time,levelNum);
@@ -223,7 +223,7 @@ public class Balloon implements Drawable {
         Random rand = new Random();
         int r = rand.nextInt(25,175);
         if(nextBalloon == null && position.x > r && (position.y < 450 && position.y > 350)){
-            determineLevel(levelNum);
+            nextBalloon = determineLevel(levelNum);
         }
         if(nextBalloon != null){
             nextBalloon.updateMap3(time,levelNum);
@@ -273,97 +273,6 @@ public class Balloon implements Drawable {
             pathCleared = true;
         }
     }
-
-    //controls the number of balloons in each level
-    public void determineLevel(int levelNum){
-        //Would it be cleaner if we put switch cases here? - Hena
-        Pair startPosition = Level.startPosition;
-        //Level 1
-        if(levelNum == 1) {
-            if (rank < 11) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-        }
-        //Level 2
-        if(levelNum == 2) {
-            if (rank < 10) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-            else if (rank == 10) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
-            }
-            else if (rank < 15) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-        }
-        //Level 3
-        if(levelNum == 3){
-            if (rank < 10) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-            else if (rank == 10) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
-            }
-            else if (rank < 15) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-            else if (rank == 15){
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
-            }
-            else if (rank < 20) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-        }
-        //Level 4
-        else if(levelNum == 4){
-            if (rank < 10) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-            else if (rank == 10) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
-            }
-            else if (rank < 15) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-            else if (rank == 15){
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
-            }
-            else if (rank < 20) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-            else if (rank == 20){
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, Color.yellow, this.rank + 1,this.verticalStart);
-            }
-            else if (rank < 25) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-        }
-        //Level 5
-        else if(levelNum >= 5){
-            if (rank < 10) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-            else if (rank == 10) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
-            }
-            else if (rank < 15) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-            else if (rank == 15){
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
-            }
-            else if (rank < 20) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-            else if (rank == 20){
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, Color.yellow, this.rank + 1,this.verticalStart);
-            }
-            else if (rank < 35) {
-                this.nextBalloon = new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
-            }
-        }
-    }
-
     //draws the balloon. Graphics differ based on map, recursively draws the subsequent balloons in the linked list
     @Override
     public void drawComponent(Graphics g){
@@ -417,5 +326,93 @@ public class Balloon implements Drawable {
             nextBalloon.isShot(bullet);
         }
         return false;
+    }
+    //controls the number of balloons in each level
+    public Balloon determineLevel(int levelNum){
+        //Would it be cleaner if we put switch cases here? - Hena
+        Pair startPosition = Level.startPosition;
+        //Level 1
+        switch (levelNum){
+            case 1:
+                if (rank < 11) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                break;
+            case 2:
+                if (rank < 10) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 10) {
+                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 15) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                break;
+            case 3: //Level 3
+                if (rank < 10) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 10) {
+                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 15) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 15){
+                    return new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 20) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                break;
+            case 4:
+                if (rank < 10) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 10) {
+                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 15) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 15){
+                    return new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 20) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 20){
+                    return new Balloon(startPosition.x, startPosition.y, Color.yellow, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 25) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                break;
+            case 5:
+                if (rank < 10) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 10) {
+                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 15) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 15){
+                    return new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 20) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 20){
+                    return new Balloon(startPosition.x, startPosition.y, Color.yellow, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 35) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+        }
+        //might need kiara to fact check this
+       return null;
     }
 }
