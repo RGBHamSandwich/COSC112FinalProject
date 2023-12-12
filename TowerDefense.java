@@ -13,7 +13,7 @@ public class TowerDefense extends JPanel {
     public static final int FPS = 60;
     public static int popped = 0;
     public static int lives = 20;
-    public static int coins = 300;
+    public static int coins = 325;
 
     //The original bug testing goat
     //static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
@@ -107,6 +107,8 @@ public class TowerDefense extends JPanel {
         else if (ButtonHolder.Tower2Placed) ButtonHolder.disableShop(g, 8);
         if (ButtonHolder.Tower3InAir) g.drawImage(ImageHolder.tower3,mouseXadj,mouseYadj,64,64,null);
         else if (ButtonHolder.Tower3Placed) ButtonHolder.disableShop(g, 8);
+        if (ButtonHolder.Tower4InAir) g.drawImage(ImageHolder.tower4,mouseXadj,mouseYadj,64,64,null);
+        else if (ButtonHolder.Tower4Placed) ButtonHolder.disableShop(g, 8);
 
 
 
@@ -154,7 +156,7 @@ public class TowerDefense extends JPanel {
         //sets the level number back to zero
         TowerDefense.level = new Level(0);
         TowerDefense.lives = 25;
-        TowerDefense.coins = 300;
+        TowerDefense.coins = 325;
         TowerDefense.popped = 0;
     }
 
@@ -168,6 +170,7 @@ public class TowerDefense extends JPanel {
             ButtonHolder.Tower1InAir = false;
             ButtonHolder.Tower2InAir = false;
             ButtonHolder.Tower3InAir = false;
+            ButtonHolder.Tower4InAir = false;
     }
 
 

@@ -64,13 +64,13 @@ public class Screen {
                 boxSize + spacing, 2*(boxSize - spacing), 2*(boxSize - spacing),null);
         if (!(ButtonHolder.Tower3InAir || ButtonHolder.Tower3Placed))g.drawImage(ImageHolder.tower3,width + spacing,
                 2 * (boxSize + spacing) + (2*boxSize - 12),2*(boxSize - spacing), 2*(boxSize - spacing),null);
-        g.drawImage(ImageHolder.tower4,width + (2*boxSize - spacing) + 2*spacing,
+        if (!(ButtonHolder.Tower4InAir || ButtonHolder.Tower4Placed))g.drawImage(ImageHolder.tower4,width + (2*boxSize - spacing) + 2*spacing,
                 2 * (boxSize + spacing) + (2*boxSize - 12), 2*(boxSize - spacing), 2*(boxSize - spacing),null);
         g.drawString(Integer.toString(TowerDefense.popped), width + boxSize*2 + 15,TowerDefense.HEIGHT - boxSize *3/2 + 15);
         g.drawString(ButtonHolder.Tower1Price + "",boxSize/4 + width + spacing + 30,2 * (3*boxSize/2 + spacing) + 15);
         g.drawString(ButtonHolder.Tower2Price + "",width + spacing + 2*boxSize + 50,2 * (3*boxSize/2 + spacing) + 15);
         g.drawString(ButtonHolder.Tower3Price + "",boxSize/4 + width + spacing + 30,2 * (3*boxSize/2 + spacing) + 5 + 3*boxSize);
-        g.drawString("????",width + spacing + 2*boxSize + 50,2 * (3*boxSize/2 + spacing) + 5 + 3*boxSize);
+        g.drawString(ButtonHolder.Tower4Price + "",width + spacing + 2*boxSize + 50,2 * (3*boxSize/2 + spacing) + 5 + 3*boxSize);
     }
 
     //draws the coin icon at a given position

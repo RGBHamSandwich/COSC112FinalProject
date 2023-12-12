@@ -18,7 +18,6 @@ public class Level {
             if (TowerDefense.map1Screen || TowerDefense.map2Screen) {
                 startPosition = new Pair(96, -20);
                 balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, true);
-                TowerDefense.createTowers(4, new Pair(300, 300));
             }
             else if (TowerDefense.map3Screen) {
                 startPosition = new Pair(-20, 416);
