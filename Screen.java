@@ -50,8 +50,11 @@ public class Screen {
         g.drawString(Integer.toString(TowerDefense.coins),width+boxSize*21/8,boxSize/2 + 20);
         //draws 6 coins in a grid.
         int spacing = 15;
-        for(int i = 1; i < 2; i++) {
+        for(int i = 1; i < 3; i++) {
             for(int j = 0; j < 3;j++) {
+                if(i == 2 && j > 0){
+                    break;
+                }
                 g.drawOval(width + (j)*boxSize + (j+1)*spacing, i * (boxSize + spacing +8) + (i-1)*(boxSize - 12), boxSize, boxSize);
                 drawCoin(g,width +(j)*boxSize + (j+1)*spacing - 5,(i+1) * (boxSize + spacing) + (i-1)*boxSize - 5);
             }
@@ -61,10 +64,12 @@ public class Screen {
         if (!(ButtonHolder.Tower1InAir || ButtonHolder.Tower1Placed)) g.drawImage(ImageHolder.tower1,width + spacing, boxSize + spacing +8, boxSize, boxSize,null);
         if (!(ButtonHolder.Tower2InAir || ButtonHolder.Tower2Placed))g.drawImage(ImageHolder.tower2,width + boxSize + 2*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
         if (!(ButtonHolder.Tower3InAir || ButtonHolder.Tower3Placed))g.drawImage(ImageHolder.tower3,width + 2*boxSize + 3*spacing, boxSize + spacing +8 , boxSize, boxSize,null);
+        g.drawImage(ImageHolder.tower4,width + spacing, 2*(boxSize + spacing +8)+ boxSize - 12, boxSize, boxSize,null);
         g.drawString(Integer.toString(TowerDefense.popped), width + boxSize*2 + 15,TowerDefense.HEIGHT - boxSize *3/2 + 15);
         g.drawString(ButtonHolder.Tower1Price + "",width + spacing + 25,2*boxSize + spacing + 32);
         g.drawString(ButtonHolder.Tower2Price + "",width + spacing + boxSize + 40,2*boxSize + spacing + 32);
         g.drawString(ButtonHolder.Tower3Price + "",width + spacing + 2*boxSize + 55,2*boxSize + spacing + 32);
+        g.drawString("????",width + spacing + 25,5*boxSize + spacing - 16);
     }
 
     //draws the coin icon at a given position
