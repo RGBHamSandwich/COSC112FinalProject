@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class TowerDefense extends JPanel {
@@ -21,6 +23,7 @@ public class TowerDefense extends JPanel {
     //these booleans will keep track of which screen is displaying (i.e. which screen should be drawn)
     Screen screen;
     static Level level;
+    static List<Tower> towers = new ArrayList<>();
 
     //If following booleans are true, draws a specific screen. Only one should be true at a time
     static boolean titleScreen = true;
@@ -114,6 +117,20 @@ public class TowerDefense extends JPanel {
         //this will end the game once you've run out of lives
         if(lives == 0){
             endGame();
+        }
+    }
+
+    public static void createTowers(int t, Pair p){
+        switch (t){
+            case 1:
+                towers.add(new PawnTower(p));
+                break;
+            case 2:
+                towers.add(new BishopTower(p));
+                break;
+            case 3:
+                towers.add(new RookTower(p));
+                break;
         }
     }
 

@@ -63,7 +63,7 @@ abstract class Tower implements Drawable{
 
 
 class PawnTower extends Tower {
-    public PawnTower(Pair p, Level l) {
+    public PawnTower(Pair p) {
         position = new Pair(p.x, p.y);
         bullets = new ArrayList<>();
         originalBulletPosition = new Pair(p.x + 31, p.y+30);

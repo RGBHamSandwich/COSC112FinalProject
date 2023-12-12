@@ -1,9 +1,9 @@
 import java.awt.*;
 
 public class Level {
-    PawnTower pawnTower;
-    RookTower rookTower;
-    BishopTower bishopTower;
+//    PawnTower pawnTower;
+//    RookTower rookTower;
+//    BishopTower bishopTower;
 
     //A linked list of balloons, keeps track of all balloons in a level
     Balloon balloon;
@@ -31,32 +31,25 @@ public class Level {
             }
         }
     }
-    public void createTowers(int t, Pair p){
-        switch (t){
-            case 1:
-                pawnTower = new PawnTower(p, this);
-                break;
-            case 2:
-                bishopTower = new BishopTower(p);
-                break;
-            case 3:
-                rookTower = new RookTower(p);
-                break;
-        }
-    }
+
 
     public void update(double time) {
         if (balloon != null) {
             if (TowerDefense.map1Screen) {
                 balloon.updateMap1(time, levelNum);
-                if (pawnTower != null){
-                    pawnTower.fireBullet(this, time);
-                }
-                if (bishopTower != null){
-                   bishopTower.fireBullet(this, time);
-                }
-                if (pawnTower != null){
-                    pawnTower.fireBullet(this, time);
+//                if (pawnTower != null){
+//                    pawnTower.fireBullet(this, time);
+//                }
+//                if (bishopTower != null){
+//                   bishopTower.fireBullet(this, time);
+//                }
+//                if (pawnTower != null){
+//                    pawnTower.fireBullet(this, time);
+//                }
+                for (Tower tower : TowerDefense.towers){
+                    if (tower != null){
+                        tower.fireBullet(this, time);
+                    }
                 }
                 //for some reason the update gets faster and slower?
 //                rookTower.fireBullet(this, time);
@@ -64,21 +57,21 @@ public class Level {
             }
             if (TowerDefense.map2Screen) {
                 balloon.updateMap2(time, levelNum);
-                if (pawnTower != null){
-                    pawnTower.fireBullet(this, time);
-                }
-                if (bishopTower != null){
-                    bishopTower.fireBullet(this, time);
-                }
+//                if (pawnTower != null){
+//                    pawnTower.fireBullet(this, time);
+//                }
+//                if (bishopTower != null){
+//                    bishopTower.fireBullet(this, time);
+//                }
             }
             if (TowerDefense.map3Screen) {
                 balloon.updateMap3(time, levelNum);
-                if (pawnTower != null){
-                    pawnTower.fireBullet(this, time);
-                }
-                if (bishopTower != null){
-                    bishopTower.fireBullet(this, time);
-                }
+//                if (pawnTower != null){
+//                    pawnTower.fireBullet(this, time);
+//                }
+//                if (bishopTower != null){
+//                    bishopTower.fireBullet(this, time);
+//                }
             }
             if (balloon.pathCleared) {
                 if (balloon.nextBalloon != null) {
@@ -99,14 +92,20 @@ public class Level {
         if (balloon != null) {
             balloon.drawComponent(g);
         }
-        if (pawnTower != null) {
-            pawnTower.drawComponent(g);
-        }
-        if (bishopTower != null){
-            bishopTower.drawComponent(g);
-        }
-        if (rookTower != null){
-            rookTower.drawComponent(g);
+//        if (pawnTower != null) {
+//            pawnTower.drawComponent(g);
+//        }
+//        if (bishopTower != null){
+//            bishopTower.drawComponent(g);
+//        }
+//        if (rookTower != null){
+//            rookTower.drawComponent(g);
+//        }
+
+        for (Tower tower : TowerDefense.towers){
+            if (tower != null){
+                tower.drawComponent(g);
+            }
         }
     }
 }
