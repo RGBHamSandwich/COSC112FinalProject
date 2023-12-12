@@ -60,7 +60,7 @@ class ButtonHolder {
     static boolean Tower3InAir;
     static boolean Tower3Placed;
     static int Tower3Price = 325;
-    static Button shop11;
+    static Button shop11 = new Button(0, 0, 0, 0);
 
 
 
@@ -87,8 +87,6 @@ class ButtonHolder {
 
     //this is the first step in deciding if a button has been clicked and what to do about it
     public static void handleClick(double x, double y) {
-        boolean anyTowerInAir = false;
-//        if (Tower1InAir || Tower2InAir || Tower3InAir || Tower4InAir) anyTowerInAir = true;
         //this section is dense, but it ensures that buttons are only clicked when the appropriate screen is showing
         //it also keeps most of the conditionals confined to one space so "ifClicked" is more straightforward for all of us
 
@@ -113,7 +111,7 @@ class ButtonHolder {
             //this detects a "start level" click
             if(checkClick(x, y, buttonArray[4])) ButtonHolder.ifClicked(4);
             //if a tower is in-air, this detects if it will be placed
-            if(anyTowerInAir && checkClick(x, y, buttonArray[7])) ButtonHolder.ifClicked(7);
+            if(anyTowerInAir() && checkClick(x, y, buttonArray[7])) ButtonHolder.ifClicked(7);
             //these detect clicks on the shop buttons; Since this is a for loop, we can keep adding shop buttons without editing this part
             for (int i = 8; i < buttonArray.length; i++) {
                 Button button = buttonArray[i];
@@ -302,6 +300,11 @@ class ButtonHolder {
 
         }
 
+    }
+
+    public static boolean anyTowerInAir() {
+        if (Tower1InAir || Tower2InAir || Tower3InAir) return true;
+        else return false;
     }
 
     //when a tower is placed, this will place a graphic over it to show that it cannot be bought again
