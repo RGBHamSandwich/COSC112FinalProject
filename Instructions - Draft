@@ -32,4 +32,5 @@ We can add also specific details to compensate for features we don't add, such a
                 Placing a tower on a path doesn't block balloons; they'll just float past you!
                 Every tower has it's own firing pattern—think about how a chess piece attacks!
                 You can only place one of each tower!
-- etc
+- map has to finish loading: "If you pop all of the balloons, there may be a brief waiting period before
+               you can start the next level."

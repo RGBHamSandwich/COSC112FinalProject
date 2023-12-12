@@ -81,7 +81,8 @@ class ButtonHolder {
         buttonArray[10] = shop10;
         buttonArray[11] = shop11;
 //        buttonArray[12] = instructions12;
-        //we'll add more buttons here
+//        buttonArray[13] = back13;
+        //we can add more buttons here
 
     }
 
