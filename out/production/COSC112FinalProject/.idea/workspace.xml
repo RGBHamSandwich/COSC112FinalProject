@@ -71,12 +71,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Button.java</url>
-          <line>196</line>
+          <line>194</line>
           <option name="timeStamp" value="165" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/TowerDefense.java</url>
           <line>173</line>
+          <line>159</line>
           <option name="timeStamp" value="166" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -131,40 +132,34 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Button.java</url>
-          <line>220</line>
+          <line>218</line>
           <option name="timeStamp" value="183" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Button.java</url>
-          <line>290</line>
+          <line>288</line>
           <option name="timeStamp" value="184" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Button.java</url>
-          <line>289</line>
+          <line>287</line>
           <option name="timeStamp" value="185" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Button.java</url>
-          <line>291</line>
+          <line>289</line>
           <option name="timeStamp" value="186" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Button.java</url>
-          <line>292</line>
+          <line>290</line>
           <option name="timeStamp" value="187" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/Button.java</url>
-          <line>157</line>
+          <line>155</line>
           <properties field="placeTower7" class="ButtonHolder" />
           <option name="timeStamp" value="164" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/Button.java</url>
-          <line>63</line>
-          <properties field="shop11" class="ButtonHolder" />
-          <option name="timeStamp" value="182" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

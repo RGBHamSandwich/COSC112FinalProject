@@ -19,6 +19,11 @@ Towers:
 
     If you change your mind about the tower, you can click on the empty bubble to put it back in the shop.
 
+    Each tower has a unique firing pattern:
+    Pawns fire one stream of bullets directly up.
+    Bishops fire to the ____ and ____.
+    Rooks fire up, down, left, and right.
+    [insert queen firing pattern if needed]
 
 
 

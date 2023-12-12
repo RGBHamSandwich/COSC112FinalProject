@@ -65,7 +65,7 @@ class ButtonHolder {
 
 
     public ButtonHolder() {
-        buttonArray = new Button[13]; // here we can edit the number of buttons
+        buttonArray = new Button[12]; // here we can edit the number of buttons
 
         //here's all of the the buttons being slotted into the array so we can reference them easier by cases
         buttonArray[0] = start0;
