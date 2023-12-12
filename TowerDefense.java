@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 
 public class TowerDefense extends JPanel {
@@ -133,6 +134,10 @@ public class TowerDefense extends JPanel {
             case 3:
                 System.out.println(8);
                 towers.add(new RookTower(p));
+                break;
+            case 4:
+                System.out.println(7);
+                towers.add(new QueenTower(p));
                 break;
         }
     }

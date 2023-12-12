@@ -18,7 +18,7 @@ abstract class Tower implements Drawable{
                     temp.radius = 0;
                     bullets.get(bullet).radius = 0;
                     TowerDefense.popped++;
-                    TowerDefense.coins += 15;
+                    TowerDefense.coins += 10;
                     if (temp.nextBalloon == null) {
                         temp = new Balloon(l.startPosition.x, l.startPosition.y, temp.color, temp.rank + 1, true);
 //                        temp = temp.determineLevel(l.levelNum);
@@ -66,24 +66,13 @@ class BishopTower extends Tower {
         position = new Pair(p.x, p.y);
         originalBulletPosition = new Pair(position.x+30, position.y+30);
         bullets = new ArrayList<>();
-        int randomFireDirection = 1 + (int)(Math.random()*2);
-        switch (randomFireDirection){
-            case 1:
-                bullets.add(new Bullet(originalBulletPosition, new Pair(-300, 300)));
-                bullets.add(new Bullet(originalBulletPosition, new Pair(300, -300)));
-                break;
-            case 2:
-                bullets.add(new Bullet(originalBulletPosition, new Pair(300, 300)));
-                bullets.add(new Bullet(originalBulletPosition, new Pair(-300, -300)));
-                break;
-//            case 3:
-//                bullets.add(new Bullet(originalBulletPosition, new Pair(250, -250)));
-//                bullets.add(new Bullet(originalBulletPosition, new Pair(-250, -250)));
-//                break;
-//            case 4:
-//                bullets.add(new Bullet(originalBulletPosition, new Pair(-250, 250)));
-//                bullets.add(new Bullet(originalBulletPosition, new Pair(-250, -250)));
-//                break;
+        if (Math.random() < 0.5){
+            bullets.add(new Bullet(originalBulletPosition, new Pair(-300, 300)));
+            bullets.add(new Bullet(originalBulletPosition, new Pair(300, -300)));
+        }
+        else {
+            bullets.add(new Bullet(originalBulletPosition, new Pair(300, 300)));
+            bullets.add(new Bullet(originalBulletPosition, new Pair(-300, -300)));
         }
     }
 
@@ -108,5 +97,26 @@ class RookTower extends Tower{
     public void drawComponent(Graphics g) {
         super.drawComponent(g);
         g.drawImage(ImageHolder.tower3,(int)position.x,(int)position.y,64,64,null);
+    }
+}
+class QueenTower extends Tower{
+    public QueenTower(Pair p){
+        position = new Pair(p.x, p.y);
+        originalBulletPosition = new Pair(position.x+30, position.y+30);
+        bullets = new ArrayList<>();
+        bullets.add(new Bullet(originalBulletPosition, new Pair(-400, 0)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(400, 0)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(0, 400)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(0, -400)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(-300, 300)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(300, -300)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(300, 300)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(-300, -300)));
+    }
+    @Override
+    public void drawComponent(Graphics g){
+        super.drawComponent(g);
+        g.drawImage(ImageHolder.tower4,(int)position.x,(int)position.y,64,64,null);
+
     }
 }
