@@ -16,6 +16,7 @@ public class ImageHolder {
     static Image tower1 = Toolkit.getDefaultToolkit().getImage("images/Tower1.png");
     static Image tower2 = Toolkit.getDefaultToolkit().getImage("images/Tower2.png");
     static Image tower3 = Toolkit.getDefaultToolkit().getImage("images/Tower3.png");
+    static Image tower4 = Toolkit.getDefaultToolkit().getImage("images/Tower4.png");
     static Image titleScreen = Toolkit.getDefaultToolkit().getImage("images/TitleScreen.png");
     static Image gameOver = Toolkit.getDefaultToolkit().getImage("images/GameOver.png");
     static Image shop = Toolkit.getDefaultToolkit().getImage("images/Shop.png");
