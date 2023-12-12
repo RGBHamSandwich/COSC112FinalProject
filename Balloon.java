@@ -273,63 +273,9 @@ public class Balloon implements Drawable {
             pathCleared = true;
         }
     }
-    //draws the balloon. Graphics differ based on map, recursively draws the subsequent balloons in the linked list
-    @Override
-    public void drawComponent(Graphics g){
-        if(color == Color.red){
-            g.drawImage(ImageHolder.redBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
-                    radius * 2, radius * 2,null);
-        }
-        else if(color == Color.yellow){
-            if(TowerDefense.map2Screen){
-                g.drawImage(ImageHolder.pastelYellowBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
-                        radius * 2, radius * 2,null);
-            }
-            else {
-                g.drawImage(ImageHolder.yellowBalloon, (int) (position.x - radius + xMargin), (int) (position.y - radius + yMargin),
-                        radius * 2, radius * 2, null);
-            }
-        }
-        else if(color == Color.blue){
-            if(TowerDefense.map2Screen){
-                g.drawImage(ImageHolder.pastelBlueBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
-                        radius * 2, radius * 2,null);
-            }
-            else {
-                g.drawImage(ImageHolder.blueBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
-                        radius * 2, radius * 2,null);
-            }
-        }
-        else if(color == Color.green){
-            if(TowerDefense.map2Screen){
-                g.drawImage(ImageHolder.pastelGreenBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
-                        radius * 2, radius * 2,null);
-            }
-            else {
-                g.drawImage(ImageHolder.greenBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
-                        radius * 2, radius * 2,null);
-            }
-        }
-        if (nextBalloon != null) {
-            nextBalloon.drawComponent(g);
-        }
-    }
 
-    //This method checks if a balloon has been popped by a bullet, returns whether it has been
-    public boolean isShot(Bullet bullet){
-        if ((bullet.getPosition().x > this.position.x-radius-2) && (bullet.getPosition().x < position.x+radius-2)){
-            if ((bullet.getPosition().y > this.position.y-radius-2) && (bullet.getPosition().y < position.y+radius-2)){
-                return true;
-            }
-        }
-        if (nextBalloon != null){
-            nextBalloon.isShot(bullet);
-        }
-        return false;
-    }
     //controls the number of balloons in each level
     public Balloon determineLevel(int levelNum){
-        //Would it be cleaner if we put switch cases here? - Hena
         Pair startPosition = Level.startPosition;
         //Level 1
         switch (levelNum){
@@ -412,7 +358,60 @@ public class Balloon implements Drawable {
                     return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
                 }
         }
-        //might need kiara to fact check this
-       return null;
+        return null;
+    }
+
+    //draws the balloon. Graphics differ based on map, recursively draws the subsequent balloons in the linked list
+    @Override
+    public void drawComponent(Graphics g){
+        if(color == Color.red){
+            g.drawImage(ImageHolder.redBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                    radius * 2, radius * 2,null);
+        }
+        else if(color == Color.yellow){
+            if(TowerDefense.map2Screen){
+                g.drawImage(ImageHolder.pastelYellowBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+            else {
+                g.drawImage(ImageHolder.yellowBalloon, (int) (position.x - radius + xMargin), (int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2, null);
+            }
+        }
+        else if(color == Color.blue){
+            if(TowerDefense.map2Screen){
+                g.drawImage(ImageHolder.pastelBlueBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+            else {
+                g.drawImage(ImageHolder.blueBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+        }
+        else if(color == Color.green){
+            if(TowerDefense.map2Screen){
+                g.drawImage(ImageHolder.pastelGreenBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+            else {
+                g.drawImage(ImageHolder.greenBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
+                        radius * 2, radius * 2,null);
+            }
+        }
+        if (nextBalloon != null) {
+            nextBalloon.drawComponent(g);
+        }
+    }
+    //This method checks if a balloon has been popped by a bullet, returns whether it has been
+    public boolean isShot(Bullet bullet){
+        if ((bullet.getPosition().x > this.position.x-radius-2) && (bullet.getPosition().x < position.x+radius-2)){
+            if ((bullet.getPosition().y > this.position.y-radius-2) && (bullet.getPosition().y < position.y+radius-2)){
+                return true;
+            }
+        }
+        if (nextBalloon != null){
+            nextBalloon.isShot(bullet);
+        }
+        return false;
     }
 }

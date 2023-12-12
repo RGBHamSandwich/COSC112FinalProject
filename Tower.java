@@ -6,15 +6,8 @@ import java.util.List;
 abstract class Tower implements Drawable{
     Pair position;
     //determine perspective, and use these if the base of the tower is different from where the bullets will be coming from.
-//    int type;
     List<Bullet> bullets;
-    Pair ogBulletVel;
     Pair originalBulletPosition;
-
-    //implement a purchase/upgrade button for each tower?
-    public Pair determineVelocity(Pair target){
-        return new Pair((target.x-position.x), (target.y-position.y));
-    }
 
     public void fireBullet(Level l, double time) {
         for (int bullet = 0; bullet < this.bullets.size(); bullet++){
@@ -25,13 +18,9 @@ abstract class Tower implements Drawable{
                     temp.radius = 0;
                     bullets.get(bullet).radius = 0;
                     TowerDefense.popped++;
-                    TowerDefense.coins++;
-                    this.bullets.get(bullet).damage--;
+                    TowerDefense.coins += 15;
                     if (temp.nextBalloon == null) {
-                        //this part I need Kiara to look at cuz rn im just creating rank 1 balloons - Hena
                         temp = new Balloon(l.startPosition.x, l.startPosition.y, temp.color, temp.rank + 1, true);
-                        //(i wanna mess around w this)
-
 //                        temp = temp.determineLevel(l.levelNum);
                     } else {
                         temp = temp.nextBalloon;
@@ -39,18 +28,13 @@ abstract class Tower implements Drawable{
                 }
                 temp = temp.nextBalloon;
             }
-
-            //instead of some arbitrary number (10) I need to make a variable that keeps track of the og position of the bullet
-            if (Math.sqrt(Math.pow(bullets.get(bullet).getPosition().x - originalBulletPosition.x, 2) + Math.pow(bullets.get(bullet).getPosition().y - originalBulletPosition.y, 2)) > 300){
-                bullets.add(new Bullet(originalBulletPosition, 1, bullets.get(bullet).getVelocity()));
+            if (Math.sqrt(Math.pow(bullets.get(bullet).getPosition().x - originalBulletPosition.x, 2) + Math.pow(bullets.get(bullet).getPosition().y - originalBulletPosition.y, 2)) > 400){
+                bullets.add(new Bullet(originalBulletPosition, bullets.get(bullet).getVelocity()));
                 bullets.remove(bullet);
             }
             this.bullets.get(bullet).update(time);
         }
     }
-//    public abstract void addBullets(int index);
-
-
     @Override
     public void drawComponent(Graphics g) {
         for (Bullet bullet : bullets){
@@ -67,20 +51,14 @@ class PawnTower extends Tower {
         position = new Pair(p.x, p.y);
         bullets = new ArrayList<>();
         originalBulletPosition = new Pair(p.x + 31, p.y+30);
-        //need a method that determines the og velocity of the bullet
-        bullets.add(new Bullet(originalBulletPosition, 1, new Pair(0, -350)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(0, -400)));
 
     }
-    @Override
-    public void fireBullet(Level l, double time) {
-        super.fireBullet(l, time);
-    }//this might be unnecessary
     @Override
     public void drawComponent(Graphics g) {
         super.drawComponent(g);
         g.drawImage(ImageHolder.tower1,(int)position.x,(int)position.y,64,64,null);
     }
-
 }
 
 class BishopTower extends Tower {
@@ -88,24 +66,24 @@ class BishopTower extends Tower {
         position = new Pair(p.x, p.y);
         originalBulletPosition = new Pair(position.x+30, position.y+30);
         bullets = new ArrayList<>();
-        int randomFireDirection = 1 + (int)(Math.random()*4);
+        int randomFireDirection = 1 + (int)(Math.random()*2);
         switch (randomFireDirection){
             case 1:
-                bullets.add(new Bullet(originalBulletPosition, 1, new Pair(-250, 250)));
-                bullets.add(new Bullet(originalBulletPosition, 1, new Pair(250, 250)));
+                bullets.add(new Bullet(originalBulletPosition, new Pair(-300, 300)));
+                bullets.add(new Bullet(originalBulletPosition, new Pair(300, -300)));
                 break;
             case 2:
-                bullets.add(new Bullet(originalBulletPosition, 1, new Pair(250, 250)));
-                bullets.add(new Bullet(originalBulletPosition, 1, new Pair(250, -250)));
+                bullets.add(new Bullet(originalBulletPosition, new Pair(300, 300)));
+                bullets.add(new Bullet(originalBulletPosition, new Pair(-300, -300)));
                 break;
-            case 3:
-                bullets.add(new Bullet(originalBulletPosition, 1, new Pair(250, -250)));
-                bullets.add(new Bullet(originalBulletPosition, 1, new Pair(-250, -250)));
-                break;
-            case 4:
-                bullets.add(new Bullet(originalBulletPosition, 1, new Pair(-250, 250)));
-                bullets.add(new Bullet(originalBulletPosition, 1, new Pair(-250, -250)));
-                break;
+//            case 3:
+//                bullets.add(new Bullet(originalBulletPosition, new Pair(250, -250)));
+//                bullets.add(new Bullet(originalBulletPosition, new Pair(-250, -250)));
+//                break;
+//            case 4:
+//                bullets.add(new Bullet(originalBulletPosition, new Pair(-250, 250)));
+//                bullets.add(new Bullet(originalBulletPosition, new Pair(-250, -250)));
+//                break;
         }
     }
 
@@ -121,10 +99,10 @@ class RookTower extends Tower{
         position = new Pair(p.x, p.y);
         originalBulletPosition = new Pair(position.x+30, position.y+30);
         bullets = new ArrayList<>();
-        bullets.add(new Bullet(originalBulletPosition, 1, new Pair(-350, 0)));
-        bullets.add(new Bullet(originalBulletPosition, 1, new Pair(350, 0)));
-        bullets.add(new Bullet(originalBulletPosition, 1, new Pair(0, 350)));
-        bullets.add(new Bullet(originalBulletPosition, 1, new Pair(0, -350)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(-400, 0)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(400, 0)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(0, 400)));
+        bullets.add(new Bullet(originalBulletPosition, new Pair(0, -400)));
     }
     @Override
     public void drawComponent(Graphics g) {
