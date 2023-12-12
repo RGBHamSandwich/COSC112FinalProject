@@ -357,6 +357,28 @@ public class Balloon implements Drawable {
                 else if (rank < 35) {
                     return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
                 }
+            default:
+                if (rank < 10) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 10) {
+                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 25) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 25){
+                    return new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 30) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
+                else if (rank == 30){
+                    return new Balloon(startPosition.x, startPosition.y, Color.yellow, this.rank + 1,this.verticalStart);
+                }
+                else if (rank < 45) {
+                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                }
         }
         return null;
     }
