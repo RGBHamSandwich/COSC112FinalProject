@@ -123,12 +123,15 @@ public class TowerDefense extends JPanel {
     public static void createTowers(int t, Pair p){
         switch (t){
             case 1:
+                System.out.println(0);
                 towers.add(new PawnTower(p));
                 break;
             case 2:
+                System.out.println(9);
                 towers.add(new BishopTower(p));
                 break;
             case 3:
+                System.out.println(8);
                 towers.add(new RookTower(p));
                 break;
         }
