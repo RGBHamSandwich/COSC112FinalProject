@@ -48,19 +48,19 @@ class ButtonHolder {
     static Button playAgain6 = new Button(WIDTH /2-30,HEIGHT*5/8 - 20, 85, 30);
     static Button placeTower7 = new Button(0,0,768,768);
     //8 is the top-left shop button, and the tower number increases from left to right
-    static Button shop8 = new Button(782, 87, 65, 100);
+    static Button shop8 = new Button(773, 79, 98, 98);
     static boolean Tower1InAir;
     static boolean Tower1Placed;
     static int Tower1Price = 100;
-    static Button shop9 = new Button(860, 87, 65, 100);
+    static Button shop9 = new Button(911, 79, 98, 98);
     static boolean Tower2InAir;
     static boolean Tower2Placed;
     static int Tower2Price = 200;
-    static Button shop10 = new Button(938, 87, 65, 100);
+    static Button shop10 = new Button(938, 79, 98, 98);
     static boolean Tower3InAir;
     static boolean Tower3Placed;
     static int Tower3Price = 325;
-    static Button shop11 = new Button(0, 0, 0, 0);
+    static Button shop11 = new Button(0, 0, 98, 98);
 
 
 
