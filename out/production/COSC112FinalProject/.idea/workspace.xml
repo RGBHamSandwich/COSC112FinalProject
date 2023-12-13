@@ -70,11 +70,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Button.java</url>
-          <line>201</line>
-          <option name="timeStamp" value="165" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/TowerDefense.java</url>
           <line>123</line>
           <option name="timeStamp" value="170" />
@@ -123,17 +118,6 @@
           <url>file://$PROJECT_DIR$/TowerDefense.java</url>
           <line>148</line>
           <option name="timeStamp" value="181" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Button.java</url>
-          <line>228</line>
-          <option name="timeStamp" value="183" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/Button.java</url>
-          <line>162</line>
-          <properties field="placeTower7" class="ButtonHolder" />
-          <option name="timeStamp" value="164" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
