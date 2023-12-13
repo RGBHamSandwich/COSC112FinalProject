@@ -1,36 +1,38 @@
 I think that we should have an instructions page ~
 
 Intro:
-    Welcome to Amherst Tower Defense!
+    ** Welcome to Amherst Tower Defense!
 
-    In our game, you'll be using towers—each representing a distinct chess piece—that unleash a barrage of
-    bullets to defend against incoming waves of colorful balloons.
+    **In our game, you'll be using towers—each representing a distinct chess piece—that unleash a barrage of
+    **bullets to defend against incoming waves of colorful balloons.
 
-    First, you'll choose a map!
+    **First, you'll choose a map!
 
 Towers:
-    Once you've chosen your map, it's time to think about your strategy!
+    **Once you've chosen your map, it's time to think about your strategy!
 
-    On the right side of the screen, you'll see a shop. There, you can use your coins to buy towers to pop
-    oncoming balloons.
+    **On the right side of the screen, you'll see a shop. There, you can use your coins to buy towers to pop
+    **oncoming balloons.
 
-    If you have enough coins, simply left-click on a tower to pick it up! Then you can place it on the map as
-    you please. [insert optional notion about the map grid]
+    **If you have enough coins, simply left-click on a tower to pick it up! Then you can place it on the map as
+    **you please. Check out the tower and balloon designs to the right!
 
-    If you change your mind about the tower, you can click on the empty bubble to put it back in the shop.
+    [insert optional notion about the map grid]
+
+    **If you change your mind about the tower, you can click on the empty bubble in the shop to put it back.
 
     Each tower has a unique firing pattern:
     Pawns fire one stream of bullets directly up.
-    Bishops fire to the ____ and ____.
+    Bishops fire to the upper right and lower left.
     Rooks fire up, down, left, and right.
-    [insert queen firing pattern if needed]
+    Queens fire in all eight possible directions.
 
-
+========================================================================================================================
 
 We can add also specific details to compensate for features we don't add, such as:
-- the map grid: "While you can technically place your towers anywhere, keep a couple of things in mind:
+*** the map grid: "While you can technically place your towers anywhere, keep a couple of things in mind:
                 Placing a tower on a path doesn't block balloons; they'll just float past you!
                 Every tower has it's own firing pattern—think about how a chess piece attacks!
-                You can only place one of each tower!
+
 - map has to finish loading: "If you pop all of the balloons, there may be a brief waiting period before
                you can start the next level."
