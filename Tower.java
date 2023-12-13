@@ -13,6 +13,11 @@ class Tower implements Drawable{
     //further than tower in the initial draw
     Pair originalBulletPosition;
 
+    public Tower(Pair p){
+        position = new Pair(p.x, p.y);
+        originalBulletPosition = new Pair(p.x + 31, p.y+30); //centers (basically hides it) bullet in reference to tower
+    }
+
     //fire bullet is the method in which we both update the bullets of each tower, but also the method in which the bullets
     //interact with the balloons
     public void fireBullet(Level l, double time) {
@@ -56,9 +61,8 @@ class Tower implements Drawable{
 //all towers behave as their respective piece's movement
 class PawnTower extends Tower {     //our cheapest, most basic tower.
     public PawnTower(Pair p) {
-        position = new Pair(p.x, p.y);
+        super(p);
         bullets = new ArrayList<>();
-        originalBulletPosition = new Pair(p.x + 31, p.y+30); //centers (basically hides it) bullet in reference to tower
         bullets.add(new Bullet(originalBulletPosition, new Pair(0, -400))); //all bullets shoot up
 
     }
@@ -71,8 +75,7 @@ class PawnTower extends Tower {     //our cheapest, most basic tower.
 
 class BishopTower extends Tower {
     public BishopTower(Pair p){
-        position = new Pair(p.x, p.y);
-        originalBulletPosition = new Pair(position.x+30, position.y+30);
+        super(p);
         bullets = new ArrayList<>();
         //since i wanted the number of bullets to increase with each tower, the bishop's bullet's velocity is randomly determined
         //to account for both ways of movement w/o shooting 4 bullets
@@ -95,8 +98,7 @@ class BishopTower extends Tower {
 }
 class RookTower extends Tower{
     public RookTower(Pair p){
-        position = new Pair(p.x, p.y);
-        originalBulletPosition = new Pair(position.x+30, position.y+30);
+        super(p);
         bullets = new ArrayList<>(); //shoots all 4 ways (vertical and horizontal)
         bullets.add(new Bullet(originalBulletPosition, new Pair(-400, 0)));
         bullets.add(new Bullet(originalBulletPosition, new Pair(400, 0)));
@@ -111,8 +113,7 @@ class RookTower extends Tower{
 }
 class QueenTower extends Tower{
     public QueenTower(Pair p){
-        position = new Pair(p.x, p.y);
-        originalBulletPosition = new Pair(position.x+30, position.y+30);
+        super(p);
         bullets = new ArrayList<>(); //shoots all 8 directions
         bullets.add(new Bullet(originalBulletPosition, new Pair(-400, 0)));
         bullets.add(new Bullet(originalBulletPosition, new Pair(400, 0)));
