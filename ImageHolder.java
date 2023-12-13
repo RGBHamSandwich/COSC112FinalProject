@@ -22,4 +22,5 @@ public class ImageHolder {
     static Image shop = Toolkit.getDefaultToolkit().getImage("images/Shop.png");
     static Image coin = Toolkit.getDefaultToolkit().getImage("images/Coin.png");
     static Image heart = Toolkit.getDefaultToolkit().getImage("images/Heart.png");
+    static Image levelComplete = Toolkit.getDefaultToolkit().getImage("images/LevelComplete.png");
 }
