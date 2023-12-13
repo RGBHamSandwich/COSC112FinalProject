@@ -179,7 +179,7 @@ class ButtonHolder {
 
             //this is the "start level" button
             case 4:
-                if (TowerDefense.level.balloon == null) {
+                if (TowerDefense.level.balloon == null /*TowerDefense.level.balloons.isEmpty()*/) {
                     System.out.println(TowerDefense.level.levelNum);
                     TowerDefense.level.levelNum++;
                     TowerDefense.level = new Level(TowerDefense.level.levelNum);

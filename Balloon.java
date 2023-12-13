@@ -91,6 +91,9 @@ public class Balloon implements Drawable {
         if(nextBalloon == null && position.y > r && position.x < 100){
             nextBalloon = determineLevel(levelNum);
         }
+//        if(position.y > r && position.x < 100){
+//            TowerDefense.level.balloons.add(determineLevel(levelNum));
+//        }
         if(nextBalloon != null){
             nextBalloon.updateMap1(time,levelNum);
         }
