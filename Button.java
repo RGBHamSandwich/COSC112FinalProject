@@ -159,44 +159,22 @@ class ButtonHolder {
             case 1:
                 TowerDefense.chooseMapScreen = false;
                 TowerDefense.map1Screen = true;
-                System.out.println("Moving to map 1");
-                System.out.println(TowerDefense.lives);
                 break;
-
             case 2:
                 TowerDefense.chooseMapScreen = false;
                 TowerDefense.map2Screen = true;
-                System.out.println("Moving to map 2");
-                System.out.println(TowerDefense.lives);
                 break;
 
             case 3:
                 TowerDefense.chooseMapScreen = false;
                 TowerDefense.map3Screen = true;
-                System.out.println("Moving to map 3");
-                System.out.println(TowerDefense.lives);
                 break;
 
             //this is the "start level" button
             case 4:
                 if (TowerDefense.level.balloon == null /*TowerDefense.level.balloons.isEmpty()*/) {
-                    System.out.println(TowerDefense.level.levelNum);
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    if (TowerDefense.level.balloon == null) {
-                        TowerDefense.level.levelNum++;
-                        TowerDefense.level = new Level(TowerDefense.level.levelNum);
-                    }
-=======
-                    TowerDefense.level.levelNum++;
-                    TowerDefense.level = new Level(TowerDefense.level.levelNum);
-                    System.out.println(TowerDefense.level.levelNum);
->>>>>>> parent of ec8341c (Merge branch 'main' of https://github.com/RGBHamSandwich/COSC112FinalProject)
-=======
-                    TowerDefense.level.levelNum++;
-                    TowerDefense.level = new Level(TowerDefense.level.levelNum);
-                    System.out.println(TowerDefense.level.levelNum);
->>>>>>> parent of ec8341c (Merge branch 'main' of https://github.com/RGBHamSandwich/COSC112FinalProject)
+                   TowerDefense.level.levelNum++;
+                   TowerDefense.level = new Level(TowerDefense.level.levelNum);
                 }
                 break;
             //this prompts the "play again" button to pop up
@@ -206,7 +184,6 @@ class ButtonHolder {
 
             //this places a tower if you're holding one
             case 7:
-                System.out.println("Ideally, the tower would be placed where you just clicked.");
                 if (Tower1InAir) {
                     TowerDefense.createTowers(1, new Pair(mouseXadj, mouseYadj));
                     Tower1InAir = false;
@@ -245,7 +222,6 @@ class ButtonHolder {
                     TowerDefense.coins += price;
                 }
                 break;
-
             case 10:
                 price = Tower3Price;
                 if (!(Tower3Placed || Tower3InAir) && price <= TowerDefense.coins) {
@@ -318,10 +294,6 @@ class ButtonHolder {
                     g.drawRect((int) position.x, (int) position.y, (int) dimension.x, (int) dimension.y);
                     g.drawString("Play again?", (int) position.x + 10, (int) position.y + 20);
                     break;
-
-//            case 5:
-//                break;
-
             }
 
         }
@@ -340,4 +312,3 @@ class ButtonHolder {
         }
 
     }
-}
