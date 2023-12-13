@@ -34,14 +34,23 @@ public class Screen {
         //this is drawing the first map
         drawMap1Screen(g,left + 650,top,smallBoxSize*3,smallBoxSize*3);
 
+        //these ints are to help with the balloon spacing
+        int balloonleft = left + 640;
+        int balloontop = top + smallBoxSize*3 + 40;
         g.drawString("Once you've chosen your map, it's time to think about your strategy!", left, top + 7*inc);
         g.drawString("On the right side of the screen, you'll see a shop. There, you can use your coins to buy towers to pop", left, top + 8*inc);
-        g.drawString("oncoming balloons. Check out the tower and balloon designs to the right!", left, top + 9*inc);
+        g.drawString("oncoming balloons.  As you pop balloons, you'll get more coins! Check out our tower and balloon designs!", left, top + 9*inc);
         g.drawString("If you have enough coins, simply left-click on a tower to pick it up! Then you can place it on the map as\n", left, top + 10*inc);
         g.drawString("you please.", left, top + 11*inc);
-        //this is drawing the balloons
-        g.fillRect(left + 640, top + smallBoxSize*3 + 40, smallBoxSize * 3 + 20, 65);
-        g.drawImage(ImageHolder.redBalloon, left + 640, top + smallBoxSize*3 + 40, null);
+        //this is drawing the balloons and the box they're on
+        g.fillRect(balloonleft + 10, balloontop, smallBoxSize * 3, 65);
+        g.drawImage(ImageHolder.pastelGreenBalloon, balloonleft + 6*inc, balloontop, null);
+        g.drawImage(ImageHolder.pastelYellowBalloon, balloonleft + 5*inc, balloontop, null);
+        g.drawImage(ImageHolder.pastelBlueBalloon, balloonleft + 4*inc, balloontop, null);
+        g.drawImage(ImageHolder.yellowBalloon, balloonleft + 3*inc, balloontop, null);
+        g.drawImage(ImageHolder.greenBalloon, balloonleft + 2*inc, balloontop, null);
+        g.drawImage(ImageHolder.blueBalloon, balloonleft + 1*inc, balloontop, null);
+        g.drawImage(ImageHolder.redBalloon, balloonleft, balloontop, null);
 
         g.drawString("While you can technically place your towers anywhere, keep a couple of things in mind:", left, top + 13*inc);
         g.drawString("Placing a tower on a path doesn't block balloons; they'll just float past you!", left, top + 14*inc);
@@ -52,9 +61,35 @@ public class Screen {
         g.drawString("The descriptions of the towers' firing patterns are below, if you want to take a look.", left, top + 19*inc);
         g.drawString("That should be about everything you need to know! Good luck!", left, top + 20*inc);
 
+        //here are the graphics of the towers and their descriptions
+        //these are more integers that are only used to help us keep
+        int towertop = balloontop + 120;
+        int towerinc = 20;
+        int stringleft = balloonleft + 60;
+        int rowinc = 60;
+        g.fillRect(balloonleft, towertop - 26, 200, 330);
         ButtonHolder.drawButton(0, g);
 
+        g.setColor(Color.black);
+        g.drawImage(ImageHolder.tower1, balloonleft, towertop - 15, null);
+        g.drawString("This is the Pawn Tower.", stringleft, towertop);
+        g.drawString("Pawns fire one stream", stringleft, towertop + towerinc);
+        g.drawString("     of bullets up.", stringleft, towertop + 2*towerinc);
 
+        g.drawImage(ImageHolder.tower2, balloonleft, towertop + 65, null);
+        g.drawString("This is the Bishop Tower.", stringleft, towertop + rowinc + towerinc);
+        g.drawString("Bishops fire diagonally in", stringleft, towertop + rowinc + 2*towerinc);
+        g.drawString("     two ways (randomly).", stringleft, towertop + rowinc + 3*towerinc);
+
+        g.drawImage(ImageHolder.tower3, balloonleft, towertop + 145, null);      //EDIT THE Y
+        g.drawString("This is the Rook Tower.", stringleft, towertop + 2*rowinc + 2*towerinc);
+        g.drawString("Rooks fire up, down,", stringleft, towertop + 2*rowinc + 3*towerinc);
+        g.drawString("     left, and right.", stringleft, towertop + 2*rowinc + 4*towerinc);
+
+        g.drawImage(ImageHolder.tower4, balloonleft, towertop + 225, null);
+        g.drawString("This is the Queen Tower.", stringleft, towertop + 3*rowinc + 3*towerinc);
+        g.drawString("Queens fire in all eight", stringleft, towertop + 3*rowinc + 4*towerinc);
+        g.drawString("     possible directions.", stringleft, towertop + 3*rowinc + 5*towerinc);
 
     }
 

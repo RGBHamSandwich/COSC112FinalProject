@@ -12,7 +12,7 @@ Towers:
     **Once you've chosen your map, it's time to think about your strategy!
 
     **On the right side of the screen, you'll see a shop. There, you can use your coins to buy towers to pop
-    **oncoming balloons.
+    **oncoming balloons. As you pop balloons, you'll get more coins!
 
     **If you have enough coins, simply left-click on a tower to pick it up! Then you can place it on the map as
     **you please. Check out the tower and balloon designs to the right!
@@ -21,11 +21,12 @@ Towers:
 
     **If you change your mind about the tower, you can click on the empty bubble in the shop to put it back.
 
-    Each tower has a unique firing pattern:
-    Pawns fire one stream of bullets directly up.
-    Bishops fire to the upper right and lower left.
-    Rooks fire up, down, left, and right.
-    Queens fire in all eight possible directions.
+    **Each tower has a unique firing pattern:
+    **Pawns fire one stream of bullets directly up.
+    **Bishops fire to the upper right and lower left.
+    **Rooks fire up, down, left, and right.
+    **Queens fire in all eight possible directions.
+
 
 ========================================================================================================================
 
