@@ -87,6 +87,7 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/TowerDefense.java</url>
           <line>118</line>
+          <line>117</line>
           <option name="timeStamp" value="176" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
