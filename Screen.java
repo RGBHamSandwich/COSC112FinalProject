@@ -18,11 +18,43 @@ public class Screen {
     }
 
     public void drawInstructionsScreen(Graphics g) {
+        //we'll use top, left, and inc (short for incrementation) to standardize the spacing and general shape of the instructions!
+        int top = 50;
+        int left = 100;
+        int inc = 20;
+        int smallBoxSize = boxSize - 10;
         g.setColor(Color.black);
         g.fillRect(0, 0, TDwidth, TDheight);
         g.setColor(Color.white);
-//        g.drawString();
+        g.drawString("Welcome to Amherst Tower Defense!", left, top);
+        g.drawString("In our game, you'll be using towers—each representing a distinct chess piece—that unleash a barrage of", left, top + 1*inc);
+        g.drawString("    bullets to defend against incoming waves of colorful balloons.\n", left, top + 2*inc);
+        g.drawString("First, you'll choose a map, like the one to the right!", left, top + 4*inc);
+        g.fillRect(left + 640, top - 10, smallBoxSize*3 + 20, smallBoxSize*3 + 20);
+        //this is drawing the first map
+        drawMap1Screen(g,left + 650,top,smallBoxSize*3,smallBoxSize*3);
+
+        g.drawString("Once you've chosen your map, it's time to think about your strategy!", left, top + 7*inc);
+        g.drawString("On the right side of the screen, you'll see a shop. There, you can use your coins to buy towers to pop", left, top + 8*inc);
+        g.drawString("oncoming balloons. Check out the tower and balloon designs to the right!", left, top + 9*inc);
+        g.drawString("If you have enough coins, simply left-click on a tower to pick it up! Then you can place it on the map as\n", left, top + 10*inc);
+        g.drawString("you please.", left, top + 11*inc);
+        //this is drawing the balloons
+        g.fillRect(left + 640, top + smallBoxSize*3 + 40, smallBoxSize * 3 + 20, 65);
+        g.drawImage(ImageHolder.redBalloon, left + 640, top + smallBoxSize*3 + 40, null);
+
+        g.drawString("While you can technically place your towers anywhere, keep a couple of things in mind:", left, top + 13*inc);
+        g.drawString("Placing a tower on a path doesn't block balloons; they'll just float past you!", left, top + 14*inc);
+        g.drawString("Every tower has it's own firing pattern—think about how a chess piece attacks!", left, top + 15*inc);
+
+        g.drawString("If you change your mind about the tower, you can click on the empty bubble in the shop to put it back.", left, top + 17*inc);
+
+        g.drawString("The descriptions of the towers' firing patterns are below, if you want to take a look.", left, top + 19*inc);
+        g.drawString("That should be about everything you need to know! Good luck!", left, top + 20*inc);
+
         ButtonHolder.drawButton(0, g);
+
+
 
     }
 
