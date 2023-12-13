@@ -1,18 +1,15 @@
 import java.awt.*;
-import java.awt.Button;
 
-import static java.awt.image.ImageObserver.HEIGHT;
-import static java.awt.image.ImageObserver.WIDTH;
 
 
 public class Screen {
     static int boxSize = 64;
-    int TDwidth = TowerDefense.WIDTH;
-    int TDheight = TowerDefense.HEIGHT;
+    int TDWidth = Main.WIDTH;
+    int TDHeight = Main.HEIGHT;
 
     //this draws the title screen
     public void drawTitleScreen(Graphics g){
-        g.drawImage(ImageHolder.titleScreen,0,0,TDwidth,TDheight,null);
+        g.drawImage(ImageHolder.titleScreen,0,0, TDWidth, TDHeight,null);
         ButtonHolder.drawButton(0, g);
         ButtonHolder.drawButton(12, g);
     }
@@ -24,7 +21,7 @@ public class Screen {
         int inc = 20;
         int smallBoxSize = boxSize - 10;
         g.setColor(Color.black);
-        g.fillRect(0, 0, TDwidth, TDheight);
+        g.fillRect(0, 0, TDWidth, TDHeight);
         g.setColor(Color.white);
         g.drawString("Welcome to Amherst Tower Defense!", left, top);
         g.drawString("In our game, you'll be using towers—each representing a distinct chess piece—that unleash a barrage of", left, top + 1*inc);
@@ -35,22 +32,22 @@ public class Screen {
         drawMap1Screen(g,left + 650,top,smallBoxSize*3,smallBoxSize*3);
 
         //these ints are to help with the balloon spacing
-        int balloonleft = left + 640;
-        int balloontop = top + smallBoxSize*3 + 40;
+        int balloonLeft = left + 640;
+        int balloonTop = top + smallBoxSize*3 + 40;
         g.drawString("Once you've chosen your map, it's time to think about your strategy!", left, top + 7*inc);
         g.drawString("On the right side of the screen, you'll see a shop. There, you can use your coins to buy towers to pop", left, top + 8*inc);
         g.drawString("oncoming balloons.  As you pop balloons, you'll get more coins! Check out our tower and balloon designs!", left, top + 9*inc);
         g.drawString("If you have enough coins, simply left-click on a tower to pick it up! Then you can place it on the map as\n", left, top + 10*inc);
         g.drawString("you please.", left, top + 11*inc);
         //this is drawing the balloons and the box they're on
-        g.fillRect(balloonleft + 10, balloontop, smallBoxSize * 3, 65);
-        g.drawImage(ImageHolder.pastelGreenBalloon, balloonleft + 6*inc, balloontop, null);
-        g.drawImage(ImageHolder.pastelYellowBalloon, balloonleft + 5*inc, balloontop, null);
-        g.drawImage(ImageHolder.pastelBlueBalloon, balloonleft + 4*inc, balloontop, null);
-        g.drawImage(ImageHolder.yellowBalloon, balloonleft + 3*inc, balloontop, null);
-        g.drawImage(ImageHolder.greenBalloon, balloonleft + 2*inc, balloontop, null);
-        g.drawImage(ImageHolder.blueBalloon, balloonleft + 1*inc, balloontop, null);
-        g.drawImage(ImageHolder.redBalloon, balloonleft, balloontop, null);
+        g.fillRect(balloonLeft + 10, balloonTop, smallBoxSize * 3, 65);
+        g.drawImage(ImageHolder.pastelGreenBalloon, balloonLeft + 6*inc, balloonTop, null);
+        g.drawImage(ImageHolder.pastelYellowBalloon, balloonLeft + 5*inc, balloonTop, null);
+        g.drawImage(ImageHolder.pastelBlueBalloon, balloonLeft + 4*inc, balloonTop, null);
+        g.drawImage(ImageHolder.yellowBalloon, balloonLeft + 3*inc, balloonTop, null);
+        g.drawImage(ImageHolder.greenBalloon, balloonLeft + 2*inc, balloonTop, null);
+        g.drawImage(ImageHolder.blueBalloon, balloonLeft + 1*inc, balloonTop, null);
+        g.drawImage(ImageHolder.redBalloon, balloonLeft, balloonTop, null);
 
         g.drawString("While you can technically place your towers anywhere, keep a couple of things in mind:", left, top + 13*inc);
         g.drawString("Placing a tower on a path doesn't block balloons; they'll just float past you!", left, top + 14*inc);
@@ -64,33 +61,33 @@ public class Screen {
 
         //here are the graphics of the towers and their descriptions
         //these are more integers that are only used to help us keep
-        int towertop = balloontop + 120;
-        int towerinc = 20;
-        int stringleft = balloonleft + 60;
-        int rowinc = 60;
-        g.fillRect(balloonleft, towertop - 26, 200, 330);
+        int towerTop = balloonTop + 120;
+        int towerInc = 20;
+        int stringLeft = balloonLeft + 60;
+        int rowInc = 60;
+        g.fillRect(balloonLeft, towerTop - 26, 200, 330);
         ButtonHolder.drawButton(0, g);
 
         g.setColor(Color.black);
-        g.drawImage(ImageHolder.tower1, balloonleft, towertop - 15, null);
-        g.drawString("This is the Pawn Tower.", stringleft, towertop);
-        g.drawString("Pawns fire one stream", stringleft, towertop + towerinc);
-        g.drawString("     of bullets up.", stringleft, towertop + 2*towerinc);
+        g.drawImage(ImageHolder.tower1, balloonLeft, towerTop - 15, null);
+        g.drawString("This is the Pawn Tower.", stringLeft, towerTop);
+        g.drawString("Pawns fire one stream", stringLeft, towerTop + towerInc);
+        g.drawString("     of bullets up.", stringLeft, towerTop + 2*towerInc);
 
-        g.drawImage(ImageHolder.tower2, balloonleft, towertop + 65, null);
-        g.drawString("This is the Bishop Tower.", stringleft, towertop + rowinc + towerinc);
-        g.drawString("Bishops fire diagonally in", stringleft, towertop + rowinc + 2*towerinc);
-        g.drawString("     two ways (randomly).", stringleft, towertop + rowinc + 3*towerinc);
+        g.drawImage(ImageHolder.tower2, balloonLeft, towerTop + 65, null);
+        g.drawString("This is the Bishop Tower.", stringLeft, towerTop + rowInc + towerInc);
+        g.drawString("Bishops fire diagonally in", stringLeft, towerTop + rowInc + 2*towerInc);
+        g.drawString("     two ways (randomly).", stringLeft, towerTop + rowInc + 3*towerInc);
 
-        g.drawImage(ImageHolder.tower3, balloonleft, towertop + 145, null);      //EDIT THE Y
-        g.drawString("This is the Rook Tower.", stringleft, towertop + 2*rowinc + 2*towerinc);
-        g.drawString("Rooks fire up, down,", stringleft, towertop + 2*rowinc + 3*towerinc);
-        g.drawString("     left, and right.", stringleft, towertop + 2*rowinc + 4*towerinc);
+        g.drawImage(ImageHolder.tower3, balloonLeft, towerTop + 145, null);      //EDIT THE Y
+        g.drawString("This is the Rook Tower.", stringLeft, towerTop + 2*rowInc + 2*towerInc);
+        g.drawString("Rooks fire up, down,", stringLeft, towerTop + 2*rowInc + 3*towerInc);
+        g.drawString("     left, and right.", stringLeft, towerTop + 2*rowInc + 4*towerInc);
 
-        g.drawImage(ImageHolder.tower4, balloonleft, towertop + 225, null);
-        g.drawString("This is the Queen Tower.", stringleft, towertop + 3*rowinc + 3*towerinc);
-        g.drawString("Queens fire in all eight", stringleft, towertop + 3*rowinc + 4*towerinc);
-        g.drawString("     possible directions.", stringleft, towertop + 3*rowinc + 5*towerinc);
+        g.drawImage(ImageHolder.tower4, balloonLeft, towerTop + 225, null);
+        g.drawString("This is the Queen Tower.", stringLeft, towerTop + 3*rowInc + 3*towerInc);
+        g.drawString("Queens fire in all eight", stringLeft, towerTop + 3*rowInc + 4*towerInc);
+        g.drawString("     possible directions.", stringLeft, towerTop + 3*rowInc + 5*towerInc);
 
     }
 
@@ -125,13 +122,13 @@ public class Screen {
     //draws the panel on the right side of the screen for the shop
     public void drawShopScreen(Graphics g){
         g.drawImage(ImageHolder.shop,768,0,256,768,null);
-        int width = TDwidth - 256;
+        int width = TDWidth - 256;
         //These two lines draw the life counter next to the shop label
         drawLifeToken(g,width+boxSize*17/8,1);
-        g.drawString(Integer.toString(TowerDefense.lives),width+boxSize*21/8,20);
+        g.drawString(Integer.toString(Main.lives),width+boxSize*21/8,20);
         //These two lines draw the coin counter under the life counter
         drawCoin(g,width+boxSize*17/8,boxSize/2);
-        g.drawString(Integer.toString(TowerDefense.coins),width+boxSize*21/8,boxSize/2 + 20);
+        g.drawString(Integer.toString(Main.coins),width+boxSize*21/8,boxSize/2 + 20);
         //draws 6 coins in a grid.
         int spacing = 5;
         for(int i = 1; i < 3; i++) {
@@ -150,13 +147,13 @@ public class Screen {
                 2 * (boxSize + spacing) + (2*boxSize - 12),2*(boxSize - spacing), 2*(boxSize - spacing),null);
         if (!(ButtonHolder.Tower4InAir || ButtonHolder.Tower4Placed))g.drawImage(ImageHolder.tower4,width + (2*boxSize - spacing) + 2*spacing,
                 2 * (boxSize + spacing) + (2*boxSize - 12), 2*(boxSize - spacing), 2*(boxSize - spacing),null);
-        g.drawString(Integer.toString(TowerDefense.popped), width + boxSize*2 + 15,TDheight - boxSize *5/2 + 35);
+        g.drawString(Integer.toString(Main.popped), width + boxSize*2 + 15, TDHeight - boxSize *5/2 + 35);
         g.drawString(ButtonHolder.Tower1Price + "",boxSize/4 + width + spacing + 30,2 * (3*boxSize/2 + spacing) + 15);
         g.drawString(ButtonHolder.Tower2Price + "",width + spacing + 2*boxSize + 50,2 * (3*boxSize/2 + spacing) + 15);
         g.drawString(ButtonHolder.Tower3Price + "",boxSize/4 + width + spacing + 30,2 * (3*boxSize/2 + spacing) + 5 + 3*boxSize);
         g.drawString(ButtonHolder.Tower4Price + "",width + spacing + 2*boxSize + 50,2 * (3*boxSize/2 + spacing) + 5 + 3*boxSize);
-        if(TowerDefense.level.balloon == null && TowerDefense.level.levelNum != 0){
-            g.drawImage(ImageHolder.levelComplete,768,TowerDefense.HEIGHT - 128,256,64,null);
+        if(Main.level.balloon == null && Main.level.levelNum != 0){
+            g.drawImage(ImageHolder.levelComplete,768, Main.HEIGHT - 128,256,64,null);
         }
     }
 
@@ -173,7 +170,7 @@ public class Screen {
     //draws the game over screen
     public void drawGameOverScreen(Graphics g,int width,int height){
         g.drawImage(ImageHolder.gameOver,0,0,width,height,null);
-        if(TowerDefense.playAgain) {
+        if(Main.playAgain) {
             ButtonHolder.drawButton(6, g);
         }
     }

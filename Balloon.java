@@ -84,8 +84,6 @@ public class Balloon implements Drawable {
     //controls balloon movement on the first map, recursively updates the subsequent balloons in the linked list
     public void updateMap1(double time,int levelNum){
         position = position.add(velocity.times(time));
-        //Put here a method that determines which level we're on and how many balloons to generate for each level
-        //Start with three levels for one map
         Random rand = new Random();
         int r = rand.nextInt(25,175);
         if(nextBalloon == null && position.y > r && position.x < 100){
@@ -114,7 +112,8 @@ public class Balloon implements Drawable {
             velocity.y = velocity.x;
             velocity.x = 0;
         }
-        if(position.y > TowerDefense.HEIGHT + 15){
+        //End Condition
+        if(position.y > Main.HEIGHT + 15){
             pathCleared = true;
         }
     }
@@ -122,8 +121,6 @@ public class Balloon implements Drawable {
     //controls balloon movement on the second map, recursively updates the subsequent balloons in the linked list
     public void updateMap2(double time,int levelNum){
         position = position.add(velocity.times(time));
-        //Put here a method that determines which level we're on and how many balloons to generate for each level
-        //Start with three levels for one map
         Random rand = new Random();
         int r = rand.nextInt(25,175);
         if(nextBalloon == null && position.y > r && position.x < 100){
@@ -205,8 +202,7 @@ public class Balloon implements Drawable {
             velocity.y = determineVelocity(this.color);
         }
         //End Condition
-        //15 was the static value for radius... og code said "Balloon.radius"
-        if(position.y > TowerDefense.HEIGHT + 15){
+        if(position.y > Main.HEIGHT + 15){
             pathCleared = true;
         }
     }
@@ -268,7 +264,7 @@ public class Balloon implements Drawable {
             velocity.x = velocity.y;
             velocity.y = 0;
         }
-        //"og code had "Balloon.radius" instead of 15
+        //End Conditions
         if(position.x > Screen.boxSize*12 + 15){
             pathCleared = true;
         }
@@ -277,14 +273,13 @@ public class Balloon implements Drawable {
     //controls the number of balloons in each level
     public Balloon determineLevel(int levelNum){
         Pair startPosition = Level.startPosition;
-        //Level 1
         switch (levelNum){
-            case 1:
+            case 1://Level 1
                 if (rank < 11) {
                     return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 break;
-            case 2:
+            case 2://Level 2
                 if (rank < 10) {
                     return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
@@ -312,7 +307,7 @@ public class Balloon implements Drawable {
                     return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 break;
-            case 4:
+            case 4://Level 4
                 if (rank < 10) {
                     return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
@@ -335,7 +330,7 @@ public class Balloon implements Drawable {
                     return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 break;
-            case 5:
+            case 5: //Level 5
                 if (rank < 10) {
                     return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
@@ -357,7 +352,7 @@ public class Balloon implements Drawable {
                 else if (rank < 35) {
                     return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
-            default:
+            default: //for any Level Number greater than 5
                 if (rank < 10) {
                     return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
@@ -391,7 +386,7 @@ public class Balloon implements Drawable {
                     radius * 2, radius * 2,null);
         }
         else if(color == Color.yellow){
-            if(TowerDefense.map2Screen){
+            if(Main.map2Screen){
                 g.drawImage(ImageHolder.pastelYellowBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
                         radius * 2, radius * 2,null);
             }
@@ -401,7 +396,7 @@ public class Balloon implements Drawable {
             }
         }
         else if(color == Color.blue){
-            if(TowerDefense.map2Screen){
+            if(Main.map2Screen){
                 g.drawImage(ImageHolder.pastelBlueBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
                         radius * 2, radius * 2,null);
             }
@@ -411,7 +406,7 @@ public class Balloon implements Drawable {
             }
         }
         else if(color == Color.green){
-            if(TowerDefense.map2Screen){
+            if(Main.map2Screen){
                 g.drawImage(ImageHolder.pastelGreenBalloon,(int) (position.x - radius + xMargin),(int) (position.y - radius + yMargin),
                         radius * 2, radius * 2,null);
             }
@@ -424,6 +419,7 @@ public class Balloon implements Drawable {
             nextBalloon.drawComponent(g);
         }
     }
+
     //This method checks if a balloon has been popped by a bullet, returns whether it has been
     public boolean isShot(Bullet bullet){
         if ((bullet.getPosition().x > this.position.x-radius-2) && (bullet.getPosition().x < position.x+radius-2)){
@@ -431,7 +427,6 @@ public class Balloon implements Drawable {
                 return true;
             }
         }
-
         return false;
     }
 }

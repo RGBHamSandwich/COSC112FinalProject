@@ -14,9 +14,11 @@ public class Bullet implements Drawable {
 
     public Pair getPosition(){return position;}
     public Pair getVelocity() {return velocity;}
+
+    //updates bullet
     public void update(double time) {
         position = position.add(velocity.times(time));
-    }   //updates bullet
+    }
 
     @Override
     public void drawComponent(Graphics g) {

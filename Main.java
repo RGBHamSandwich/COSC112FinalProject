@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TowerDefense extends JPanel {
+public class Main extends JPanel {
     //change panel width and height so that we can have a shop panel and game panel
     //which are independent of the final width and height.
     public static final int WIDTH = 1024;
@@ -36,7 +36,7 @@ public class TowerDefense extends JPanel {
 
 
 
-    public TowerDefense(){
+    public Main(){
         //these three lines allow us to use all of the mouse functions within the MouseFunctions class
         MouseFunctions mouse = new MouseFunctions();
         addMouseListener(mouse);
@@ -57,7 +57,7 @@ public class TowerDefense extends JPanel {
         //here we create the instance of TowerDefense and move the focus from "main" to "TowerDefense"
         JFrame frame = new JFrame("Amherst Tower Defense");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        TowerDefense mainInstance = new TowerDefense();
+        Main mainInstance = new Main();
         frame.setContentPane(mainInstance);
         frame.pack();
         frame.setVisible(true);
@@ -151,10 +151,10 @@ public class TowerDefense extends JPanel {
         gameOverScreen = false;
         playAgain = false;
         //sets the level number back to zero
-        TowerDefense.level = new Level(0);
-        TowerDefense.lives = 25;
-        TowerDefense.coins = 325;
-        TowerDefense.popped = 0;
+        Main.level = new Level(0);
+        Main.lives = 25;
+        Main.coins = 325;
+        Main.popped = 0;
     }
 
     //loads the "Game Over" screen and gets rid of extra balloons
@@ -183,7 +183,5 @@ public class TowerDefense extends JPanel {
             }
         }
     }
-
-
 
 }
