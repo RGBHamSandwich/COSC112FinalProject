@@ -4,10 +4,8 @@ import java.util.ArrayList;
 public class Level {
     //A linked list of balloons, keeps track of all balloons in a level
     Balloon balloon;
-
     //tracks which level the player is in
     int levelNum;
-
     //The position where balloons start in a given map
     static Pair startPosition = new Pair(0, 0);
 
@@ -26,7 +24,8 @@ public class Level {
             }
         }
     }
-    public void updateTowers(double time){//helps make the code in the big loop look a little cleaner and more concise
+    //this helps make the code in the big update loop look a little cleaner and more concise
+    public void updateTowers(double time){
         for (Tower tower : TowerDefense.towers){
             if (tower != null){
                 tower.fireBullet(this, time);
@@ -63,7 +62,7 @@ public class Level {
         }
     }
 
-    //draws all the components of a level
+    //this draws all the components of a level
     public void draw(Graphics g) {
         if (balloon!= null){
             balloon.drawComponent(g);

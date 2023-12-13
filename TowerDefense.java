@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 
 public class TowerDefense extends JPanel {
@@ -15,9 +14,7 @@ public class TowerDefense extends JPanel {
     public static int lives = 20;
     public static int coins = 325;
 
-    //The original bug testing goat
-    //static Image image = Toolkit.getDefaultToolkit().getImage("goat.jpg");
-
+    //when we create a ButtonHolder, it creates all of the necessary buttons for our project
     private ButtonHolder buttonHolder;
 
     //these booleans will keep track of which screen is displaying (i.e. which screen should be drawn)
@@ -74,9 +71,6 @@ public class TowerDefense extends JPanel {
         //with these if-statements, we determine which map to draw
         if (titleScreen){
             screen.drawTitleScreen(g);
-            //this is the OG bugtesting goat; leave him be. <3
-            //p.s. we can't turn him in unless we make a goat button
-//            g.drawImage(TowerDefense.image, 10, 10, this);
         }
 
         else if (instructionsScreen) {
@@ -109,13 +103,13 @@ public class TowerDefense extends JPanel {
 
         //here's the start of the tower logic
         if (ButtonHolder.Tower1InAir) g.drawImage(ImageHolder.tower1,mouseXadj,mouseYadj,64,64,null);
-        else if (ButtonHolder.Tower1Placed) ButtonHolder.disableShop(g, 8);
+//        else if (ButtonHolder.Tower1Placed) ButtonHolder.disableShop(g, 8);
         if (ButtonHolder.Tower2InAir) g.drawImage(ImageHolder.tower2,mouseXadj,mouseYadj,64,64,null);
-        else if (ButtonHolder.Tower2Placed) ButtonHolder.disableShop(g, 8);
+//        else if (ButtonHolder.Tower2Placed) ButtonHolder.disableShop(g, 8);
         if (ButtonHolder.Tower3InAir) g.drawImage(ImageHolder.tower3,mouseXadj,mouseYadj,64,64,null);
-        else if (ButtonHolder.Tower3Placed) ButtonHolder.disableShop(g, 8);
+//        else if (ButtonHolder.Tower3Placed) ButtonHolder.disableShop(g, 8);
         if (ButtonHolder.Tower4InAir) g.drawImage(ImageHolder.tower4,mouseXadj,mouseYadj,64,64,null);
-        else if (ButtonHolder.Tower4Placed) ButtonHolder.disableShop(g, 8);
+//        else if (ButtonHolder.Tower4Placed) ButtonHolder.disableShop(g, 8);
     }
 
     //updates the components of the game
@@ -128,7 +122,7 @@ public class TowerDefense extends JPanel {
     }
 
     //depending on the button clicked, a certain tower is created or "called" (indicated by towerCalled)
-    //Pair "placed" indicated where on the map the player has indicated to place their tower
+    //this takes in a Pair "placed" indicating where on the map the player has indicated to place their tower
     public static void createTowers(int towerCalled, Pair placed){
         switch (towerCalled){
             case 1:

@@ -1,8 +1,8 @@
 import java.awt.*;
-//import java.lang.runtime.SwitchBootstraps;
 import java.util.Random;
+
 public class Balloon implements Drawable {
-    int radius;
+    int radius;     //this is NOT static because we need to tamper with it in fireBullet method
     Pair position;
     Pair velocity;
     Color color;
@@ -431,10 +431,7 @@ public class Balloon implements Drawable {
                 return true;
             }
         }
-        // pretty sure this is redundant:
-//        if (nextBalloon != null){
-//            nextBalloon.isShot(bullet);
-//        }
+
         return false;
     }
 }

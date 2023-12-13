@@ -28,7 +28,6 @@ class Tower implements Drawable{
                     TowerDefense.coins += 10;
                     if (temp.nextBalloon == null) {//if the balloon struck down isn't linked to another balloon, a new balloon is created
                         temp = new Balloon(Level.startPosition,temp.color, temp.rank + 1, true);
-//                        temp = temp.determineLevel(l.levelNum);
                     } else {//other wise, we change the pointer to the balloon it's linked to
                         temp = temp.nextBalloon;
                     }
@@ -55,7 +54,7 @@ class Tower implements Drawable{
 }
 
 //all towers behave as their respective piece's movement
-class PawnTower extends Tower {//our cheapest, most basic tower..
+class PawnTower extends Tower {     //our cheapest, most basic tower..
     public PawnTower(Pair p) {
         position = new Pair(p.x, p.y);
         bullets = new ArrayList<>();

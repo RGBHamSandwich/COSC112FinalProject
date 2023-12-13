@@ -59,7 +59,8 @@ public class Screen {
         g.drawString("If you change your mind about the tower, you can click on the empty bubble in the shop to put it back.", left, top + 17*inc);
 
         g.drawString("The descriptions of the towers' firing patterns are below, if you want to take a look.", left, top + 19*inc);
-        g.drawString("That should be about everything you need to know! Good luck!", left, top + 20*inc);
+        g.drawString("Once the level has timed out (balloons have been shot or have passed by), press \"Start Level\"!", left, top + 20*inc);
+        g.drawString("That should be about everything you need to know! Good luck!", left, top + 23*inc);
 
         //here are the graphics of the towers and their descriptions
         //these are more integers that are only used to help us keep

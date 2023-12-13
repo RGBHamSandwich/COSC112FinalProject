@@ -69,9 +69,9 @@ class ButtonHolder {
 
 
     public ButtonHolder() {
-        buttonArray = new Button[13]; // here we can edit the number of buttons
+        buttonArray = new Button[13];
 
-        //here's all of the the buttons being slotted into the array so we can reference them easier by cases
+        //here is all of the the buttons being slotted into the array so we can reference them easier by cases
         buttonArray[0] = start0;
         buttonArray[1] = map1;
         buttonArray[2] = map2;
@@ -85,9 +85,6 @@ class ButtonHolder {
         buttonArray[10] = shop10;
         buttonArray[11] = shop11;
         buttonArray[12] = instructions12;
-//        buttonArray[13] = back13;
-        //we can add more buttons here
-
     }
 
     //this is the first step in deciding if a button has been clicked and what to do about it
@@ -317,12 +314,5 @@ class ButtonHolder {
             else return false;
         }
 
-        //when a tower is placed, this will place a graphic over it to show that it cannot be bought again
-        public static void disableShop (Graphics g,int num){
-            Pair position = buttonArray[num].position;
-            Pair dimension = buttonArray[num].dimension;
-            g.setColor(Color.red);
-            g.fillRect((int) position.x, (int) position.y, (int) dimension.x, (int) dimension.y);
-        }
 
     }
