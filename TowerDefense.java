@@ -166,7 +166,6 @@ public class TowerDefense extends JPanel {
     //loads the "Game Over" screen and gets rid of extra balloons
     static void endGame(){
             level.balloon = null;
-//        level.balloons.clear();
             gameOverScreen = true;
             map1Screen = false;
             map2Screen = false;

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Level {
     //A linked list of balloons, keeps track of all balloons in a level
     Balloon balloon;
-//    ArrayList<Balloon> balloons = new ArrayList<>();
 
     //tracks which level the player is in
     int levelNum;
@@ -16,19 +15,14 @@ public class Level {
         this.levelNum = levelNum;
         if (levelNum == 0) {
             balloon = null;
-//            if (!balloons.isEmpty()){
-//                balloons.clear();
-//            }
         } else {
             if (TowerDefense.map1Screen || TowerDefense.map2Screen) {
                 startPosition = new Pair(96, -20);
                 balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, true);
-//                balloons.add(new Balloon(startPosition.x, startPosition.y, Color.red, 1, true));
             }
             else if (TowerDefense.map3Screen) {
                 startPosition = new Pair(-20, 416);
                 balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, false);
-//                balloons.add(new Balloon(startPosition.x, startPosition.y, Color.red, 1, true));
             }
         }
     }
@@ -44,11 +38,6 @@ public class Level {
         if (balloon != null) {
             if (TowerDefense.map1Screen) {
                 balloon.updateMap1(time, levelNum);
-//                for (Balloon balloon : balloons){
-//                    if (balloon != null){
-//                        balloon.updateMap1(time, levelNum);
-//                    }
-//                }
                 updateTowers(time);
             }
             if (TowerDefense.map2Screen) {
@@ -76,11 +65,6 @@ public class Level {
 
     //draws all the components of a level
     public void draw(Graphics g) {
-//       for (Balloon balloon : balloons){
-//           if (balloon != null){
-//               balloon.drawComponent(g);
-//           }
-//       }
         if (balloon!= null){
             balloon.drawComponent(g);
         }
