@@ -9,7 +9,7 @@ class Tower implements Drawable{
     Pair position;
     //each tower has its own arraylist of bullets and the number of elements for each tower differs
     List<Bullet> bullets;
-    //og bullet position helps us better alighn the bullets to the images of the towers (w/o it bullets would appear a bit
+    //og bullet position helps us better align the bullets to the images of the towers (w/o it bullets would appear a bit
     //further than tower in the initial draw
     Pair originalBulletPosition;
 
@@ -27,7 +27,7 @@ class Tower implements Drawable{
                     TowerDefense.popped++;
                     TowerDefense.coins += 10;
                     if (temp.nextBalloon == null) {//if the balloon struck down isn't linked to another balloon, a new balloon is created
-                        temp = new Balloon(l.startPosition.x, l.startPosition.y, temp.color, temp.rank + 1, true);
+                        temp = new Balloon(Level.startPosition,temp.color, temp.rank + 1, true);
 //                        temp = temp.determineLevel(l.levelNum);
                     } else {//other wise, we change the pointer to the balloon it's linked to
                         temp = temp.nextBalloon;

@@ -18,11 +18,11 @@ public class Level {
         } else {
             if (TowerDefense.map1Screen || TowerDefense.map2Screen) {
                 startPosition = new Pair(96, -20);
-                balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, true);
+                balloon = new Balloon(startPosition, Color.red, 1, true);
             }
             else if (TowerDefense.map3Screen) {
                 startPosition = new Pair(-20, 416);
-                balloon = new Balloon(startPosition.x, startPosition.y, Color.red, 1, false);
+                balloon = new Balloon(startPosition, Color.red, 1, false);
             }
         }
     }

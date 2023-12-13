@@ -21,8 +21,8 @@ public class Balloon implements Drawable {
 
 
     //Constructor for a balloon given its color, position, and initial direction
-    public Balloon(double x, double y, Color color, int rank, boolean verticalStart){
-        this.position = new Pair(x,y);
+    public Balloon(Pair position, Color color, int rank, boolean verticalStart){
+        this.position = new Pair(position.x,position.y);
         this.color = color;
         this.rank = rank;
         this.verticalStart = verticalStart;
@@ -281,103 +281,103 @@ public class Balloon implements Drawable {
         switch (levelNum){
             case 1:
                 if (rank < 11) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 break;
             case 2:
                 if (rank < 10) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 10) {
-                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.blue, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 15) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 break;
             case 3: //Level 3
                 if (rank < 10) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 10) {
-                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.blue, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 15) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 15){
-                    return new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.green, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 20) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 break;
             case 4:
                 if (rank < 10) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 10) {
-                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.blue, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 15) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 15){
-                    return new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.green, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 20) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 20){
-                    return new Balloon(startPosition.x, startPosition.y, Color.yellow, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.yellow, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 25) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 break;
             case 5:
                 if (rank < 10) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 10) {
-                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.blue, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 15) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 15){
-                    return new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.green, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 20) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 20){
-                    return new Balloon(startPosition.x, startPosition.y, Color.yellow, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.yellow, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 35) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
             default:
                 if (rank < 10) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 10) {
-                    return new Balloon(startPosition.x, startPosition.y, Color.blue, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.blue, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 25) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 25){
-                    return new Balloon(startPosition.x, startPosition.y, Color.green, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.green, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 30) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
                 else if (rank == 30){
-                    return new Balloon(startPosition.x, startPosition.y, Color.yellow, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, Color.yellow, this.rank + 1,this.verticalStart);
                 }
                 else if (rank < 45) {
-                    return new Balloon(startPosition.x, startPosition.y, this.color, this.rank + 1,this.verticalStart);
+                    return new Balloon(startPosition, this.color, this.rank + 1,this.verticalStart);
                 }
         }
         return null;
