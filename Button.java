@@ -148,7 +148,7 @@ class ButtonHolder {
         //the following cases detail what happens when a specific button is clicked
         //recall that each position [?] in the array correlates to a particular button function
         //these numbers are consistent with those, so case 0 and buttonArray[0] pertain to the same button
-        switch(num) {
+        switch (num) {
             //here's the start and play again button to send you to the chooseMapScreen
             case 0:
             case 6:
@@ -175,12 +175,12 @@ class ButtonHolder {
             case 4:
                 if (TowerDefense.level.balloon == null /*TowerDefense.level.balloons.isEmpty()*/) {
                     System.out.println(TowerDefense.level.levelNum);
-                if (TowerDefense.level.balloon == null) {
-                    TowerDefense.level.levelNum++;
-                    TowerDefense.level = new Level(TowerDefense.level.levelNum);
+                    if (TowerDefense.level.balloon == null) {
+                        TowerDefense.level.levelNum++;
+                        TowerDefense.level = new Level(TowerDefense.level.levelNum);
+                    }
                 }
                 break;
-
             //this prompts the "play again" button to pop up
             case 5:
                 TowerDefense.playAgain = true;
@@ -197,8 +197,7 @@ class ButtonHolder {
                 } else if (Tower3InAir) {
                     TowerDefense.createTowers(3, new Pair(mouseXadj, mouseYadj));
                     Tower3InAir = false;
-                }
-                else if (Tower4InAir) {
+                } else if (Tower4InAir) {
                     TowerDefense.createTowers(4, new Pair(mouseXadj, mouseYadj));
                     Tower4InAir = false;
                 }
@@ -250,76 +249,76 @@ class ButtonHolder {
                     TowerDefense.coins += price;
                 }
                 break;
+            }
         }
 
-    }
 
-    public static void putTowersDown() {
-        if (Tower1InAir) {
-            Tower1InAir = false;
-            TowerDefense.coins += Tower1Price;
+        public static void putTowersDown () {
+            if (Tower1InAir) {
+                Tower1InAir = false;
+                TowerDefense.coins += Tower1Price;
+            }
+            if (Tower2InAir) {
+                ButtonHolder.Tower2InAir = false;
+                TowerDefense.coins += Tower2Price;
+            }
+            if (Tower3InAir) {
+                ButtonHolder.Tower3InAir = false;
+                TowerDefense.coins += Tower3Price;
+            }
+            if (Tower4InAir) {
+                ButtonHolder.Tower4InAir = false;
+                TowerDefense.coins += Tower4Price;
+            }
         }
-        if (Tower2InAir) {
-            ButtonHolder.Tower2InAir = false;
-            TowerDefense.coins += Tower2Price;
-        }
-        if (Tower3InAir) {
-            ButtonHolder.Tower3InAir = false;
-            TowerDefense.coins += Tower3Price;
-        }
-        if (Tower4InAir) {
-            ButtonHolder.Tower4InAir = false;
-            TowerDefense.coins += Tower4Price;
-        }
-    }
 
-    //for the buttons that need to be drawn, their physical details are here
-    public static void drawButton(int num, Graphics g){
-        Button b = ButtonHolder.buttonArray[num];
-        Pair position = b.position;
-        Pair dimension = b.dimension;
+        //for the buttons that need to be drawn, their physical details are here
+        public static void drawButton ( int num, Graphics g){
+            Button b = ButtonHolder.buttonArray[num];
+            Pair position = b.position;
+            Pair dimension = b.dimension;
 
-        //similar to ifClicked, the following cases detail how to draw a button
-        //it's important to note that we don't have to draw ALL of the buttons
-        switch(num) {
-            case 0: //the start button
-                g.drawRect((int) position.x,(int) position.y,(int) dimension.x,(int) dimension.y);
-                g.drawString("Start",(int) position.x + 10,(int) position.y + 20);
-                break;
+            //similar to ifClicked, the following cases detail how to draw a button
+            //it's important to note that we don't have to draw ALL of the buttons
+            switch (num) {
+                case 0: //the start button
+                    g.drawRect((int) position.x, (int) position.y, (int) dimension.x, (int) dimension.y);
+                    g.drawString("Start", (int) position.x + 10, (int) position.y + 20);
+                    break;
 
-            case 1: //the map buttons (1, 2, and 3 are encompassed here)
-                g.drawRect((int) position.x,(int) position.y,(int) dimension.x,(int) dimension.y);
-                b = ButtonHolder.buttonArray[2];
-                g.drawRect((int) b.position.x,(int) b.position.y,(int) b.dimension.x,(int) b.dimension.y);
-                b = ButtonHolder.buttonArray[3];
-                g.drawRect((int) b.position.x,(int) b.position.y,(int) b.dimension.x,(int) b.dimension.y);
-                break;
+                case 1: //the map buttons (1, 2, and 3 are encompassed here)
+                    g.drawRect((int) position.x, (int) position.y, (int) dimension.x, (int) dimension.y);
+                    b = ButtonHolder.buttonArray[2];
+                    g.drawRect((int) b.position.x, (int) b.position.y, (int) b.dimension.x, (int) b.dimension.y);
+                    b = ButtonHolder.buttonArray[3];
+                    g.drawRect((int) b.position.x, (int) b.position.y, (int) b.dimension.x, (int) b.dimension.y);
+                    break;
 
-            case 6:
-                g.setColor(Color.BLACK);
-                g.drawRect((int) position.x,(int) position.y,(int) dimension.x,(int) dimension.y);
-                g.drawString("Play again?", (int) position.x + 10, (int) position.y + 20);
-                break;
+                case 6:
+                    g.setColor(Color.BLACK);
+                    g.drawRect((int) position.x, (int) position.y, (int) dimension.x, (int) dimension.y);
+                    g.drawString("Play again?", (int) position.x + 10, (int) position.y + 20);
+                    break;
 
 //            case 5:
 //                break;
 
+            }
+
+        }
+
+        public static boolean anyTowerInAir () {
+            if (Tower1InAir || Tower2InAir || Tower3InAir || Tower4InAir) return true;
+            else return false;
+        }
+
+        //when a tower is placed, this will place a graphic over it to show that it cannot be bought again
+        public static void disableShop (Graphics g,int num){
+            Pair position = buttonArray[num].position;
+            Pair dimension = buttonArray[num].dimension;
+            g.setColor(Color.red);
+            g.fillRect((int) position.x, (int) position.y, (int) dimension.x, (int) dimension.y);
         }
 
     }
-
-    public static boolean anyTowerInAir() {
-        if (Tower1InAir || Tower2InAir || Tower3InAir || Tower4InAir) return true;
-        else return false;
-    }
-
-    //when a tower is placed, this will place a graphic over it to show that it cannot be bought again
-    public static void disableShop(Graphics g, int num) {
-        Pair position = buttonArray[num].position;
-        Pair dimension = buttonArray[num].dimension;
-        g.setColor(Color.red);
-        g.fillRect((int) position.x, (int) position.y, (int) dimension.x, (int) dimension.y);
-    }
-
-
 }
