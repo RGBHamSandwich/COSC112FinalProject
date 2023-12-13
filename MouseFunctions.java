@@ -1,4 +1,3 @@
-
 import java.awt.event.*;
 
 
@@ -12,7 +11,6 @@ public class MouseFunctions implements MouseListener, MouseMotionListener {
     public void mouseClicked(MouseEvent e) {
         double x = e.getX();
         double y = e.getY();
-        System.out.println("The mouse has been clicked at " + x + ", " + y + ".");
         ButtonHolder.handleClick(x, y);
 
     }
@@ -32,8 +30,8 @@ public class MouseFunctions implements MouseListener, MouseMotionListener {
     @Override
     public void mouseExited(MouseEvent e) {
         //if we use click/drag mechanics, this is important so the program doesn't crash when the mouse exits the screen
-        double x = TowerDefense.WIDTH/2;
-        double y = TowerDefense.HEIGHT/2;
+        double x = Main.WIDTH/2;
+        double y = Main.HEIGHT/2;
 
     }
 

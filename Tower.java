@@ -24,8 +24,8 @@ class Tower implements Drawable{
                     //we stop drawing it by making radius zero
                     temp.radius = 0;
                     bullets.get(bullet).radius = 0; //also stop drawing the bullet so as to ensure that each bullet only strikes a single balloon
-                    TowerDefense.popped++;
-                    TowerDefense.coins += 10;
+                    Main.popped++;
+                    Main.coins += 10;
                     if (temp.nextBalloon == null) {//if the balloon struck down isn't linked to another balloon, a new balloon is created
                         temp = new Balloon(Level.startPosition,temp.color, temp.rank + 1, true);
                     } else {//other wise, we change the pointer to the balloon it's linked to

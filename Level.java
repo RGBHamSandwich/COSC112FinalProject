@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Level {
     //A linked list of balloons, keeps track of all balloons in a level
@@ -14,11 +13,11 @@ public class Level {
         if (levelNum == 0) {
             balloon = null;
         } else {
-            if (TowerDefense.map1Screen || TowerDefense.map2Screen) {
+            if (Main.map1Screen || Main.map2Screen) {
                 startPosition = new Pair(96, -20);
                 balloon = new Balloon(startPosition, Color.red, 1, true);
             }
-            else if (TowerDefense.map3Screen) {
+            else if (Main.map3Screen) {
                 startPosition = new Pair(-20, 416);
                 balloon = new Balloon(startPosition, Color.red, 1, false);
             }
@@ -26,7 +25,7 @@ public class Level {
     }
     //this helps make the code in the big update loop look a little cleaner and more concise
     public void updateTowers(double time){
-        for (Tower tower : TowerDefense.towers){
+        for (Tower tower : Main.towers){
             if (tower != null){
                 tower.fireBullet(this, time);
             }
@@ -35,15 +34,15 @@ public class Level {
 
     public void update(double time) {
         if (balloon != null) {
-            if (TowerDefense.map1Screen) {
+            if (Main.map1Screen) {
                 balloon.updateMap1(time, levelNum);
                 updateTowers(time);
             }
-            if (TowerDefense.map2Screen) {
+            if (Main.map2Screen) {
                 balloon.updateMap2(time, levelNum);
                 updateTowers(time);
             }
-            if (TowerDefense.map3Screen) {
+            if (Main.map3Screen) {
                 balloon.updateMap3(time, levelNum);
                 updateTowers(time);
             }
@@ -56,7 +55,7 @@ public class Level {
                     balloon = null;
                 }
                 if(balloon!= null && balloon.radius != 0) {
-                    TowerDefense.lives--;
+                    Main.lives--;
                 }
             }
         }
@@ -67,7 +66,7 @@ public class Level {
         if (balloon!= null){
             balloon.drawComponent(g);
         }
-        for (Tower tower : TowerDefense.towers){
+        for (Tower tower : Main.towers){
             if (tower != null){
                 tower.drawComponent(g);
             }
