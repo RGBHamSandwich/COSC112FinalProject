@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Level {
     //A linked list of balloons, keeps track of all balloons in a level
     Balloon balloon;
-    ArrayList<Balloon> balloons = new ArrayList<>();
+//    ArrayList<Balloon> balloons = new ArrayList<>();
 
     //tracks which level the player is in
     int levelNum;
@@ -15,9 +15,10 @@ public class Level {
     public Level(int levelNum) {
         this.levelNum = levelNum;
         if (levelNum == 0) {
-            if (!balloons.isEmpty()){
-                balloons.clear();
-            }
+            balloon = null;
+//            if (!balloons.isEmpty()){
+//                balloons.clear();
+//            }
         } else {
             if (TowerDefense.map1Screen || TowerDefense.map2Screen) {
                 startPosition = new Pair(96, -20);
@@ -31,7 +32,7 @@ public class Level {
             }
         }
     }
-    public void updateTowers(double time){
+    public void updateTowers(double time){//helps make the code in the big loop look a little cleaner and more concise
         for (Tower tower : TowerDefense.towers){
             if (tower != null){
                 tower.fireBullet(this, time);
@@ -52,17 +53,13 @@ public class Level {
             }
             if (TowerDefense.map2Screen) {
                 balloon.updateMap2(time, levelNum);
-//                for (Balloon balloon : balloons){
-//                    if (balloon != null){
-//                        balloon.updateMap1(time, levelNum);
-//                    }
-//                }
                 updateTowers(time);
             }
             if (TowerDefense.map3Screen) {
                 balloon.updateMap3(time, levelNum);
                 updateTowers(time);
             }
+            //this conditional tracks the balloons that have cleared the screen and subtracts lives accordingly
             if (balloon.pathCleared) {
                 if (balloon.nextBalloon != null) {
                     balloon = balloon.nextBalloon;

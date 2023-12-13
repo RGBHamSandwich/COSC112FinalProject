@@ -20,11 +20,9 @@ public class TowerDefense extends JPanel {
 
     private ButtonHolder buttonHolder;
 
-    //Should these booleans be moved to screen? (we're only creating one "screen" so it should be able to hold them right?0
     //these booleans will keep track of which screen is displaying (i.e. which screen should be drawn)
     Screen screen;
     static Level level;
-    static List<Tower> towers = new ArrayList<>();
 
     //If following booleans are true, draws a specific screen. Only one should be true at a time
     static boolean titleScreen = true;
@@ -36,6 +34,9 @@ public class TowerDefense extends JPanel {
     static boolean gameOverScreen = false;
     //if true, draws play again button
     static boolean playAgain = false;
+    //since all maps and levels have the same 4 types of towers, we thought it best for the list of towers to live in the main class
+    static List<Tower> towers = new ArrayList<>();
+
 
 
     public TowerDefense(){
@@ -115,9 +116,6 @@ public class TowerDefense extends JPanel {
         else if (ButtonHolder.Tower3Placed) ButtonHolder.disableShop(g, 8);
         if (ButtonHolder.Tower4InAir) g.drawImage(ImageHolder.tower4,mouseXadj,mouseYadj,64,64,null);
         else if (ButtonHolder.Tower4Placed) ButtonHolder.disableShop(g, 8);
-
-
-
     }
 
     //updates the components of the game
@@ -129,19 +127,21 @@ public class TowerDefense extends JPanel {
         }
     }
 
-    public static void createTowers(int t, Pair p){
-        switch (t){
+    //depending on the button clicked, a certain tower is created or "called" (indicated by towerCalled)
+    //Pair "placed" indicated where on the map the player has indicated to place their tower
+    public static void createTowers(int towerCalled, Pair placed){
+        switch (towerCalled){
             case 1:
-                towers.add(new PawnTower(p));
+                towers.add(new PawnTower(placed));
                 break;
             case 2:
-                towers.add(new BishopTower(p));
+                towers.add(new BishopTower(placed));
                 break;
             case 3:
-                towers.add(new RookTower(p));
+                towers.add(new RookTower(placed));
                 break;
             case 4:
-                towers.add(new QueenTower(p));
+                towers.add(new QueenTower(placed));
                 break;
         }
     }
