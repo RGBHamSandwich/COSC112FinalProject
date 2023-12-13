@@ -1,13 +1,29 @@
 import java.awt.*;
+import java.awt.Button;
+
+import static java.awt.image.ImageObserver.HEIGHT;
+import static java.awt.image.ImageObserver.WIDTH;
 
 
 public class Screen {
     static int boxSize = 64;
+    int TDwidth = TowerDefense.WIDTH;
+    int TDheight = TowerDefense.HEIGHT;
 
     //this draws the title screen
     public void drawTitleScreen(Graphics g){
-        g.drawImage(ImageHolder.titleScreen,0,0,TowerDefense.WIDTH,TowerDefense.HEIGHT,null);
+        g.drawImage(ImageHolder.titleScreen,0,0,TDwidth,TDheight,null);
         ButtonHolder.drawButton(0, g);
+        ButtonHolder.drawButton(12, g);
+    }
+
+    public void drawInstructionsScreen(Graphics g) {
+        g.setColor(Color.black);
+        g.fillRect(0, 0, TDwidth, TDheight);
+        g.setColor(Color.white);
+//        g.drawString();
+        ButtonHolder.drawButton(0, g);
+
     }
 
     //This method draws the screen where the user can choose their map, including drawing smaller renditions of the maps
@@ -41,7 +57,7 @@ public class Screen {
     //draws the panel on the right side of the screen for the shop
     public void drawShopScreen(Graphics g){
         g.drawImage(ImageHolder.shop,768,0,256,768,null);
-        int width = TowerDefense.WIDTH - 256;
+        int width = TDwidth - 256;
         //These two lines draw the life counter next to the shop label
         drawLifeToken(g,width+boxSize*17/8,1);
         g.drawString(Integer.toString(TowerDefense.lives),width+boxSize*21/8,20);
@@ -66,7 +82,7 @@ public class Screen {
                 2 * (boxSize + spacing) + (2*boxSize - 12),2*(boxSize - spacing), 2*(boxSize - spacing),null);
         if (!(ButtonHolder.Tower4InAir || ButtonHolder.Tower4Placed))g.drawImage(ImageHolder.tower4,width + (2*boxSize - spacing) + 2*spacing,
                 2 * (boxSize + spacing) + (2*boxSize - 12), 2*(boxSize - spacing), 2*(boxSize - spacing),null);
-        g.drawString(Integer.toString(TowerDefense.popped), width + boxSize*2 + 15,TowerDefense.HEIGHT - boxSize *3/2 + 15);
+        g.drawString(Integer.toString(TowerDefense.popped), width + boxSize*2 + 15,TDheight - boxSize *3/2 + 15);
         g.drawString(ButtonHolder.Tower1Price + "",boxSize/4 + width + spacing + 30,2 * (3*boxSize/2 + spacing) + 15);
         g.drawString(ButtonHolder.Tower2Price + "",width + spacing + 2*boxSize + 50,2 * (3*boxSize/2 + spacing) + 15);
         g.drawString(ButtonHolder.Tower3Price + "",boxSize/4 + width + spacing + 30,2 * (3*boxSize/2 + spacing) + 5 + 3*boxSize);

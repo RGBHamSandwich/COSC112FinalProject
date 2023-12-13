@@ -28,6 +28,7 @@ public class TowerDefense extends JPanel {
 
     //If following booleans are true, draws a specific screen. Only one should be true at a time
     static boolean titleScreen = true;
+    static boolean instructionsScreen = false;
     static boolean chooseMapScreen = false;
     static boolean map1Screen = false;
     static boolean map2Screen = false;
@@ -69,13 +70,18 @@ public class TowerDefense extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        // let's replace these if/else statements with a switch(case) setup
+        //with these if-statements, we determine which map to draw
         if (titleScreen){
             screen.drawTitleScreen(g);
             //this is the OG bugtesting goat; leave him be. <3
             //p.s. we can't turn him in unless we make a goat button
 //            g.drawImage(TowerDefense.image, 10, 10, this);
         }
+
+        else if (instructionsScreen) {
+            screen.drawInstructionsScreen(g);
+        }
+
         else if(chooseMapScreen){
             screen.drawChooseMapScreen(g,getWidth(),getHeight());
         }
@@ -143,6 +149,7 @@ public class TowerDefense extends JPanel {
     //this will reset the game so that it can be played again
     static void resetGame(){
         titleScreen = false;
+        instructionsScreen = false;
         chooseMapScreen = true;
         map1Screen = false;
         map2Screen = false;

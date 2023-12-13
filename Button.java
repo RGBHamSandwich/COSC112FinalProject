@@ -64,11 +64,12 @@ class ButtonHolder {
     static boolean Tower4InAir;
     static boolean Tower4Placed;
     static int Tower4Price = 1000;
+    static Button instructions12 = new Button(WIDTH/2-33,HEIGHT*5/8 + 50, 76, 30);
 
 
 
     public ButtonHolder() {
-        buttonArray = new Button[12]; // here we can edit the number of buttons
+        buttonArray = new Button[13]; // here we can edit the number of buttons
 
         //here's all of the the buttons being slotted into the array so we can reference them easier by cases
         buttonArray[0] = start0;
@@ -83,7 +84,7 @@ class ButtonHolder {
         buttonArray[9] = shop9;
         buttonArray[10] = shop10;
         buttonArray[11] = shop11;
-//        buttonArray[12] = instructions12;
+        buttonArray[12] = instructions12;
 //        buttonArray[13] = back13;
         //we can add more buttons here
 
@@ -95,9 +96,12 @@ class ButtonHolder {
         //it also keeps most of the conditionals confined to one space so "ifClicked" is more straightforward for all of us
 
         //this detects a start button click
-        if ((TowerDefense.titleScreen || (TowerDefense.gameOverScreen && TowerDefense.playAgain)) && checkClick(x, y, buttonArray[0])) ButtonHolder.ifClicked(0);
+        if ((TowerDefense.titleScreen || TowerDefense.instructionsScreen || (TowerDefense.gameOverScreen && TowerDefense.playAgain)) && checkClick(x, y, buttonArray[0])) ButtonHolder.ifClicked(0);
 
-        //these detect a map selection click
+            //this detects an "instructions" button click
+        else if (TowerDefense.titleScreen && checkClick(x, y, buttonArray[12])) ButtonHolder.ifClicked(12);
+
+            //these detect a map selection click
         else if (TowerDefense.chooseMapScreen) {
             if (checkClick(x, y, buttonArray[1])) ButtonHolder.ifClicked(1);
             else if (checkClick(x, y, buttonArray[2])) ButtonHolder.ifClicked(2);
@@ -107,17 +111,17 @@ class ButtonHolder {
         //this detects a "game over" click
         else if(TowerDefense.lives == 0 && !TowerDefense.playAgain) ButtonHolder.ifClicked(5);
 
-        //this detects a click to play again
+            //this detects a click to play again
         else if(TowerDefense.gameOverScreen) ButtonHolder.ifClicked(6);
 
-        //all of the next clicks happen on the map screens, so they're grouped together
+            //all of the next clicks happen on the map screens, so they're grouped together
         else if (TowerDefense.map1Screen || TowerDefense.map2Screen || TowerDefense.map3Screen) {
             //this detects a "start level" click
             if(checkClick(x, y, buttonArray[4])) ButtonHolder.ifClicked(4);
             //if a tower is in-air, this detects if it will be placed
             if(anyTowerInAir() && checkClick(x, y, buttonArray[7])) ButtonHolder.ifClicked(7);
             //these detect clicks on the shop buttons; Since this is a for loop, we can keep adding shop buttons without editing this part
-            for (int i = 8; i < buttonArray.length; i++) {
+            for (int i = 8; i < 11; i++) {
                 Button button = buttonArray[i];
                 if (x > button.left && x < button.right && y > button.top && y < button.bottom) {
                     ButtonHolder.ifClicked(i);
@@ -244,6 +248,11 @@ class ButtonHolder {
                     TowerDefense.coins += price;
                 }
                 break;
+
+            case 12:
+                TowerDefense.titleScreen = false;
+                TowerDefense.instructionsScreen = true;
+                break;
             }
         }
 
@@ -293,6 +302,11 @@ class ButtonHolder {
                     g.setColor(Color.BLACK);
                     g.drawRect((int) position.x, (int) position.y, (int) dimension.x, (int) dimension.y);
                     g.drawString("Play again?", (int) position.x + 10, (int) position.y + 20);
+                    break;
+
+                case 12: //the instructions button
+                    g.drawRect((int) position.x, (int) position.y, (int) dimension.x, (int) dimension.y);
+                    g.drawString("Instructions", (int) position.x + 10, (int) position.y + 20);
                     break;
             }
 
