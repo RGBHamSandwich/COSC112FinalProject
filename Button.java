@@ -182,10 +182,16 @@ class ButtonHolder {
                 if (TowerDefense.level.balloon == null /*TowerDefense.level.balloons.isEmpty()*/) {
                     System.out.println(TowerDefense.level.levelNum);
 <<<<<<< HEAD
+<<<<<<< HEAD
                     if (TowerDefense.level.balloon == null) {
                         TowerDefense.level.levelNum++;
                         TowerDefense.level = new Level(TowerDefense.level.levelNum);
                     }
+=======
+                    TowerDefense.level.levelNum++;
+                    TowerDefense.level = new Level(TowerDefense.level.levelNum);
+                    System.out.println(TowerDefense.level.levelNum);
+>>>>>>> parent of ec8341c (Merge branch 'main' of https://github.com/RGBHamSandwich/COSC112FinalProject)
 =======
                     TowerDefense.level.levelNum++;
                     TowerDefense.level = new Level(TowerDefense.level.levelNum);
