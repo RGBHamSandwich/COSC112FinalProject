@@ -149,11 +149,14 @@ public class Screen {
                 2 * (boxSize + spacing) + (2*boxSize - 12),2*(boxSize - spacing), 2*(boxSize - spacing),null);
         if (!(ButtonHolder.Tower4InAir || ButtonHolder.Tower4Placed))g.drawImage(ImageHolder.tower4,width + (2*boxSize - spacing) + 2*spacing,
                 2 * (boxSize + spacing) + (2*boxSize - 12), 2*(boxSize - spacing), 2*(boxSize - spacing),null);
-        g.drawString(Integer.toString(TowerDefense.popped), width + boxSize*2 + 15,TDheight - boxSize *3/2 + 15);
+        g.drawString(Integer.toString(TowerDefense.popped), width + boxSize*2 + 15,TDheight - boxSize *5/2 + 35);
         g.drawString(ButtonHolder.Tower1Price + "",boxSize/4 + width + spacing + 30,2 * (3*boxSize/2 + spacing) + 15);
         g.drawString(ButtonHolder.Tower2Price + "",width + spacing + 2*boxSize + 50,2 * (3*boxSize/2 + spacing) + 15);
         g.drawString(ButtonHolder.Tower3Price + "",boxSize/4 + width + spacing + 30,2 * (3*boxSize/2 + spacing) + 5 + 3*boxSize);
         g.drawString(ButtonHolder.Tower4Price + "",width + spacing + 2*boxSize + 50,2 * (3*boxSize/2 + spacing) + 5 + 3*boxSize);
+        if(TowerDefense.level.balloon == null && TowerDefense.level.levelNum != 0){
+            g.drawImage(ImageHolder.levelComplete,768,TowerDefense.HEIGHT - 128,256,64,null);
+        }
     }
 
     //draws the coin icon at a given position
