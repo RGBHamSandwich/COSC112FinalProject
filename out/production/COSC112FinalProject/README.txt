@@ -1,5 +1,6 @@
+Welcome to README.txt.txt
 
-This is the final project of Hena E, Kiara F, and Beck M.
+This is the final project of Hena E, Kiara F, and Beck M!
 We're proud to present Amherst Tower Defense, a creative game based off of the popular
     "tower defense" game format, most notably including Bloons Tower Defense.
 

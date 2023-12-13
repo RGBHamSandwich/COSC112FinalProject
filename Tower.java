@@ -54,7 +54,7 @@ class Tower implements Drawable{
 }
 
 //all towers behave as their respective piece's movement
-class PawnTower extends Tower {     //our cheapest, most basic tower..
+class PawnTower extends Tower {     //our cheapest, most basic tower.
     public PawnTower(Pair p) {
         position = new Pair(p.x, p.y);
         bullets = new ArrayList<>();
